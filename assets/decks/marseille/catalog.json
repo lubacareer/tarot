@@ -1,0 +1,1492 @@
+{
+  "id": "marseille",
+  "name": "Tarot de Marseille",
+  "credit": "Jean-Pierre Payen, Avignon, eighteenth century. Cary Collection of Playing Cards, Beinecke Rare Book and Manuscript Library, Yale University, FRA166. The Two of Coins bears 1713. The catalog tentatively dates this impression to 1760.",
+  "source": "https://collections.library.yale.edu/catalog/32296393",
+  "rights": "Public-domain historical artwork. Images courtesy of Yale University Library under its open-access policy for digital representations of public-domain works. Card commentaries are original to this app.",
+  "rightsUrl": "https://web.library.yale.edu/sites/default/files/files/policy_-_open_access_to_digital_representations_of_works_in_the_public_domain_from_museum_library_and_archive_collections_2011_.pdf",
+  "cards": [
+    {
+      "id": "fool",
+      "title": "The Fool",
+      "number": null,
+      "image": "fool.webp",
+      "symbolism": "A traveler carries a bundle on a pole while an animal catches at his clothes. This unnumbered card steps outside the sequence of trumps.",
+      "meaning": "Take a first step with what you can carry. Leave enough room to be surprised on the way.",
+      "reversed": "Consider what keeps tugging at your attention as you try to move on.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296420",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296420/full/!3000,3000/0/default.jpg",
+      "sourceImageSha256": "9d09d2f3c90ee98f4c91fcd635afaf80bd657402d0c6d8848e8ff46f86518591",
+      "crop": [
+        1609,
+        134,
+        2908,
+        2602
+      ],
+      "sheet": "14r"
+    },
+    {
+      "id": "magician",
+      "title": "The Juggler",
+      "number": "I",
+      "image": "magician.webp",
+      "symbolism": "The Bateleur works at a table scattered with small objects, holding a tool in one hand. Look for the skill hidden in the handling of simple things.",
+      "meaning": "Try your hand before you claim mastery. The tools already on the table can teach you something.",
+      "reversed": "An impressive gesture may conceal uncertainty. Ask for a demonstration you can understand.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        1141,
+        2424,
+        2031,
+        4116
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "high_priestess",
+      "title": "The Popess",
+      "number": "II",
+      "image": "high_priestess.webp",
+      "symbolism": "La Papesse sits with an open book across her lap. Her attention suggests knowledge that takes time to read.",
+      "meaning": "Study what is already available and allow reflection to deepen it.",
+      "reversed": "A trusted text or private impression may need a fresh reading.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        2192,
+        2420,
+        3080,
+        4106
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "empress",
+      "title": "The Empress",
+      "number": "III",
+      "image": "empress.webp",
+      "symbolism": "The Empress holds a scepter and a shield bearing an eagle. Her emblems give creative authority a visible shape.",
+      "meaning": "Give a growing idea both encouragement and the authority to take up space.",
+      "reversed": "A wish to manage every detail can keep a new creation from developing its own shape.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        74,
+        76,
+        959,
+        1766
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "emperor",
+      "title": "The Emperor",
+      "number": "IV",
+      "image": "emperor.webp",
+      "symbolism": "The Emperor sits in profile, legs crossed, with a shield and scepter. Look at the single direction of his gaze.",
+      "meaning": "Hold one clear boundary so people know where they stand.",
+      "reversed": "Turn to hear the viewpoint outside your present line of sight.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        1118,
+        70,
+        2010,
+        1766
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "hierophant",
+      "title": "The Pope",
+      "number": "V",
+      "image": "hierophant.webp",
+      "symbolism": "Le Pape raises a hand above two smaller figures who approach him. Gesture carries the lesson as much as speech.",
+      "meaning": "Seek instruction from someone who embodies the practice they teach.",
+      "reversed": "Question a lesson whose authority has become its only justification.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        2178,
+        71,
+        3066,
+        1764
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "lovers",
+      "title": "The Lover",
+      "number": "VI",
+      "image": "lovers.webp",
+      "symbolism": "One figure stands between two others while an archer aims from above. The competing gestures make choice visible.",
+      "meaning": "Recognize the different loyalties pulling at a decision. Choose a commitment you can own.",
+      "reversed": "Unspoken wishes may be speaking through other people. Bring yours into the conversation.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        59,
+        2437,
+        943,
+        4123
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "chariot",
+      "title": "The Chariot",
+      "number": "VII",
+      "image": "chariot.webp",
+      "symbolism": "A crowned driver rides beneath a canopy over two horses. Look at how their bodies divide the space below him.",
+      "meaning": "Bring your resources under a common direction and make a public commitment to move.",
+      "reversed": "The appearance of control can hide a divided effort. Check what each part is doing.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        1114,
+        2453,
+        2002,
+        4149
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "justice",
+      "title": "Justice",
+      "number": "VIII",
+      "image": "justice.webp",
+      "symbolism": "On trump VIII, a crowned figure faces forward with a sword and scales. The measured posture asks for an equally measured answer.",
+      "meaning": "Give each side its proper weight, then make the decision that follows from the balance.",
+      "reversed": "Compare the standards being applied. Adjust an imbalance before issuing a verdict.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296414",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296414/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c43a8752a66306ef6552203f100134891f467483c4d51a1cab37d28c8ecc757d",
+      "crop": [
+        2177,
+        2454,
+        3068,
+        4152
+      ],
+      "sheet": "11r"
+    },
+    {
+      "id": "hermit",
+      "title": "The Hermit",
+      "number": "IX",
+      "image": "hermit.webp",
+      "symbolism": "A bent figure advances with a staff and a lantern partly sheltered by his mantle.",
+      "meaning": "Look closely at the small stretch of path your own light can reach.",
+      "reversed": "A private search may need a companion or an agreed point of return.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        92,
+        53,
+        980,
+        1747
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "wheel_of_fortune",
+      "title": "Wheel of Fortune",
+      "number": "X",
+      "image": "wheel_of_fortune.webp",
+      "symbolism": "Figures cling to a mounted wheel while another figure occupies its top. The positions describe different moments of one turn.",
+      "meaning": "Identify where a cycle is carrying you and what can be changed while it turns.",
+      "reversed": "Intervene in a recurring habit at the moment before it usually repeats.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        1148,
+        49,
+        2036,
+        1745
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "strength",
+      "title": "Strength",
+      "number": "XI",
+      "image": "strength.webp",
+      "symbolism": "On trump XI, a figure holds a lion at the mouth. Observe the closeness of the hands to the animal.",
+      "meaning": "Meet raw energy at close quarters with skill and composure.",
+      "reversed": "Give yourself distance if holding everything together has become exhausting.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        2190,
+        53,
+        3079,
+        1748
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "hanged_man",
+      "title": "The Hanged Man",
+      "number": "XII",
+      "image": "hanged_man.webp",
+      "symbolism": "One foot catches on a beam between two cut tree trunks. The head-down body reverses the reader's point of view.",
+      "meaning": "Turn the question around and see what the unfamiliar view reveals.",
+      "reversed": "Name what the suspension is costing and what could bring it to an end.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        98,
+        2413,
+        985,
+        4107
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "death",
+      "title": "The Unnamed Arcanum",
+      "number": "XIII",
+      "image": "death.webp",
+      "symbolism": "Trump XIII has a number and no printed title. A skeletal worker wields a long blade over a field of fragments.",
+      "meaning": "Recognize what has run its course. Clear a little ground for the next undertaking.",
+      "reversed": "A half-finished ending can occupy more space than a clean one. Find one thing you can release.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        1148,
+        2418,
+        2036,
+        4109
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "temperance",
+      "title": "Temperance",
+      "number": "XIV",
+      "image": "temperance.webp",
+      "symbolism": "A winged figure tips one vessel toward another. Study the open space the stream must cross.",
+      "meaning": "Let two influences meet gradually. Adjust the proportion by observing its effect.",
+      "reversed": "Pause a transfer that is draining one side faster than the other can receive.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296416",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296416/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a58d76bda4497922741956c6eb527b289f631d0441192c248e168f5598f8449f",
+      "crop": [
+        2199,
+        2396,
+        3091,
+        4091
+      ],
+      "sheet": "12r"
+    },
+    {
+      "id": "devil",
+      "title": "The Devil",
+      "number": "XV",
+      "image": "devil.webp",
+      "symbolism": "A tall winged figure stands over two smaller tethered beings. Their differing sizes show a relationship of power.",
+      "meaning": "Examine what you give up in return for a familiar comfort or advantage.",
+      "reversed": "Notice an old attachment weakening and make use of the new room to move.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        66,
+        71,
+        952,
+        1763
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "tower",
+      "title": "The House of God",
+      "number": "XVI",
+      "image": "tower.webp",
+      "symbolism": "The crownlike top separates from the tower as people tumble below. Colored shapes fill the surrounding air.",
+      "meaning": "An opening in a fixed arrangement can expose both damage and possibility. Attend to immediate needs first.",
+      "reversed": "A structure under strain may need an opening you choose for yourself.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        1121,
+        68,
+        2007,
+        1760
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "star",
+      "title": "The Star",
+      "number": "XVII",
+      "image": "star.webp",
+      "symbolism": "An unclothed figure kneels under a field of stars with two vessels tilted toward the ground and water.",
+      "meaning": "Tend a source of renewal without demanding an instant return.",
+      "reversed": "When faith in the process is low, measure the small act of care you can still offer.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        2169,
+        66,
+        3061,
+        1759
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "moon",
+      "title": "The Moon",
+      "number": "XVIII",
+      "image": "moon.webp",
+      "symbolism": "A moon looks down between towers above two animals and a water creature. The image moves from deep water to open sky.",
+      "meaning": "Trace an impression back to its source and allow uncertain details to remain open.",
+      "reversed": "Distinguish a useful instinct from an echo of an earlier fear.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        69,
+        2445,
+        960,
+        4140
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "sun",
+      "title": "The Sun",
+      "number": "XIX",
+      "image": "sun.webp",
+      "symbolism": "Two figures stand together below a large sun, in front of a low wall. Their outstretched arms make contact central to the scene.",
+      "meaning": "Share something openly with another person and see what becomes easier in the light.",
+      "reversed": "A warm intention can miss its mark. Ask how the gesture was received.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        1125,
+        2435,
+        2011,
+        4132
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "judgement",
+      "title": "Judgement",
+      "number": "XX",
+      "image": "judgement.webp",
+      "symbolism": "An angel with a trumpet appears above a figure rising between two witnesses. The call is heard within a group.",
+      "meaning": "Answer a call to renew a relationship or revise an earlier decision.",
+      "reversed": "Someone else's judgment may be obscuring your own. Listen again before you answer.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296418",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296418/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "d03aca1f151ddf3bd861e2e05844996937773a84fc1a277fa6c6b82a0d39059e",
+      "crop": [
+        2174,
+        2427,
+        3067,
+        4122
+      ],
+      "sheet": "13r"
+    },
+    {
+      "id": "world",
+      "title": "The World",
+      "number": "XXI",
+      "image": "world.webp",
+      "symbolism": "A central figure stands inside a wreath surrounded by four beings. The frame gathers separate presences into a whole.",
+      "meaning": "Recognize what has come together and give a finished cycle a proper close.",
+      "reversed": "Identify the missing contribution or farewell that would let a chapter feel complete.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296420",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296420/full/!3000,3000/0/default.jpg",
+      "sourceImageSha256": "9d09d2f3c90ee98f4c91fcd635afaf80bd657402d0c6d8848e8ff46f86518591",
+      "crop": [
+        94,
+        115,
+        1384,
+        2583
+      ],
+      "sheet": "14r"
+    },
+    {
+      "id": "wands_ace",
+      "title": "Ace of Batons",
+      "number": "1",
+      "image": "wands_ace.webp",
+      "symbolism": "A hand grips a single thick, branching baton as colored marks scatter around it. The cut wood retains a sense of growth.",
+      "meaning": "Take hold of a practical impulse while it has energy.",
+      "reversed": "Shape raw enthusiasm into one action with a clear purpose.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        2178,
+        63,
+        3066,
+        1760
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "wands_2",
+      "title": "Two of Batons",
+      "number": "2",
+      "image": "wands_2.webp",
+      "symbolism": "Two batons cross at a single point, leaving room for branches around them.",
+      "meaning": "Bring two intentions together and decide where their paths intersect.",
+      "reversed": "Separate objectives that only appeared to point toward the same task.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        77,
+        2442,
+        960,
+        4137
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "wands_3",
+      "title": "Three of Batons",
+      "number": "3",
+      "image": "wands_3.webp",
+      "symbolism": "A third baton runs straight between the diagonals. Follow its line through the crossing.",
+      "meaning": "Choose a direction for an early collaboration and begin extending it.",
+      "reversed": "A new demand may be dividing the first effort. Reorder the work.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        1140,
+        2421,
+        2022,
+        4106
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "wands_4",
+      "title": "Four of Batons",
+      "number": "4",
+      "image": "wands_4.webp",
+      "symbolism": "Four batons make a regular crossing bordered by curled leaves. The center has become a little framework.",
+      "meaning": "Build a dependable framework for a shared effort.",
+      "reversed": "Allow a useful structure to bend when new needs emerge.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        2194,
+        2425,
+        3082,
+        4117
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "wands_5",
+      "title": "Five of Batons",
+      "number": "5",
+      "image": "wands_5.webp",
+      "symbolism": "One straight baton cuts through two diagonal pairs, making the center feel crowded.",
+      "meaning": "Give different approaches a fair trial and learn from the friction.",
+      "reversed": "Name the actual point of competition before spending more energy on it.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        56,
+        72,
+        937,
+        1759
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_6",
+      "title": "Six of Batons",
+      "number": "6",
+      "image": "wands_6.webp",
+      "symbolism": "Three batons run in each diagonal direction. Their balanced crossing organizes a busy center.",
+      "meaning": "Coordinate the efforts of several people around a visible milestone.",
+      "reversed": "Review whose contribution went unseen when credit was distributed.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        1107,
+        75,
+        1998,
+        1765
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_7",
+      "title": "Seven of Batons",
+      "number": "7",
+      "image": "wands_7.webp",
+      "symbolism": "A straight central baton threads a crossing of six. One line holds its course among several others.",
+      "meaning": "Stand by an important purpose while making room for honest challenge.",
+      "reversed": "Consider whether every challenge truly calls for a defense.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        2156,
+        67,
+        3042,
+        1759
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_8",
+      "title": "Eight of Batons",
+      "number": "8",
+      "image": "wands_8.webp",
+      "symbolism": "Two thick groups of batons weave into a compact lattice. Their ends fan out from the center.",
+      "meaning": "Coordinate timing so several actions reinforce one another.",
+      "reversed": "Clear a bottleneck before asking everyone to move faster.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        42,
+        2431,
+        927,
+        4119
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_9",
+      "title": "Nine of Batons",
+      "number": "9",
+      "image": "wands_9.webp",
+      "symbolism": "A long straight baton runs through a dense woven field. Follow the single line where it briefly disappears.",
+      "meaning": "Keep hold of your purpose through the last difficult stages of a task.",
+      "reversed": "Let help through a defensive arrangement that has grown too dense.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        1088,
+        2432,
+        1979,
+        4115
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_10",
+      "title": "Ten of Batons",
+      "number": "10",
+      "image": "wands_10.webp",
+      "symbolism": "Ten batons form a nearly solid woven center. The bundle visually outweighs the spaces around it.",
+      "meaning": "Take stock of the full workload and divide it in a way people can sustain.",
+      "reversed": "Loosen a tightly packed schedule by removing a real obligation.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296404",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296404/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "8ab2f4bac3d13c56f3a02b3096f9b39bdf0063cff832d19c7afc6eb1fbff8e2e",
+      "crop": [
+        2142,
+        2432,
+        3030,
+        4120
+      ],
+      "sheet": "6r"
+    },
+    {
+      "id": "wands_page",
+      "title": "Page of Batons",
+      "number": null,
+      "image": "wands_page.webp",
+      "symbolism": "A standing valet holds a tall rough baton upright and looks along it, testing its size.",
+      "meaning": "Begin by handling the task yourself and learning its weight.",
+      "reversed": "A tool that overwhelms a beginner can be exchanged for a smaller first exercise.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        1134,
+        96,
+        2024,
+        1785
+      ],
+      "sheet": "2r"
+    },
+    {
+      "id": "wands_knight",
+      "title": "Knight of Batons",
+      "number": null,
+      "image": "wands_knight.webp",
+      "symbolism": "A rider carries a long baton against the movement of the horse. Look at the two directions in the silhouette.",
+      "meaning": "Take initiative while remaining responsive to a changing route.",
+      "reversed": "Check whether urgency is drawing your energy away from the chosen destination.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        82,
+        89,
+        971,
+        1786
+      ],
+      "sheet": "2r"
+    },
+    {
+      "id": "wands_queen",
+      "title": "Queen of Batons",
+      "number": null,
+      "image": "wands_queen.webp",
+      "symbolism": "A crowned figure steadies a thick baton across her body. Her grip gives the wood a definite direction.",
+      "meaning": "Offer confident encouragement and give a shared project something firm to grow around.",
+      "reversed": "An invitation can feel like a command. Leave room for another person's pace.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        2162,
+        2446,
+        3051,
+        4143
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "wands_king",
+      "title": "King of Batons",
+      "number": null,
+      "image": "wands_king.webp",
+      "symbolism": "The king holds a long baton while seated on a low throne. Ready energy is held within an established role.",
+      "meaning": "Use your authority to make purposeful action easier for others.",
+      "reversed": "A strong preference can narrow a group too soon. Invite another proposal.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        1113,
+        2430,
+        2001,
+        4126
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "cups_ace",
+      "title": "Ace of Cups",
+      "number": "1",
+      "image": "cups_ace.webp",
+      "symbolism": "A single elaborate cup rises like a little building, complete with towers. One vessel contains a great deal of space.",
+      "meaning": "Make room for a new feeling or invitation before deciding where it will lead.",
+      "reversed": "Notice an opening you are protecting so carefully that nothing can enter.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        81,
+        81,
+        973,
+        1779
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_2",
+      "title": "Two of Cups",
+      "number": "2",
+      "image": "cups_2.webp",
+      "symbolism": "Two cups flank a stem below a crest of leaves. The small inscription belongs to the deck maker.",
+      "meaning": "Give an exchange room to grow on both sides. Start with a gesture that invites an answer.",
+      "reversed": "Look for the expectation one side has never put into words.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        1132,
+        82,
+        2017,
+        1761
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_3",
+      "title": "Three of Cups",
+      "number": "3",
+      "image": "cups_3.webp",
+      "symbolism": "One cup rises above a lower pair between curling leaves. The triangle makes a third presence easy to see.",
+      "meaning": "Invite another person or perspective into a connection that can welcome it.",
+      "reversed": "Check whether the third voice is being included on equal terms.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        2178,
+        78,
+        3066,
+        1766
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_4",
+      "title": "Four of Cups",
+      "number": "4",
+      "image": "cups_4.webp",
+      "symbolism": "Four cups sit in two pairs around a central leaf design. The pattern gives feeling a stable frame.",
+      "meaning": "Create regular occasions for care and connection.",
+      "reversed": "A settled arrangement may need a fresh gesture to feel alive.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        61,
+        2451,
+        949,
+        4130
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_5",
+      "title": "Five of Cups",
+      "number": "5",
+      "image": "cups_5.webp",
+      "symbolism": "A fifth cup interrupts the square made by the outer four. Notice the altered balance around the center.",
+      "meaning": "Let an unexpected feeling reveal what an established bond needs.",
+      "reversed": "A small disappointment can fill the whole picture. Look again at the connections around it.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        1120,
+        2425,
+        2008,
+        4118
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_6",
+      "title": "Six of Cups",
+      "number": "6",
+      "image": "cups_6.webp",
+      "symbolism": "Three pairs of cups flank a continuous branching stem. Follow how one level leads into the next.",
+      "meaning": "Recall a kindness and carry it forward in a form that suits the present.",
+      "reversed": "Familiar patterns deserve examination when circumstances have changed.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296410",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296410/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "1cdc2e34acdbd5a906a85169963bc969c6d7b939e0ebd13ce39523e8fb5399e3",
+      "crop": [
+        2169,
+        2459,
+        3058,
+        4150
+      ],
+      "sheet": "9r"
+    },
+    {
+      "id": "cups_7",
+      "title": "Seven of Cups",
+      "number": "7",
+      "image": "cups_7.webp",
+      "symbolism": "Seven cups form an uneven arrangement with a conspicuous central cup. Notice where your eye settles first.",
+      "meaning": "Sort several emotional possibilities by the one that continues to draw your attention.",
+      "reversed": "Reduce the range of imagined outcomes by testing one real possibility.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        98,
+        70,
+        980,
+        1765
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "cups_8",
+      "title": "Eight of Cups",
+      "number": "8",
+      "image": "cups_8.webp",
+      "symbolism": "Four paired levels of cups flank a tall central design. The repeating pattern fills the available space.",
+      "meaning": "Consider whether an established emotional arrangement has room for what you need next.",
+      "reversed": "Habit may be sustaining a connection that now asks for a different form.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        1135,
+        63,
+        2024,
+        1747
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "cups_9",
+      "title": "Nine of Cups",
+      "number": "9",
+      "image": "cups_9.webp",
+      "symbolism": "Nine cups form tiers around a central line. The open spaces are as deliberate as the filled ones.",
+      "meaning": "Enjoy a satisfying exchange and identify what made it nourishing.",
+      "reversed": "Excess attention to an ideal arrangement can obscure a genuine pleasure.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        2193,
+        60,
+        3078,
+        1742
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "cups_10",
+      "title": "Ten of Cups",
+      "number": "10",
+      "image": "cups_10.webp",
+      "symbolism": "One large cup lies across the top of nine smaller cups. Its scale gathers the pattern beneath it.",
+      "meaning": "Let individual acts of care add up to a shared sense of belonging.",
+      "reversed": "A group ideal may be pressing down on its members. Ask what each person needs.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296412",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296412/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "b7a75b289afaf0748128e42760e1de9a9a0201fd8ad4b104100c355852ae8e47",
+      "crop": [
+        88,
+        2435,
+        974,
+        4120
+      ],
+      "sheet": "10r"
+    },
+    {
+      "id": "cups_page",
+      "title": "Page of Cups",
+      "number": null,
+      "image": "cups_page.webp",
+      "symbolism": "The valet carries a large covered cup close to the body. Its contents remain out of sight.",
+      "meaning": "Offer a feeling delicately and allow time for an answer.",
+      "reversed": "Take care of a new feeling before asking it to carry a public promise.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        68,
+        2429,
+        960,
+        4126
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "cups_knight",
+      "title": "Knight of Cups",
+      "number": null,
+      "image": "cups_knight.webp",
+      "symbolism": "A mounted figure extends a cup ahead. Unlike the seated court cards, the knight brings the vessel on a journey.",
+      "meaning": "Carry a sincere message to the person who can receive it.",
+      "reversed": "Make certain the recipient wants the offer before carrying it farther.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        2193,
+        71,
+        3083,
+        1764
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "cups_queen",
+      "title": "Queen of Cups",
+      "number": null,
+      "image": "cups_queen.webp",
+      "symbolism": "The queen sits with an ornate cup and a long straight blade. Receptivity and discernment occupy the same image.",
+      "meaning": "Listen generously and use judgment about what to take to heart.",
+      "reversed": "Receiving every demand can dull discernment. Choose what is yours to hold.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        1129,
+        67,
+        2019,
+        1759
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "cups_king",
+      "title": "King of Cups",
+      "number": null,
+      "image": "cups_king.webp",
+      "symbolism": "A seated king holds a large lidded cup above one knee. The vessel is steady in his hand.",
+      "meaning": "Create the conditions for others to speak freely and feel heard.",
+      "reversed": "Emotional reserve may leave others guessing. State your intention plainly.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        73,
+        71,
+        962,
+        1764
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "swords_ace",
+      "title": "Ace of Swords",
+      "number": "1",
+      "image": "swords_ace.webp",
+      "symbolism": "A hand holds a single sword through a crown. Leaves and small colored shapes surround the blade.",
+      "meaning": "Give a decisive thought a precise statement. Choose words you can stand behind.",
+      "reversed": "Before insisting on certainty, examine how the claim was formed.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        1114,
+        2432,
+        2008,
+        4132
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "swords_2",
+      "title": "Two of Swords",
+      "number": "2",
+      "image": "swords_2.webp",
+      "symbolism": "Two curved swords enclose a floral center. Empty space becomes the focus of their meeting.",
+      "meaning": "Hold two readings of the same situation long enough to see what both contain.",
+      "reversed": "Name what will help you choose between competing accounts.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296398",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296398/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "002fd7e1831d2585ac5e56aae443b245d57b7964aa0a325785cddfa5b225f2da",
+      "crop": [
+        2180,
+        2433,
+        3067,
+        4126
+      ],
+      "sheet": "3r"
+    },
+    {
+      "id": "swords_3",
+      "title": "Three of Swords",
+      "number": "3",
+      "image": "swords_3.webp",
+      "symbolism": "A straight sword stands between two curving blades. The clear central line interrupts a settled outline.",
+      "meaning": "Let a difficult fact enter the conversation and change its shape.",
+      "reversed": "Pain can narrow a conclusion. Give yourself time to check it.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        80,
+        74,
+        965,
+        1760
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_4",
+      "title": "Four of Swords",
+      "number": "4",
+      "image": "swords_4.webp",
+      "symbolism": "Two pairs of curved swords surround a flower. The enclosed center has room to rest.",
+      "meaning": "Protect a period of quiet thinking before you resume an argument.",
+      "reversed": "A protected pause can end once a concrete question is ready to be addressed.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        1138,
+        80,
+        2019,
+        1768
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_5",
+      "title": "Five of Swords",
+      "number": "5",
+      "image": "swords_5.webp",
+      "symbolism": "A straight blade appears inside a woven oval of four curved swords. Its point changes the enclosed pattern.",
+      "meaning": "Notice how a forceful argument affects the space available for other voices.",
+      "reversed": "Put down the winning point long enough to reopen a conversation.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        2186,
+        64,
+        3072,
+        1745
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_6",
+      "title": "Six of Swords",
+      "number": "6",
+      "image": "swords_6.webp",
+      "symbolism": "Six curved swords form an oval around a small plant. The blades make a passage around the center.",
+      "meaning": "Build a calmer way through a disagreement by following an orderly sequence.",
+      "reversed": "A tidy explanation can conceal an unfinished passage. Return to the step you skipped.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        83,
+        2444,
+        965,
+        4131
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_7",
+      "title": "Seven of Swords",
+      "number": "7",
+      "image": "swords_7.webp",
+      "symbolism": "One straight sword divides the narrow space inside six curves. Look for the direction only this blade takes.",
+      "meaning": "Find an independent approach and be candid about its consequences.",
+      "reversed": "An indirect approach may now be creating more confusion than it resolves.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        1148,
+        2428,
+        2036,
+        4118
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_8",
+      "title": "Eight of Swords",
+      "number": "8",
+      "image": "swords_8.webp",
+      "symbolism": "Four curved blades on each side make a narrow enclosure around a flower.",
+      "meaning": "Identify the smallest workable freedom within a constrained situation.",
+      "reversed": "Check which apparent limits remain in force and which can now be questioned.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296400",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296400/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f0f42e4e1df54605e788b59384a0e79069558425f53b2aade1e77befb23317c8",
+      "crop": [
+        2203,
+        2431,
+        3092,
+        4125
+      ],
+      "sheet": "4r"
+    },
+    {
+      "id": "swords_9",
+      "title": "Nine of Swords",
+      "number": "9",
+      "image": "swords_9.webp",
+      "symbolism": "A single upright sword fills the gap within eight enclosing blades. One idea dominates a crowded field.",
+      "meaning": "Examine the thought that keeps returning and look for evidence on both sides.",
+      "reversed": "Give a recurring worry less room by bringing it into a specific conversation.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        67,
+        80,
+        953,
+        1769
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "swords_10",
+      "title": "Ten of Swords",
+      "number": "10",
+      "image": "swords_10.webp",
+      "symbolism": "Two straight blades cross near the top inside eight bending blades. The central space is fully occupied.",
+      "meaning": "Recognize when a line of thought has been argued to exhaustion and allow it to end.",
+      "reversed": "Clear one lingering argument so attention can turn elsewhere.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296402",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296402/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "f9318866122b2c4a082876f6fd2c4a9bcf896d64b8b5c865caa9ab876797979e",
+      "crop": [
+        1112,
+        61,
+        1998,
+        1745
+      ],
+      "sheet": "5r"
+    },
+    {
+      "id": "swords_page",
+      "title": "Page of Swords",
+      "number": null,
+      "image": "swords_page.webp",
+      "symbolism": "The valet looks sideways while holding a sword and its sheath. The image leaves the next action undecided.",
+      "meaning": "Ask a careful question before drawing a conclusion.",
+      "reversed": "Examine a rumor before letting it direct your response.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        73,
+        2427,
+        960,
+        4125
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "swords_knight",
+      "title": "Knight of Swords",
+      "number": null,
+      "image": "swords_knight.webp",
+      "symbolism": "A horse moves forward beneath a rider whose long sword slants across the image.",
+      "meaning": "Carry a clear argument to the point where a decision is needed.",
+      "reversed": "Give the other side time to answer before renewing the charge.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        2191,
+        83,
+        3079,
+        1782
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "swords_queen",
+      "title": "Queen of Swords",
+      "number": null,
+      "image": "swords_queen.webp",
+      "symbolism": "The queen holds a sword upright against the front of her body. Its edge gives her silhouette a firm boundary.",
+      "meaning": "State a distinction clearly and listen for what falls on either side of it.",
+      "reversed": "A sound boundary can be expressed without dismissing another person's experience.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        1134,
+        77,
+        2024,
+        1770
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "swords_king",
+      "title": "King of Swords",
+      "number": null,
+      "image": "swords_king.webp",
+      "symbolism": "A crowned king holds a sword upright while turning his gaze aside. Authority still has to choose where to look.",
+      "meaning": "Apply an agreed principle with attention to the particular case.",
+      "reversed": "Seek another view when an established judgment feels unusually easy.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296394",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296394/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "7be264766138f4c4459e63d8d7c34a50e0c3826bec8d20496acd645c91f85f68",
+      "crop": [
+        80,
+        68,
+        969,
+        1759
+      ],
+      "sheet": "1r"
+    },
+    {
+      "id": "pentacles_ace",
+      "title": "Ace of Coins",
+      "number": "1",
+      "image": "pentacles_ace.webp",
+      "symbolism": "A single large patterned coin occupies the center between small leaf sprays. Look at the detail concentrated in one object.",
+      "meaning": "Put a tangible first resource behind a worthwhile possibility.",
+      "reversed": "Check what an attractive opportunity actually contains before committing to it.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        69,
+        77,
+        956,
+        1769
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_2",
+      "title": "Two of Coins",
+      "number": "2",
+      "image": "pentacles_2.webp",
+      "symbolism": "Two large coins are joined by a curling band bearing the maker's name and the date 1713.",
+      "meaning": "Keep two commitments in motion through a deliberate rhythm of exchange.",
+      "reversed": "One of the commitments may now need a different timetable.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        1128,
+        105,
+        2015,
+        1793
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_3",
+      "title": "Three of Coins",
+      "number": "3",
+      "image": "pentacles_3.webp",
+      "symbolism": "Three coins form a triangle between two curling stems. The upper coin depends visually on the lower pair.",
+      "meaning": "Use complementary contributions to build something none of the parts could support alone.",
+      "reversed": "Examine the supporting roles before adding another layer.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        2184,
+        99,
+        3069,
+        1786
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_4",
+      "title": "Four of Coins",
+      "number": "4",
+      "image": "pentacles_4.webp",
+      "symbolism": "Four coins surround a heraldic ornament at the center. The arrangement suggests resources held under one seal.",
+      "meaning": "Set aside a sound reserve and decide what purpose it serves.",
+      "reversed": "A protected resource may be ready to circulate again.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        64,
+        2458,
+        948,
+        4142
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_5",
+      "title": "Five of Coins",
+      "number": "5",
+      "image": "pentacles_5.webp",
+      "symbolism": "A central coin joins four outer coins, linked by surrounding flourishes. One additional need changes the balance.",
+      "meaning": "Identify where support is missing and make a specific request.",
+      "reversed": "A modest contribution can shift the balance more than it first appears.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        1126,
+        2445,
+        2014,
+        4139
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_6",
+      "title": "Six of Coins",
+      "number": "6",
+      "image": "pentacles_6.webp",
+      "symbolism": "Six coins form paired ranks with a clear flow of foliage between them.",
+      "meaning": "Distribute resources in a way that takes account of the people at each level.",
+      "reversed": "Unequal needs may require revising an apparently even division.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296406",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296406/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "c69839f94f845ccbaa1c6f5b9c39a79be37c40fef0564410fe6aad332e5e258b",
+      "crop": [
+        2166,
+        2453,
+        3052,
+        4148
+      ],
+      "sheet": "7r"
+    },
+    {
+      "id": "pentacles_7",
+      "title": "Seven of Coins",
+      "number": "7",
+      "image": "pentacles_7.webp",
+      "symbolism": "Coins surround a staggered central arrangement. Count their positions before judging the shape of the whole.",
+      "meaning": "Assess what an investment has produced and allow time for an honest comparison.",
+      "reversed": "More effort may give a poor return unless the arrangement itself changes.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296408",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296408/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "57959dc18b7ffcad996d29622144aa72b85005bdd7f299343e773641d8cf8951",
+      "crop": [
+        90,
+        86,
+        978,
+        1770
+      ],
+      "sheet": "8r"
+    },
+    {
+      "id": "pentacles_8",
+      "title": "Eight of Coins",
+      "number": "8",
+      "image": "pentacles_8.webp",
+      "symbolism": "Eight coins sit in paired rows around a long stem. Look at the small variations within the repeated pattern.",
+      "meaning": "Refine a practical skill by comparing one attempt with the next.",
+      "reversed": "Change the practice when the repeated steps no longer sharpen the skill.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296408",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296408/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "57959dc18b7ffcad996d29622144aa72b85005bdd7f299343e773641d8cf8951",
+      "crop": [
+        1156,
+        101,
+        2041,
+        1797
+      ],
+      "sheet": "8r"
+    },
+    {
+      "id": "pentacles_9",
+      "title": "Nine of Coins",
+      "number": "9",
+      "image": "pentacles_9.webp",
+      "symbolism": "Nine coins form a close arrangement with a distinctive middle position. The composition has matured without becoming completely uniform.",
+      "meaning": "Enjoy a result that your patience and judgment helped create.",
+      "reversed": "Consider which parts of an expensive standard genuinely support your independence.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296408",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296408/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "57959dc18b7ffcad996d29622144aa72b85005bdd7f299343e773641d8cf8951",
+      "crop": [
+        86,
+        2463,
+        971,
+        4157
+      ],
+      "sheet": "8r"
+    },
+    {
+      "id": "pentacles_10",
+      "title": "Ten of Coins",
+      "number": "10",
+      "image": "pentacles_10.webp",
+      "symbolism": "Ten coins fill the field in paired rows. A continuous plant-like design connects the spaces left between them.",
+      "meaning": "Organize material resources so their benefits can outlast a single occasion.",
+      "reversed": "Discuss how a shared resource will be maintained and who will take part.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296408",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296408/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "57959dc18b7ffcad996d29622144aa72b85005bdd7f299343e773641d8cf8951",
+      "crop": [
+        1135,
+        2456,
+        2020,
+        4149
+      ],
+      "sheet": "8r"
+    },
+    {
+      "id": "pentacles_page",
+      "title": "Page of Coins",
+      "number": null,
+      "image": "pentacles_page.webp",
+      "symbolism": "A standing valet holds one coin aloft while another rests at the feet. Compare the resource under study with the one close at hand.",
+      "meaning": "Study a new practical opportunity and check what is already available to start it.",
+      "reversed": "Bring attention back from the imagined reward to the lesson at your feet.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        2178,
+        2456,
+        3065,
+        4152
+      ],
+      "sheet": "2r"
+    },
+    {
+      "id": "pentacles_knight",
+      "title": "Knight of Coins",
+      "number": null,
+      "image": "pentacles_knight.webp",
+      "symbolism": "A coin floats before a rider and horse. The material objective is visible along the route.",
+      "meaning": "Give a concrete task a steady pace and a clear destination.",
+      "reversed": "Review a dependable route when it stops leading toward the intended result.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        1135,
+        2458,
+        2031,
+        4155
+      ],
+      "sheet": "2r"
+    },
+    {
+      "id": "pentacles_queen",
+      "title": "Queen of Coins",
+      "number": null,
+      "image": "pentacles_queen.webp",
+      "symbolism": "The queen raises a single coin and holds a scepter. Her attention turns toward the object she is tending.",
+      "meaning": "Care for something tangible with enough attention to notice small changes.",
+      "reversed": "Resources offered to others may need replenishing at their source.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        77,
+        2464,
+        967,
+        4157
+      ],
+      "sheet": "2r"
+    },
+    {
+      "id": "pentacles_king",
+      "title": "King of Coins",
+      "number": null,
+      "image": "pentacles_king.webp",
+      "symbolism": "The seated king holds a coin near the knee, close to the body. His pose gives possession a practical weight.",
+      "meaning": "Use experience to steward a resource and share its benefits deliberately.",
+      "reversed": "Review whether holding on serves the original purpose of the resource.",
+      "source": "https://collections.library.yale.edu/catalog/32296393?child_oid=32296396",
+      "sourceImage": "https://collections.library.yale.edu/iiif/2/32296396/full/!4200,4200/0/default.jpg",
+      "sourceImageSha256": "a9170555efe1162801999c6d5775ce6dbaf20d85354a93f9bd4e90bd5953ba7a",
+      "crop": [
+        2193,
+        97,
+        3083,
+        1793
+      ],
+      "sheet": "2r"
+    }
+  ]
+}

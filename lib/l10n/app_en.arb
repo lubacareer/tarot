@@ -1,0 +1,217 @@
+{
+  "@@locale": "en",
+  "navTable": "Table",
+  "navLibrary": "Library",
+  "navGuide": "Guide",
+  "appTitle": "Arcana Observatory",
+  "language": "Language",
+  "languageSaveError": "Could not save the language preference.",
+  "readingTable": "Reading table",
+  "tableHeading": "The reading table",
+  "deckLibrary": "Deck library",
+  "fieldGuide": "Field guide",
+  "uprightReversed": "Upright & reversed",
+  "uprightCards": "Upright cards",
+  "beginReading": "Begin reading",
+  "chooseDeck": "Choose your deck",
+  "chooseSpread": "Choose your spread",
+  "singleDescription": "One card brings a single question into focus.",
+  "threeDescription": "Read three positions together to explore how their meanings relate.",
+  "crossDescription": "Explore a question in depth through ten connected positions.",
+  "includeReversals": "Include reversed cards",
+  "reversalsHelp": "A card can appear upside down with its own interpretation.",
+  "beginSpread": "Begin this spread",
+  "cardCount": "{count, plural, one{1 card} other{{count} cards}}",
+  "@cardCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "chooseCard": "Choose a card",
+  "turnCard": "Turn your card",
+  "positionCounter": "Position {number} of {total} · {position}",
+  "@positionCounter": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      },
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "previousCards": "Previous cards",
+  "pageRange": "{start}–{end} of {total}",
+  "@pageRange": {
+    "placeholders": {
+      "start": {
+        "type": "int"
+      },
+      "end": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "nextCards": "Next cards",
+  "revealCard": "Reveal card",
+  "reversed": "Reversed",
+  "upright": "Upright",
+  "enlargeCard": "Enlarge card",
+  "readingComplete": "Reading complete",
+  "positionGuide": "Position guide",
+  "lookAtImage": "Look at the image",
+  "cardMeaning": "Card meaning",
+  "readPosition": "Read the position",
+  "connectDetail": "What detail in {card} connects its meaning to “{position}” in your reading?",
+  "@connectDetail": {
+    "placeholders": {
+      "card": {
+        "type": "String"
+      },
+      "position": {
+        "type": "String"
+      }
+    }
+  },
+  "closingReflection": "Closing reflection",
+  "smallAction": "What is one small action this card invites you to try?",
+  "twoCards": "Which two cards seem to speak to each other? Use their positions to explain the connection, then name one action to take.",
+  "newReading": "New reading",
+  "returnToCard": "Return to drawn card",
+  "chooseNext": "Choose next card",
+  "drawFromDeck": "Draw from the deck",
+  "beforeReveal": "Before you reveal",
+  "chooseFaceDown": "Select a face-down card from the shuffled deck for this position.",
+  "rememberQuestion": "Hold the position’s question in mind, then turn the card to explore its imagery.",
+  "startAgain": "Start again",
+  "spreadLayout": "Spread layout",
+  "drawCardNumber": "Draw card {number}",
+  "@drawCardNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "drawFaceDownNumber": "Draw face-down card {number}",
+  "@drawFaceDownNumber": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
+  "close": "Close",
+  "resetZoom": "Reset zoom",
+  "zoomIn": "Zoom in",
+  "leaveReading": "Leave this reading?",
+  "exitingClears": "Exiting clears the cards on this table.",
+  "restartClears": "Starting again clears the cards on this table.",
+  "keepReading": "Keep reading",
+  "exitApp": "Exit app",
+  "openingLibrary": "Opening deck library",
+  "libraryOpenError": "The deck library could not be opened.",
+  "tryAgain": "Try again",
+  "symbolism": "Symbolism",
+  "useDeck": "Use this deck",
+  "cardGallery": "Card gallery",
+  "previousPage": "Previous page",
+  "nextPage": "Next page",
+  "askQuestion": "Ask a question",
+  "guideQuestion": "Frame a question that leaves room for reflection. “What could help me approach this decision?” gives each card a role in exploring your choices.",
+  "noticePicture": "Notice the picture",
+  "guidePicture": "Name one visible detail before opening the meaning. Notice where a figure looks, what they carry, or how a repeated suit fills the card. In The Star, vessels pouring water can bring renewal to mind.",
+  "guidePosition": "A spread gives each card a job. In the Past position, The Star might recall a time when hope returned. In the Present position, the same image can invite you to notice what sustains you today.",
+  "exploreReversal": "Explore a reversal",
+  "guideReversal": "Enable reversed cards to include upside-down draws. Compare the upright idea with the reversed interpretation. Consider whether the image suggests a delay, a private experience, or a different direction.",
+  "connectCards": "Connect your cards",
+  "guideConnect": "Read the cards in spread order. Look for a shared color, suit, gesture, or idea. Describe how that thread changes from one position to the next and name one small action you want to try.",
+  "softwareLicense": "Software license",
+  "artworkCredits": "Artwork credits",
+  "licenseOpenError": "This license file could not be opened.",
+  "guideIntro": "Learn to connect the imagery, position, and meaning of each card.",
+  "creditsLicenses": "Credits & licenses",
+  "openSourceLibraries": "Open-source libraries",
+  "oneCard": "One card",
+  "threeCards": "Past · Present · Future",
+  "celticCross": "Celtic Cross",
+  "focus": "Focus",
+  "focusPrompt": "What detail in this card deserves your attention today?",
+  "past": "Past",
+  "pastPrompt": "How might this image describe an influence you bring from the past?",
+  "present": "Present",
+  "presentPrompt": "Where can you recognize this pattern in your situation now?",
+  "future": "Future",
+  "futurePrompt": "If this pattern continues, what possibility might open up?",
+  "situation": "Situation",
+  "situationPrompt": "What does this card suggest is at the heart of the matter?",
+  "crossing": "Crossing",
+  "crossingPrompt": "How could this energy challenge or support the situation?",
+  "above": "Above",
+  "abovePrompt": "What intention or aspiration does this image bring to mind?",
+  "foundation": "Foundation",
+  "foundationPrompt": "What underlying experience could be shaping the situation?",
+  "behind": "Behind",
+  "behindPrompt": "What influence might be receding into the past?",
+  "ahead": "Ahead",
+  "aheadPrompt": "What possibility appears to be approaching?",
+  "stance": "Your stance",
+  "stancePrompt": "Where do you see your own approach in this card?",
+  "surroundings": "Surroundings",
+  "surroundingsPrompt": "How might this pattern appear in the people or conditions around you?",
+  "hopesFears": "Hopes and fears",
+  "hopesFearsPrompt": "What wish or worry does this image bring to the surface?",
+  "outcome": "Outcome",
+  "outcomePrompt": "What direction does the spread suggest if the present pattern continues?",
+  "majorLabel": "Major Arcana · {number}",
+  "@majorLabel": {
+    "placeholders": {
+      "number": {
+        "type": "String"
+      }
+    }
+  },
+  "minorLabel": "Minor Arcana · {suit} · {rank}",
+  "@minorLabel": {
+    "placeholders": {
+      "suit": {
+        "type": "String"
+      },
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "unnumbered": "Unnumbered",
+  "courtLabel": "{rank} (court)",
+  "@courtLabel": {
+    "placeholders": {
+      "rank": {
+        "type": "String"
+      }
+    }
+  },
+  "cups": "Cups",
+  "swords": "Swords",
+  "batons": "Batons",
+  "wands": "Wands",
+  "coins": "Coins",
+  "pentacles": "Pentacles",
+  "page": "Page",
+  "knight": "Knight",
+  "queen": "Queen",
+  "king": "King",
+  "majorLesson": "Read this image as a turning point and ask what larger change its central figure or event might represent.",
+  "cupsLesson": "A cup holds, offers or spills its contents, giving you a way to explore how feelings pass between people.",
+  "swordsLesson": "Read the blade as a tool of judgment and ask what needs to be separated, questioned or decided.",
+  "wandsLesson": "A staff can support a traveler or direct a movement, so look for where effort is being put to work.",
+  "coinsLesson": "Read the disc as a resource and ask who holds, shares or cultivates something of practical value."
+}

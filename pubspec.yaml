@@ -1,0 +1,39 @@
+name: arcana_observatory
+description: "Learn tarot with three illustrated decks and guided offline readings."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  archive: ^4.7.1
+  flutter:
+    sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.3
+  shared_preferences: ^2.5.5
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  generate: true
+  uses-material-design: true
+  assets:
+    - assets/decks/waite_smith/
+    - assets/decks/marseille/
+    - assets/decks/celestial/
+    - assets/visuals/observatory.webp
+    - assets/fonts/rubik-OFL.txt
+    - LICENSE
+    - ARTWORK-LICENSE.md
+  fonts:
+    - family: Rubik
+      fonts:
+        - asset: assets/fonts/Rubik.ttf
