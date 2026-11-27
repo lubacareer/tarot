@@ -1,0 +1,790 @@
+{
+  "id": "celestial",
+  "name": "Celestial Arcana",
+  "credit": "Original art direction, scene briefs, and interpretations by the Arcana Observatory contributors. Paintings generated with OpenAI ImageGen.",
+  "source": "https://github.com/lubacareer/tarot",
+  "rights": "CC BY 4.0",
+  "styleBrief": "Use case: illustration-story. Original celestial tarot painting for the Celestial Arcana deck. Full-bleed portrait composition about 2:3, a single compelling image with absolutely no lettering, numerals, labels, border, trademark, signature or watermark. Traditional astronomical atlas meets hand-painted symbolist gouache: velvety Prussian blue, luminous mineral pigments, antique gold, subtle speckled paper grain and delicate hand-inked hatching. Human warmth, big readable focal silhouette, intentional pools of darkness, tactile physical paint, deep-space night skies. Frame all important action centrally within the middle 80% of the width.",
+  "cards": [
+    {
+      "id": "fool",
+      "title": "The Fool",
+      "number": "0",
+      "image": "fool.webp",
+      "symbolism": "The open hand releases a seed at the lip of an unfamiliar world. The fox keeps its paws on the ground.",
+      "meaning": "Take one small step into a possibility you cannot fully map. Curiosity can get you moving while your attention keeps you steady.",
+      "reversed": "Excitement may be carrying you past a warning, or caution may have turned into a rut. Test the ground with a small, reversible step.",
+      "brief": "An exuberant wanderer steps off a small golden asteroid toward a thin crescent of light. A tiny russet fox tosses its head at the brink. A white seed on a long stalk floats from the traveler's open hand."
+    },
+    {
+      "id": "magician",
+      "title": "The Magician",
+      "number": "I",
+      "image": "magician.webp",
+      "symbolism": "The lens catches diffuse starlight and concentrates it on one point. Four tools within reach represent different ways to act.",
+      "meaning": "Choose a tool you already understand and give it one clear job. An idea gains force when you put it into practice.",
+      "reversed": "A fine display can conceal a poorly defined intention. Check that your tools and your words serve the same purpose.",
+      "brief": "A dark-skinned celestial instrument maker in teal at a workshop beneath an open dome aligns a brass lens with a falling star. A cup, wand, sword and pentacle lie on the worktable."
+    },
+    {
+      "id": "high_priestess",
+      "title": "The High Priestess",
+      "number": "II",
+      "image": "high_priestess.webp",
+      "symbolism": "The bright and dark columns frame a chart that is only partly open. The pool offers another way of seeing.",
+      "meaning": "Give an impression time to take shape. A detail you have quietly been noticing may deserve a place beside the facts.",
+      "reversed": "Secrecy or second-guessing may be getting in the way. Name the impression plainly and look for a detail that helps you check it.",
+      "brief": "A silent astronomer in dark blue between twin columns of bright moonstone and dark basalt holds a partly unfurled star chart. A silver crescent floats above a still black reflecting pool."
+    },
+    {
+      "id": "empress",
+      "title": "The Empress",
+      "number": "III",
+      "image": "empress.webp",
+      "symbolism": "The garden draws a distant spiral of stars down into the color and texture of growing things.",
+      "meaning": "Care for the conditions that let something grow. Food, attention, comfort or a stretch of unhurried time may be the most creative gift available.",
+      "reversed": "Giving continuously can drain the soil. Return some of that care to your own body, space or unfinished work.",
+      "brief": "A pregnant celestial gardener with a crown of small star blossoms kneels on a moss-green moon. Golden wheat and soft red poppies grow beneath her hands; a spiral galaxy hangs low."
+    },
+    {
+      "id": "emperor",
+      "title": "The Emperor",
+      "number": "IV",
+      "image": "emperor.webp",
+      "symbolism": "A plumb line gives the terraced settlement a dependable reference. The ruler sits close enough to see the lives below.",
+      "meaning": "Set a clear boundary or draw up a plan other people can rely on. Take responsibility for how the structure works in practice.",
+      "reversed": "A rigid rule may be serving its own survival. Check whom the structure helps and where it can safely bend.",
+      "brief": "A gray-haired ruler in red seated on a throne carved from a rust-colored planetary cliff holds a plumb line. The terraced rock and a small settlement below follow its vertical alignment."
+    },
+    {
+      "id": "hierophant",
+      "title": "The Hierophant",
+      "number": "V",
+      "image": "hierophant.webp",
+      "symbolism": "The well-used instrument and the learners' faces show knowledge passing between generations.",
+      "meaning": "Borrow the strength of a practice that has been tested over time. Ask someone experienced to show you the reasoning behind it.",
+      "reversed": "Inherited advice may need translation into your circumstances. Ask which principle matters and which custom can change.",
+      "brief": "An elder in saffron at a vaulted observatory shows two young apprentices how to sight a bronze astrolabe. Worn keys hang from a cord against a deep indigo robe."
+    },
+    {
+      "id": "lovers",
+      "title": "The Lovers",
+      "number": "VI",
+      "image": "lovers.webp",
+      "symbolism": "The intersecting orbits meet at the same point as the travelers' hands. Each person retains a separate foothold.",
+      "meaning": "Make a choice that fits the values you want to share. Speak openly about what commitment asks of each person.",
+      "reversed": "An attractive choice may conflict with an important value. Give both people room to say what alignment would require.",
+      "brief": "Two travelers of different skin tones stand on neighboring moon ledges and join hands across the gap. A flowering red tree arches over them; two orbital arcs cross in the sky."
+    },
+    {
+      "id": "chariot",
+      "title": "The Chariot",
+      "number": "VII",
+      "image": "chariot.webp",
+      "symbolism": "The opposing arcs of the team give motion its tension. The fixed star gives the navigator a direction.",
+      "meaning": "Choose a destination and coordinate the forces pulling at you. Momentum becomes useful when you can steer it.",
+      "reversed": "Pushing harder may make opposing demands fight harder. Pause long enough to bring your direction and pace back together.",
+      "brief": "A navigator in lapis armor pilots a small ceremonial sky chariot between two great comet-horses, one silver and one obsidian, sweeping in opposite arcs, with a pole star dead ahead."
+    },
+    {
+      "id": "strength",
+      "title": "Strength",
+      "number": "VIII",
+      "image": "strength.webp",
+      "symbolism": "The calm hand and the lion's solar mane put tenderness beside tremendous power.",
+      "meaning": "Stay present with a strong feeling. A patient response can direct the energy without denying its force.",
+      "reversed": "Exhaustion can make gentleness feel impossible. Give yourself a moment to regain steadiness before responding.",
+      "brief": "A young woman in a cream robe kneels beside a huge bright copper sun-lion. Her fingers gently rest on its muzzle as its mane dissolves into curling solar flares."
+    },
+    {
+      "id": "hermit",
+      "title": "The Hermit",
+      "number": "IX",
+      "image": "hermit.webp",
+      "symbolism": "The lantern lights the nearest stones. The far end of the path stays dark.",
+      "meaning": "Step away from competing signals and give one question your full attention. You only need enough light for the next decision.",
+      "reversed": "Solitude may have outlasted its usefulness. Take the insight you found and try it in a conversation or a practical task.",
+      "brief": "A solitary old wayfinder on a jagged blue moon ridge shelters a brass lantern inside his cloak. One small trail of lit stones winds into darkness; a violet nebula recedes."
+    },
+    {
+      "id": "wheel_of_fortune",
+      "title": "Wheel of Fortune",
+      "number": "X",
+      "image": "wheel_of_fortune.webp",
+      "symbolism": "The passing shadow makes a distant cycle briefly visible in an ordinary village.",
+      "meaning": "Notice what is changing around you. A shift you did not choose may still offer a moment to act.",
+      "reversed": "An old cycle can feel permanent while you are inside it. Look for the one part of your response that can change this time.",
+      "brief": "An immense bronze orrery with concentric turning rings looms above a tiny village observatory. A shooting star grazes its rim and its moving shadow sweeps the rooftops."
+    },
+    {
+      "id": "justice",
+      "title": "Justice",
+      "number": "XI",
+      "image": "justice.webp",
+      "symbolism": "A level horizon and upright blade echo the balance. Both stones receive the same attention.",
+      "meaning": "Lay out the facts, name your criteria and own the consequences of the choice. Give every affected voice a fair hearing.",
+      "reversed": "An assumption may be tipping the scales. Recheck the evidence and look for an obligation you have yet to acknowledge.",
+      "brief": "A robed celestial judge weighs a luminous meteorite against a dark stone in brass balances. A straight sword stands upright in the other hand; the horizon is precise and level."
+    },
+    {
+      "id": "hanged_man",
+      "title": "The Hanged One",
+      "number": "XII",
+      "image": "hanged_man.webp",
+      "symbolism": "The halo glows nearest the upside-down face. Sky and reflection invite a second reading of the same scene.",
+      "meaning": "Let a decision rest while you examine it from an unfamiliar angle. A useful pause can change what you see.",
+      "reversed": "Waiting may have become a way to avoid a choice. Name what you still hope to learn and decide when to move.",
+      "brief": "A serene barefoot traveler hangs upside down by one ankle from a crescent-shaped ice arch above a starfield, arms relaxed, a circular golden halo around the head. The sky is reflected below."
+    },
+    {
+      "id": "death",
+      "title": "Death",
+      "number": "XIII",
+      "image": "death.webp",
+      "symbolism": "The empty casing hangs beside the living moth. Two different suns mark the ending and the beginning.",
+      "meaning": "A chapter has reached its natural close. Acknowledge what it gave you and make a concrete space for what follows.",
+      "reversed": "Something already finished may still occupy your attention. A small farewell can make a change easier to accept.",
+      "brief": "A white moth emerges from a split dark chrysalis on the branch of a silver-barked tree. A red giant sets behind it and a thin blue sun rises on the other horizon. Contemplative transformation."
+    },
+    {
+      "id": "temperance",
+      "title": "Temperance",
+      "number": "XIV",
+      "image": "temperance.webp",
+      "symbolism": "The stream joins two separate vessels while the figure stands in two different elements.",
+      "meaning": "Blend two approaches a little at a time. Let feedback guide the mixture until you find a rhythm you can sustain.",
+      "reversed": "An uneasy mix may need less of one ingredient. Slow the exchange and adjust one thing at a time.",
+      "brief": "A winged stargazer in ivory pours a thin ribbon of turquoise water between two hammered gold vessels. One foot rests on violet rock and the other in a dark tidal pool."
+    },
+    {
+      "id": "devil",
+      "title": "The Devil",
+      "number": "XV",
+      "image": "devil.webp",
+      "symbolism": "The glow captures the seekers' gaze. The loose ends suggest a degree of freedom they have overlooked.",
+      "meaning": "Examine a habit or bargain that keeps drawing you back. Seeing what you gain from it can make your choices clearer.",
+      "reversed": "A binding pattern may be loosening. Notice the opening and take one practical step that supports your freedom.",
+      "brief": "Two star seekers lean into the glow of a huge glittering black meteor beneath a red eclipse. Loose golden chains loop around their wrists; their unfastened ends lie visibly on the floor."
+    },
+    {
+      "id": "tower",
+      "title": "The Tower",
+      "number": "XVI",
+      "image": "tower.webp",
+      "symbolism": "The broken dome opens the building to the storm. The exposed stone shows what the structure depended upon.",
+      "meaning": "A disruption can uncover a weakness that was already present. Attend first to immediate needs, then decide what deserves rebuilding.",
+      "reversed": "A warning may be arriving before the break. Address a vulnerable point while there is still room to choose how.",
+      "brief": "A bolt of white lightning splits the domed roof of an astronomical tower on a violet cliff. Brass roof fragments arc into the bright night while the stone foundation is revealed."
+    },
+    {
+      "id": "star",
+      "title": "The Star",
+      "number": "XVII",
+      "image": "star.webp",
+      "symbolism": "The star is steady above two streams. Care reaches both the lake and its dry shore.",
+      "meaning": "Nourish a hope through an ordinary act of care. Recovery can begin quietly and still matter.",
+      "reversed": "When hope feels remote, work close to home. Choose one small gesture of restoration you can make today.",
+      "brief": "A barefoot water bearer kneels beside an ink-blue crater lake, pouring from two clay jugs, one onto shore and one into water. One enormous pale gold star dominates a gently stippled sky."
+    },
+    {
+      "id": "moon",
+      "title": "The Moon",
+      "number": "XVIII",
+      "image": "moon.webp",
+      "symbolism": "Moonlight reveals only part of the path. The animals respond to it from different places and instincts.",
+      "meaning": "Allow room for uncertainty. Follow a hunch gently and check what changes when you view it in clearer light.",
+      "reversed": "A confusing impression may be beginning to settle. Separate what you actually saw from the story you added.",
+      "brief": "A silver full moon hovers low between twin weathered observatory towers. A fox and a white dog watch a red crayfish climbing from a tidal pool; a winding path fades into fog."
+    },
+    {
+      "id": "sun",
+      "title": "The Sun",
+      "number": "XIX",
+      "image": "sun.webp",
+      "symbolism": "The bright pennant, open ground and sunflowers give joy a visible direction.",
+      "meaning": "Enjoy something openly and let others share in it. Clear light can help you recognize progress you had taken for granted.",
+      "reversed": "Pressure to appear cheerful may hide a simpler pleasure. Set the performance aside and notice one genuine bright spot.",
+      "brief": "A laughing child in a loose saffron tunic runs through tall sunflowers on a golden plain beneath a huge radiant sun, trailing a fluttering vermilion pennant."
+    },
+    {
+      "id": "judgement",
+      "title": "Judgement",
+      "number": "XX",
+      "image": "judgement.webp",
+      "symbolism": "The sleepers wake in response to a single signal. Each stands up under their own power.",
+      "meaning": "Answer an invitation to take stock. Name what you have learned and act from that clearer understanding of yourself.",
+      "reversed": "A harsh inner verdict may be drowning out the invitation. Review your history with enough kindness to learn from it.",
+      "brief": "An immense spiral of gold light unfurls like a trumpet across the night sky. Sleepers rise from pale moonstone platforms and turn their faces to its glowing call."
+    },
+    {
+      "id": "world",
+      "title": "The World",
+      "number": "XXI",
+      "image": "world.webp",
+      "symbolism": "The wreath makes a complete circle around a figure still in motion. Four witnesses give the moment a sense of wholeness.",
+      "meaning": "Recognize the full arc of what you have finished. Celebrate it, gather what you learned and carry that experience forward.",
+      "reversed": "One loose end may be keeping a finished chapter open. Decide what would make the ending feel complete enough.",
+      "brief": "A dancer wrapped in a flowing violet scarf floats inside an oval wreath of constellations. Small emblems of a lion, bull, eagle and human face anchor the four corners of the sky."
+    },
+    {
+      "id": "cups_ace",
+      "title": "Ace of Cups",
+      "number": "I",
+      "image": "cups_ace.webp",
+      "symbolism": "The overflowing cup makes room for a blossom below it.",
+      "meaning": "Give a new feeling a place to land. A candid message or a small act of tenderness can open the way.",
+      "reversed": "A full emotional cup needs an outlet. Let yourself name a feeling before deciding how to share it.",
+      "brief": "A single hammered gold chalice brims over with a waterfall of luminous aquamarine under a young silver moon. A solitary white waterlily opens where the water lands."
+    },
+    {
+      "id": "cups_2",
+      "title": "Two of Cups",
+      "number": "II",
+      "image": "cups_2.webp",
+      "symbolism": "The two cups remain distinct even where their reflections meet.",
+      "meaning": "Offer a gesture that the other person has room to return. Mutual understanding grows through two willing contributions.",
+      "reversed": "A connection may be slipping out of balance. Check whether both people can express what they need.",
+      "brief": "Two different hands raise matching gold chalices above the water between two island shores. Their reflections meet at a gentle ripple; a blue double star shines above."
+    },
+    {
+      "id": "cups_3",
+      "title": "Three of Cups",
+      "number": "III",
+      "image": "cups_3.webp",
+      "symbolism": "The triangle of cups turns a wide night sky into a shared celebration.",
+      "meaning": "Mark a milestone with people who know what went into it. Let companionship be an end in itself.",
+      "reversed": "A gathering may leave someone at the edge. Notice who can speak freely and who might welcome a quieter invitation.",
+      "brief": "Three friends in richly colored robes toast under an open observatory dome. Three raised chalices make a bright triangle beneath a spray of coral and turquoise stars."
+    },
+    {
+      "id": "cups_4",
+      "title": "Four of Cups",
+      "number": "IV",
+      "image": "cups_4.webp",
+      "symbolism": "The traveler's low gaze gives the moonlit offering a different place in the scene.",
+      "meaning": "Take time to distinguish genuine disinterest from weariness. A change of perspective may bring an overlooked option into view.",
+      "reversed": "Interest may be returning in a small way. Follow the opening that feels genuinely alive.",
+      "brief": "A seated traveler gazes at three cups lined up beside a dark moon pool. A fourth silver cup rests on a ledge overhead in a shaft of moonlight."
+    },
+    {
+      "id": "cups_5",
+      "title": "Five of Cups",
+      "number": "V",
+      "image": "cups_5.webp",
+      "symbolism": "The overturned vessels occupy the foreground. The bridge and standing cups offer another direction when the figure is ready.",
+      "meaning": "Give a real loss its due. When you are ready, turn toward one connection or resource that is still available.",
+      "reversed": "Recovery may be beginning before you feel ready to call it that. Reach toward a steady source of company.",
+      "brief": "A cloaked figure on a tidal flat mourns three overturned chalices. Two upright gold cups gleam behind the figure and a thin bridge spans the water to a lit window."
+    },
+    {
+      "id": "cups_6",
+      "title": "Six of Cups",
+      "number": "VI",
+      "image": "cups_6.webp",
+      "symbolism": "An ordinary vessel becomes a gift when a flower and an outstretched hand meet.",
+      "meaning": "Return to a memory that carries warmth. Consider which small kindness you could bring from it into the present.",
+      "reversed": "A cherished memory may be smoothing away important details. Keep what was nourishing while making room for what you need now.",
+      "brief": "Two children tend a miniature moon garden of six antique cups filled with tiny white flowers. One child offers a flowering cup to the other beside a familiar garden gate."
+    },
+    {
+      "id": "cups_7",
+      "title": "Seven of Cups",
+      "number": "VII",
+      "image": "cups_7.webp",
+      "symbolism": "Each floating bowl displays a possibility. Their distance leaves their practical weight uncertain.",
+      "meaning": "Enjoy imagining the alternatives, then investigate one. A little firsthand information will help you choose.",
+      "reversed": "Too many imagined futures can delay a real beginning. Set aside the options you would never actually pursue.",
+      "brief": "Seven dreamlike chalices hang in a violet nebula. Their bowls contain contrasting miniatures: tower, wreath, bright gem, curling snake, ivory mask, cloud and silver bird. A small figure considers them."
+    },
+    {
+      "id": "cups_8",
+      "title": "Eight of Cups",
+      "number": "VIII",
+      "image": "cups_8.webp",
+      "symbolism": "The cups are sound and upright even as the traveler chooses the ascending path.",
+      "meaning": "Something that once mattered may have given what it could. Make room to seek the experience you now need.",
+      "reversed": "The familiar may be holding you back, or you may be leaving too quickly. Name what remains unfinished before you go.",
+      "brief": "A traveler with a staff climbs a rough violet ridge away from eight gold cups arranged on a shore. An eclipsed moon hangs above a distant mountain pass."
+    },
+    {
+      "id": "cups_9",
+      "title": "Nine of Cups",
+      "number": "IX",
+      "image": "cups_9.webp",
+      "symbolism": "The illuminated shelf makes contentment tangible and close to home.",
+      "meaning": "Enjoy the satisfaction of a wish taking shape. Describe what feels sufficient so you can recognize it again.",
+      "reversed": "A polished display can outshine your actual feelings. Ask what gives you quiet satisfaction when nobody is watching.",
+      "brief": "A contented cook in an indigo apron sits at the threshold of a small asteroid inn. Nine polished gold cups glow on a curved wooden shelf beneath a honey-colored planet."
+    },
+    {
+      "id": "cups_10",
+      "title": "Ten of Cups",
+      "number": "X",
+      "image": "cups_10.webp",
+      "symbolism": "The arc of cups embraces the cottage and its people. A river carries their reflected light onward.",
+      "meaning": "Attend to a shared joy or habit of care. Belonging grows through the everyday life you make together.",
+      "reversed": "An ideal picture of harmony may obscure a need. Invite the quieter members of the group to describe what home feels like.",
+      "brief": "A family of varied ages stands outside a low cottage beneath a bright aurora. Ten gold chalices trace a gentle arc in the sky reflected in a nearby river."
+    },
+    {
+      "id": "cups_page",
+      "title": "Page of Cups",
+      "number": null,
+      "image": "cups_page.webp",
+      "symbolism": "The unexpected visitor interrupts the fisher's expectations and invites a closer look.",
+      "meaning": "Make room for a surprising feeling or imaginative idea. Approach it with the curiosity of a beginner.",
+      "reversed": "A tender idea may be easy to dismiss too soon. Explore it privately until it has enough shape to share.",
+      "brief": "A young sky fisher in a blue cap recoils in delighted surprise as a small silver fish pops upward from a gold cup. A turquoise ringed planet shines above rolling waves."
+    },
+    {
+      "id": "cups_knight",
+      "title": "Knight of Cups",
+      "number": null,
+      "image": "cups_knight.webp",
+      "symbolism": "The rider moves toward someone while taking care of the cup's contents.",
+      "meaning": "An invitation, creative gesture or honest expression of feeling wants to move beyond intention. Deliver it with care.",
+      "reversed": "A romantic idea can outpace its practical follow-through. Pair the gesture with an action you can sustain.",
+      "brief": "A dark-haired rider in silver and blue crosses a shallow lunar stream on a pale horse. The rider carries a single gold chalice steadily at chest height."
+    },
+    {
+      "id": "cups_queen",
+      "title": "Queen of Cups",
+      "number": null,
+      "image": "cups_queen.webp",
+      "symbolism": "The covered vessel asks for close listening. Still water holds the image without taking possession of it.",
+      "meaning": "Listen with compassion and leave room for another person's own account. Sensitivity can help you notice what needs care.",
+      "reversed": "Empathy may be spilling past your limits. Find a quiet place to hear your own feelings as clearly as everyone else's.",
+      "brief": "A queen with silver braids listens closely to a covered shell-shaped chalice seated beside a deep jade tidal basin. Her reflection glimmers in the water."
+    },
+    {
+      "id": "cups_king",
+      "title": "King of Cups",
+      "number": null,
+      "image": "cups_king.webp",
+      "symbolism": "The sea moves constantly while the king keeps the cup steady.",
+      "meaning": "Hold strong feelings with steadiness. You can acknowledge what moves you and still choose a measured response.",
+      "reversed": "A calm exterior may be hiding pressure. Give the feeling an honest outlet before it begins to steer your decisions.",
+      "brief": "A calm monarch in sapphire robes sits on a stone throne surrounded by a turbulent midnight sea. A steady golden chalice catches a star's reflection above the spray."
+    },
+    {
+      "id": "wands_ace",
+      "title": "Ace of Wands",
+      "number": "I",
+      "image": "wands_ace.webp",
+      "symbolism": "A living shoot and a flame emerge from the same staff. Both need tending to last.",
+      "meaning": "Act on a spark while it is fresh. Give it a modest first task that will show whether it can grow.",
+      "reversed": "Scattered enthusiasm may need a focus. Choose one experiment small enough to start today.",
+      "brief": "One bronze staff sprouts bright green leaves and a vivid flame at its tip above the rust-red surface of a moon. A comet leaves a luminous diagonal tail behind it."
+    },
+    {
+      "id": "wands_2",
+      "title": "Two of Wands",
+      "number": "II",
+      "image": "wands_2.webp",
+      "symbolism": "The hand-held globe reduces a vast journey to something the planner can examine.",
+      "meaning": "Compare your present position with a wider possibility. Decide what preparation would make the reach realistic.",
+      "reversed": "Planning may be keeping you safely on the terrace. Gather the one missing fact that would let you choose.",
+      "brief": "A robed planner stands between two bronze staffs on a terrace holding a glass globe of stars. Amber light reveals a far mountain on the globe and a similar shape on the horizon."
+    },
+    {
+      "id": "wands_3",
+      "title": "Three of Wands",
+      "number": "III",
+      "image": "wands_3.webp",
+      "symbolism": "The departing ships carry the watchkeeper's earlier work beyond the harbor.",
+      "meaning": "Watch how work already set in motion meets the world. Use what returns to plan your next reach.",
+      "reversed": "A delayed return can distort your sense of progress. Check the route and timing before changing your whole direction.",
+      "brief": "A watchkeeper stands with three tall bronze staffs at a lookout over a copper-colored space harbor. A small fleet of sail-like ships glides away on a bright stellar wind."
+    },
+    {
+      "id": "wands_4",
+      "title": "Four of Wands",
+      "number": "IV",
+      "image": "wands_4.webp",
+      "symbolism": "The decorated gateway makes a threshold into a place for celebration.",
+      "meaning": "Mark a milestone and welcome the people who helped you reach it. A shared pause can strengthen the foundation.",
+      "reversed": "A formal occasion may feel disconnected from the people in it. Choose a simpler way to recognize what matters.",
+      "brief": "Four bronze staffs hold a flowering arch at the entrance to a lantern-lit hill observatory. Friends dance through the gateway under peach and gold stars."
+    },
+    {
+      "id": "wands_5",
+      "title": "Five of Wands",
+      "number": "V",
+      "image": "wands_5.webp",
+      "symbolism": "The crossing poles show how many different intentions are moving through one small space.",
+      "meaning": "Use a lively disagreement to test ideas. Agreed rules can turn friction into practice.",
+      "reversed": "Rivalry may be using energy the work itself needs. Name the shared aim before continuing the contest.",
+      "brief": "Five apprentice comet catchers in bright ocher and vermilion practice with five crossing staffs in an observatory courtyard. Each turns in a different direction; the sparring is energetic and playful."
+    },
+    {
+      "id": "wands_6",
+      "title": "Six of Wands",
+      "number": "VI",
+      "image": "wands_6.webp",
+      "symbolism": "The wreath and the waiting crowd turn a private effort into a public moment.",
+      "meaning": "Accept earned recognition and name those who contributed. Let encouragement strengthen your next effort.",
+      "reversed": "Praise can be uneven or strangely unsatisfying. Decide how you judge the quality of your work for yourself.",
+      "brief": "A traveler rides a small white horse into a star port beneath six raised bronze staffs. A laurel wreath hangs from the rider's own staff; people at the gates cheer."
+    },
+    {
+      "id": "wands_7",
+      "title": "Seven of Wands",
+      "number": "VII",
+      "image": "wands_7.webp",
+      "symbolism": "Height gives the climber a vantage point and a position that takes effort to hold.",
+      "meaning": "Stand behind a conviction you can explain. Choose the point worth defending and protect your footing.",
+      "reversed": "Constant defense can exhaust you. Decide which challenge truly touches your values and let the others pass.",
+      "brief": "A climber on a narrow red mesa holds a glowing staff across their body. Six other staffs rise toward the ledge from below, silhouetted against a red nebula."
+    },
+    {
+      "id": "wands_8",
+      "title": "Eight of Wands",
+      "number": "VIII",
+      "image": "wands_8.webp",
+      "symbolism": "The staffs share a direction and an unobstructed stretch of sky.",
+      "meaning": "Events may be moving quickly. Communicate clearly and act while the route is open.",
+      "reversed": "Speed can scatter a message or send it to the wrong place. Confirm your destination before accelerating.",
+      "brief": "Eight long bronze staffs streak diagonally through an open twilight sky like a flight of meteors. Below, a river turns around a small yellow town."
+    },
+    {
+      "id": "wands_9",
+      "title": "Nine of Wands",
+      "number": "IX",
+      "image": "wands_9.webp",
+      "symbolism": "The supporting staff and the fence show the value and the cost of a long watch.",
+      "meaning": "Draw on hard-won experience to keep a boundary. Build in a chance to rest or share the watch.",
+      "reversed": "Vigilance may have outlived a particular threat. Check what still needs guarding and where support is available.",
+      "brief": "A weary sentry with a bandaged brow leans on one living bronze staff. Eight taller staffs make a rough fence behind them along a crater rim at purple dawn."
+    },
+    {
+      "id": "wands_10",
+      "title": "Ten of Wands",
+      "number": "X",
+      "image": "wands_10.webp",
+      "symbolism": "The load blocks the courier's view even as the destination draws near.",
+      "meaning": "Review the duties you have gathered. Finish what matters and see which responsibility could be shared.",
+      "reversed": "Putting down a burden can be an act of responsibility. Be explicit about who will carry the work next.",
+      "brief": "A courier bends beneath ten bundled bronze staffs while climbing a stony stair to a small sunlit observatory. The warm doorway is just ahead."
+    },
+    {
+      "id": "wands_page",
+      "title": "Page of Wands",
+      "number": null,
+      "image": "wands_page.webp",
+      "symbolism": "The scout gives a tiny sign of growth the attention of a great discovery.",
+      "meaning": "Follow a fresh interest far enough to learn its shape. Curiosity is a good reason for a first attempt.",
+      "reversed": "The wish to look experienced can block a beginning. Give yourself permission to try something awkwardly.",
+      "brief": "A young desert scout in a russet cape studies a bright new shoot growing from the top of a single bronze staff. A red planet rises above a field of dunes."
+    },
+    {
+      "id": "wands_knight",
+      "title": "Knight of Wands",
+      "number": null,
+      "image": "wands_knight.webp",
+      "symbolism": "Horse, comet and cape all point into motion. The rider must still choose the route.",
+      "meaning": "Bring courage and speed to a moment that needs action. Give that energy a clear destination.",
+      "reversed": "A powerful start can overshoot its mark. Slow down enough to check the route and the people traveling with you.",
+      "brief": "A rider in red leans forward on a rearing chestnut horse, carrying a flowering bronze staff. The horse's mane and the rider's cape stream in the wind of a passing comet."
+    },
+    {
+      "id": "wands_queen",
+      "title": "Queen of Wands",
+      "number": null,
+      "image": "wands_queen.webp",
+      "symbolism": "The bold flower and watchful cat put visible warmth beside independent attention.",
+      "meaning": "Lead through warmth and confidence. Leave space for another person's ideas to flourish in your company.",
+      "reversed": "The effort of appearing radiant can consume your energy. Reconnect with the work or company that honestly inspires you.",
+      "brief": "A queen in gold with copper curls sits in a bright observatory courtyard, carrying a tall wand and a sunflower. A curious black cat rests at her feet beneath a rust-colored sun."
+    },
+    {
+      "id": "wands_king",
+      "title": "King of Wands",
+      "number": null,
+      "image": "wands_king.webp",
+      "symbolism": "The wand directs attention beyond the throne toward a distant light the city can share.",
+      "meaning": "Give a bold idea a clear direction and invite others to shape the journey. Good leadership makes room for initiative.",
+      "reversed": "A strong vision can crowd out other judgments. Ask what your collaborators can see from where they stand.",
+      "brief": "An older king in a red mantle stands beside a throne carved with salamanders, pointing a tall living wand at a new star rising over a desert city."
+    },
+    {
+      "id": "swords_ace",
+      "title": "Ace of Swords",
+      "number": "I",
+      "image": "swords_ace.webp",
+      "symbolism": "The bright edge draws a clear line through the dark rock. The crown marks the strength of a precise idea.",
+      "meaning": "Put a difficult thought into one clear sentence. Precision can give you the opening you need to act.",
+      "reversed": "A forceful conclusion may still be blurry. Define your terms and check whether the evidence supports the claim.",
+      "brief": "One polished silver sword rises vertically from a cleft in dark lunar basalt. A thin aurora follows its edge and a small crown of light hovers above the point."
+    },
+    {
+      "id": "swords_2",
+      "title": "Two of Swords",
+      "number": "II",
+      "image": "swords_2.webp",
+      "symbolism": "The balanced blades hold the pose steady while the blindfold closes off one source of information.",
+      "meaning": "Acknowledge the choice you are holding in suspension. Identify one fact or value that could help you decide.",
+      "reversed": "A stalemate can become heavier than either option. Uncover an assumption and test whether it still deserves its place.",
+      "brief": "A blindfolded navigator sits above a still violet sea with two crossed silver swords resting against their shoulders. A thin crescent hangs over distant rocks."
+    },
+    {
+      "id": "swords_3",
+      "title": "Three of Swords",
+      "number": "III",
+      "image": "swords_3.webp",
+      "symbolism": "The rain exposes the cuts in the garnet. Its bright color survives the wound.",
+      "meaning": "Name the hurt honestly and give it time. Plain language can make a painful experience easier to share.",
+      "reversed": "A wound may be easing, or a familiar account may be reopening it. Notice what helps you process the pain and what repeats it.",
+      "brief": "Three silver swords pierce a large heart-shaped crimson garnet suspended above a stormy moon. Rain on the polished stone catches a line of cold starlight."
+    },
+    {
+      "id": "swords_4",
+      "title": "Four of Swords",
+      "number": "IV",
+      "image": "swords_4.webp",
+      "symbolism": "The swords have places to rest as surely as the sentinel does. The quiet room holds the watch for a while.",
+      "meaning": "Give your mind a period of real rest. You can return to a decision after the pressure has settled.",
+      "reversed": "A pause may be overdue or may be ready to end. Listen for the difference between exhaustion and renewed curiosity.",
+      "brief": "A resting sentinel lies peacefully on a stone bench beneath a stained-glass star in a quiet chapel. Three sheathed swords hang on the wall and a fourth lies beneath the bench."
+    },
+    {
+      "id": "swords_5",
+      "title": "Five of Swords",
+      "number": "V",
+      "image": "swords_5.webp",
+      "symbolism": "The gathered blades make the victory visible. The departing figures show what it may have cost.",
+      "meaning": "Consider the price of winning this argument. Decide what relationship or principle you want to carry beyond it.",
+      "reversed": "The contest may be over even if its effects linger. An honest repair can begin by naming your part.",
+      "brief": "A lone victor gathers silver swords on a windswept asteroid beach while two companions walk away. Broken reflections slide across a shallow tide pool beneath a bruised purple sky."
+    },
+    {
+      "id": "swords_6",
+      "title": "Six of Swords",
+      "number": "VI",
+      "image": "swords_6.webp",
+      "symbolism": "The boat carries its history aboard while moving toward smoother water.",
+      "meaning": "Accept help with a transition. You can carry what you learned without remaining in the conditions that taught it.",
+      "reversed": "A crossing can feel unfinished when an old concern travels with you. Name it so it can be handled on the new shore.",
+      "brief": "A ferryman steers a low blue boat holding bundled passengers across a strait under a dim star. Six sheathed silver swords stand neatly in the bow as the water ahead grows calm."
+    },
+    {
+      "id": "swords_7",
+      "title": "Seven of Swords",
+      "number": "VII",
+      "image": "swords_7.webp",
+      "symbolism": "The traveler looks back toward what was left. The lantern raises a question about secrecy and strategy.",
+      "meaning": "Think through your route and its effect on others. Discretion helps when it serves a purpose you can defend.",
+      "reversed": "A private plan may need a more honest conversation. Ask what secrecy is protecting and who bears its cost.",
+      "brief": "A careful traveler carries a bundle of five silver swords away from a tented star camp at twilight. Two upright swords remain at the threshold and a watch lantern burns behind."
+    },
+    {
+      "id": "swords_8",
+      "title": "Eight of Swords",
+      "number": "VIII",
+      "image": "swords_8.webp",
+      "symbolism": "The ring looks forbidding, but a space remains between the blades. Mud and blindfold make that opening hard to perceive.",
+      "meaning": "Distinguish the limits imposed on you from the ones you are assuming. A trusted second view may reveal room to move.",
+      "reversed": "A once-invisible option may be coming into focus. Test your freedom through a manageable, deliberate action.",
+      "brief": "A blindfolded traveler stands within a loose ring of eight silver swords embedded in wet lunar silt. An open gap in the blades faces a warm point of light."
+    },
+    {
+      "id": "swords_9",
+      "title": "Nine of Swords",
+      "number": "IX",
+      "image": "swords_9.webp",
+      "symbolism": "The blades hang above the bed while a first line of dawn appears beyond them.",
+      "meaning": "Give a recurring worry words and company. Looking at it in daylight may help separate an actual task from a feared outcome.",
+      "reversed": "The grip of a worry may be easing. Notice what offers genuine relief and make it easier to reach for that support.",
+      "brief": "A sleepless astronomer sits on the edge of a bed in an indigo attic, face in hands. Nine narrow silver swords hang horizontally on the wall and dawn glimmers through a skylight."
+    },
+    {
+      "id": "swords_10",
+      "title": "Ten of Swords",
+      "number": "X",
+      "image": "swords_10.webp",
+      "symbolism": "The pinned cloak marks an ending. The horizon has already begun a different day.",
+      "meaning": "Acknowledge an ending plainly. Once you stop asking a closed chapter to continue, you can consider your next need.",
+      "reversed": "Recovery can start slowly after a hard stop. Notice which part of the old burden you no longer have to carry.",
+      "brief": "A torn black cloak lies pinned to a barren ridge by ten upright silver swords. A magnificent orange sunrise breaks beyond the dark ridge beneath a fading constellation. No person, no gore."
+    },
+    {
+      "id": "swords_page",
+      "title": "Page of Swords",
+      "number": null,
+      "image": "swords_page.webp",
+      "symbolism": "The courier studies the wind before setting out. The blade and the papers suggest inquiry as well as action.",
+      "meaning": "Ask a precise question and follow the evidence. Let curiosity sharpen an idea before you defend it.",
+      "reversed": "Information gathered in haste can become rumor. Check the source and your reason for passing the message along.",
+      "brief": "A young courier on a high blue ridge grips a silver sword in both hands, watching the direction of a flock of pale birds. Papers rustle in the pocket of a windblown green coat."
+    },
+    {
+      "id": "swords_knight",
+      "title": "Knight of Swords",
+      "number": null,
+      "image": "swords_knight.webp",
+      "symbolism": "The blade, horse and clouds all extend the line of a single charge.",
+      "meaning": "Commit to a clear argument or a timely intervention. Keep enough awareness to change course if the facts change.",
+      "reversed": "Urgency may be outrunning understanding. Hear the end of the other person's sentence before you answer.",
+      "brief": "A rider in bright steel leans low over a galloping gray horse across a windy lunar plain. A silver sword points forward through a stream of torn blue cloud."
+    },
+    {
+      "id": "swords_queen",
+      "title": "Queen of Swords",
+      "number": null,
+      "image": "swords_queen.webp",
+      "symbolism": "The open palm invites a voice, while the upright sword holds a clear boundary.",
+      "meaning": "Make room for another account and speak your own judgment cleanly. Honesty and compassion can share a sentence.",
+      "reversed": "A sharp response may conceal hurt or fatigue. Clarify the boundary without cutting away the chance to understand.",
+      "brief": "A queen with short silver curls sits upright on a pale stone seat on a mountain ledge. She holds a straight sword in one hand and extends an open palm toward the viewer; clouds part."
+    },
+    {
+      "id": "swords_king",
+      "title": "King of Swords",
+      "number": null,
+      "image": "swords_king.webp",
+      "symbolism": "The sword meets a visible measuring line. Authority here depends on a standard that others can examine.",
+      "meaning": "State the principle behind a difficult decision and apply it consistently. Invite others to inspect your reasoning.",
+      "reversed": "Logic can become a shield for an unspoken preference. Make your assumptions visible and welcome a well-reasoned challenge.",
+      "brief": "A king in cobalt and gray sits on a high observatory balcony beneath geometric constellations. A vertical silver sword aligns precisely with a brass meridian line in the floor."
+    },
+    {
+      "id": "pentacles_ace",
+      "title": "Ace of Pentacles",
+      "number": "I",
+      "image": "pentacles_ace.webp",
+      "symbolism": "The tangible weight of the disc sits above a tiny active root. The garden points to what cultivation can do.",
+      "meaning": "Take a practical opportunity seriously. Give it a place in your calendar, budget or daily practice so it can take root.",
+      "reversed": "An attractive offer needs workable conditions. Check the time, tools and care it would actually require.",
+      "brief": "One great gold disc stamped with a five-pointed star rests in the hollow of two earthy hands. Beneath it a green shoot pushes through lunar soil; a garden gate glimmers beyond."
+    },
+    {
+      "id": "pentacles_2",
+      "title": "Two of Pentacles",
+      "number": "II",
+      "image": "pentacles_2.webp",
+      "symbolism": "The looping ribbon keeps both discs in motion while the sea changes beneath the ships.",
+      "meaning": "Adjust your rhythm as demands shift. Give each commitment enough attention to keep the whole arrangement workable.",
+      "reversed": "Too much juggling can hide an unsustainable load. Put one task down deliberately and tell the people affected.",
+      "brief": "A young performer on a harbor wall balances two star-stamped gold discs linked by a flowing green ribbon in a figure of eight. High waves lift tiny ships behind them."
+    },
+    {
+      "id": "pentacles_3",
+      "title": "Three of Pentacles",
+      "number": "III",
+      "image": "pentacles_3.webp",
+      "symbolism": "The drawing and partly finished arch make different kinds of expertise visible side by side.",
+      "meaning": "Invite practical feedback while the work can still change. A shared standard helps individual skills fit together.",
+      "reversed": "People may be working from different plans. Bring the work into view and agree what a good result looks like.",
+      "brief": "A mason, a designer and a surveyor build a small moonstone observatory together. Three gold five-pointed star discs decorate the arch; one worker checks a drawing against the stone."
+    },
+    {
+      "id": "pentacles_4",
+      "title": "Four of Pentacles",
+      "number": "IV",
+      "image": "pentacles_4.webp",
+      "symbolism": "The four discs protect valued resources while occupying both feet, head and arms.",
+      "meaning": "Protect what gives you stability. Notice when holding on begins to limit your ability to participate or move.",
+      "reversed": "Your grip on time or resources may be changing. Set a clear limit so that generosity and security can coexist.",
+      "brief": "A figure in an umber robe sits at the entrance to a little citadel, clutching one star-stamped disc to the chest, balancing another on the crown, with one beneath each boot. Green-gold stars beyond."
+    },
+    {
+      "id": "pentacles_5",
+      "title": "Five of Pentacles",
+      "number": "V",
+      "image": "pentacles_5.webp",
+      "symbolism": "The window shines above the travelers' difficult path. The doorway suggests a route to practical help.",
+      "meaning": "Take a hardship seriously and look for support you can actually reach. Asking directly can be a meaningful first step.",
+      "reversed": "A difficult stretch may be beginning to lift. Recognize a resource, contact or skill that makes the next step easier.",
+      "brief": "Two travelers in thin cloaks cross a snowy lunar street below a glowing window showing five gold pentacles in green stained glass. A warm doorway is visible around the corner."
+    },
+    {
+      "id": "pentacles_6",
+      "title": "Six of Pentacles",
+      "number": "VI",
+      "image": "pentacles_6.webp",
+      "symbolism": "The balance makes the distribution deliberate. The neighbors' hands turn a calculation into a human exchange.",
+      "meaning": "Offer or request help in terms both people understand. Check that giving leaves the recipient with genuine choice.",
+      "reversed": "Support can come with an uneven obligation. Bring the expectations into the open and make room to renegotiate.",
+      "brief": "A market keeper beneath an indigo canopy weighs star-stamped coins on a small brass balance before sharing them between two neighbors. Warm lantern light falls on their hands."
+    },
+    {
+      "id": "pentacles_7",
+      "title": "Seven of Pentacles",
+      "number": "VII",
+      "image": "pentacles_7.webp",
+      "symbolism": "The waiting gardener inspects the fruit before picking. The telescope hints at a longer view.",
+      "meaning": "Pause to assess what your effort is producing. Decide whether the work needs patience, adjustment or a different investment.",
+      "reversed": "More effort alone may not improve the harvest. Compare the return with what your time and care are costing.",
+      "brief": "A gardener leans on a hoe, studying seven gold star-discs growing like fruit on a deep green vine trained around a small telescope. Evening light touches the unripe leaves."
+    },
+    {
+      "id": "pentacles_8",
+      "title": "Eight of Pentacles",
+      "number": "VIII",
+      "image": "pentacles_8.webp",
+      "symbolism": "The row of finished pieces gives the engraver a way to see the effect of repetition.",
+      "meaning": "Choose one part of your craft to practice deliberately. Use the work in front of you as feedback for the next attempt.",
+      "reversed": "Repetition may have slipped into perfectionism or habit. Adjust the exercise so you can learn something specific.",
+      "brief": "A focused engraver at a lamplit bench cuts a five-pointed star into a gold disc. Other finished pentacles hang in orderly rows under the dark window of a moon workshop."
+    },
+    {
+      "id": "pentacles_9",
+      "title": "Nine of Pentacles",
+      "number": "IX",
+      "image": "pentacles_9.webp",
+      "symbolism": "The trained falcon and tended vines both show what sustained attention can make possible.",
+      "meaning": "Enjoy the independence and comfort your work has created. Take time to inhabit the life you have been building.",
+      "reversed": "An impressive garden can demand constant upkeep. Ask which comforts still serve the life you want.",
+      "brief": "A self-possessed woman in an embroidered amber coat walks through a lush walled moon garden. A pale falcon rests on her glove and gold pentacle fruits hang on trained vines."
+    },
+    {
+      "id": "pentacles_10",
+      "title": "Ten of Pentacles",
+      "number": "X",
+      "image": "pentacles_10.webp",
+      "symbolism": "The worn arch has sheltered many arrivals. The family gives continuity a living face.",
+      "meaning": "Think beyond the immediate gain. Strengthen a resource, skill or tradition that others can use after you.",
+      "reversed": "An inherited arrangement may no longer serve everyone. Ask what is worth passing on and what needs to change.",
+      "brief": "Three generations meet under a carved entrance arch in a settled moon colony. Ten star-stamped gold discs adorn the old stone; a small dog greets the youngest child."
+    },
+    {
+      "id": "pentacles_page",
+      "title": "Page of Pentacles",
+      "number": null,
+      "image": "pentacles_page.webp",
+      "symbolism": "The raised disc receives close study. Tools on the ground connect that attention to practical learning.",
+      "meaning": "Begin a skill or opportunity through steady practice. Choose a first exercise concrete enough to repeat.",
+      "reversed": "An appealing goal may still lack a workable first step. Set up a small task with an observable result.",
+      "brief": "A young field naturalist raises a single star-stamped gold disc to eye level in a green meadow beneath a lavender planet. A notebook and small spade lie at their feet."
+    },
+    {
+      "id": "pentacles_knight",
+      "title": "Knight of Pentacles",
+      "number": null,
+      "image": "pentacles_knight.webp",
+      "symbolism": "The stationary horse gives the rider time to inspect the fields. The disc connects the plan to material work.",
+      "meaning": "Use a dependable routine and follow through. Progress may be quiet enough that others only see it at harvest.",
+      "reversed": "A reliable routine can become rigid. Check whether a small change in method would better serve the same commitment.",
+      "brief": "A patient rider on a heavy black horse surveys furrows on a moon farm at daybreak. A single star-stamped gold disc rests in the rider's gloved hand while the horse stands still."
+    },
+    {
+      "id": "pentacles_queen",
+      "title": "Queen of Pentacles",
+      "number": null,
+      "image": "pentacles_queen.webp",
+      "symbolism": "The queen's careful hold echoes the cultivated garden. Comfort appears as something made and maintained.",
+      "meaning": "Care for real needs through practical generosity. Arrange your space, time or resources so care can continue.",
+      "reversed": "Care work can empty your own reserves. Include yourself among the people whose needs influence the plan.",
+      "brief": "A queen in moss-green velvet cradles a large gold pentacle in a courtyard full of herbs, carved stone rabbits and climbing roses. A half-lit earthlike world hangs above the garden."
+    },
+    {
+      "id": "pentacles_king",
+      "title": "King of Pentacles",
+      "number": null,
+      "image": "pentacles_king.webp",
+      "symbolism": "The heavy disc and terraced land show accumulated skill and resources. The living vines still require attention.",
+      "meaning": "Use experience and material stability to support lasting work. Stewardship includes planning for whoever comes next.",
+      "reversed": "Possessions or control may have become the measure of success. Consider what your resources let people actually do.",
+      "brief": "A broad-shouldered monarch in a vine-embroidered black robe sits on a throne of dark stone beneath grapevines. A star-stamped gold disc rests on one knee; terraced hills and a ringed planet glow behind."
+    }
+  ]
+}
