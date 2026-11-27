@@ -98,6 +98,11 @@ class InterpretationClient {
     final data = jsonDecode(utf8.decode(bytes.takeBytes()));
     if (response.statusCode != HttpStatus.ok) {
       final error = data is Map ? data['error'] : null;
+      if (error == 'invalid_request' &&
+          (response.statusCode == HttpStatus.badRequest ||
+              response.statusCode == HttpStatus.requestEntityTooLarge)) {
+        throw const InterpretationException('invalid_request');
+      }
       if (response.statusCode == HttpStatus.tooManyRequests &&
           (error == 'quota' || error == 'rate_limit')) {
         throw InterpretationException(error as String);

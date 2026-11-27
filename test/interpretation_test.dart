@@ -123,6 +123,50 @@ void main() {
     },
   );
 
+  group('HTTP error handling', () {
+    final request = InterpretationRequest(
+      sessionId: 'a',
+      language: 'en',
+      deckId: 'celestial',
+      spreadId: 'three',
+      question: '',
+      cards: [
+        for (final id in ['star', 'world', 'strength'])
+          {'id': id, 'reversed': false},
+      ],
+    );
+
+    for (final (status, body, code) in [
+      (400, '{"error":"invalid_request"}', 'invalid_request'),
+      (413, '{"error":"invalid_request"}', 'invalid_request'),
+      (429, '{"error":"quota"}', 'quota'),
+      (429, '{"error":"rate_limit"}', 'rate_limit'),
+      (503, '{"error":"invalid_request"}', 'unavailable'),
+      (503, 'temporarily offline', 'unavailable'),
+      (200, '{"card":"Star","synthesis":null}', 'unavailable'),
+    ]) {
+      test('$status $body maps to $code', () async {
+        final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+        addTearDown(() => server.close(force: true));
+        server.listen((incoming) async {
+          await incoming.drain<void>();
+          incoming.response.statusCode = status;
+          incoming.response.write(body);
+          await incoming.response.close();
+        });
+        final client = InterpretationClient(
+          baseUrl: 'http://127.0.0.1:${server.port}',
+        );
+        await expectLater(
+          client.interpret(request),
+          throwsA(
+            isA<InterpretationException>().having((e) => e.code, 'code', code),
+          ),
+        );
+      });
+    }
+  });
+
   test(
     'HTTP sends the reading to the service and parses the final synthesis',
     () async {
