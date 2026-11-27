@@ -221,7 +221,7 @@ class _ObservatoryState extends State<Observatory> {
                               onDeck: (v) => setState(() => chosen = v),
                               onSpread: (v) => setState(() => spread = v),
                               onReversals: (v) => setState(() => reversals = v),
-                              onStart: () => _start(deck),
+                              onStart: () => _start(chosen ?? decks.first),
                             ),
                           if (page == _Page.library)
                             DeckLibrary(

@@ -1,11 +1,12 @@
 import 'package:arcana_observatory/reading.dart';
 import 'package:arcana_observatory/ui/library.dart';
 import 'package:arcana_observatory/ui/reading_table.dart';
+import 'package:arcana_observatory/ui/setup.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
-TarotDeck _deck(int size) => TarotDeck(
-  id: 'fixture',
+TarotDeck _deck(int size, {String id = 'fixture'}) => TarotDeck(
+  id: id,
   name: 'Test deck',
   credit: 'Test artist',
   rights: 'Test rights',
@@ -48,6 +49,29 @@ Future<void> _activateTwice(WidgetTester tester, String tooltip) async {
 }
 
 void main() {
+  for (final (direction, startingPage) in [('Next', 0), ('Previous', 2)]) {
+    testWidgets(
+      'a queued $direction page cannot move the newly selected deck',
+      (tester) async {
+        final decks = [_deck(40), _deck(40, id: 'second')];
+        await _show(
+          tester,
+          DeckLibrary(decks: decks, selected: decks.first, onUse: (_) {}),
+        );
+        for (var page = 0; page < startingPage; page++) {
+          _button(tester, 'Next page').onPressed!();
+          await tester.pumpAndSettle();
+        }
+        final queued = _button(tester, '$direction page').onPressed!;
+        tester.widgetList<DeckOption>(find.byType(DeckOption)).last.onTap();
+        queued();
+        await tester.pumpAndSettle();
+        expect(find.text('1–12 of 40'), findsOneWidget);
+        expect(_button(tester, 'Previous page').onPressed, isNull);
+      },
+    );
+  }
+
   testWidgets('a queued Next loses its authority after a card is picked', (
     tester,
   ) async {

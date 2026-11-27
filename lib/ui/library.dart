@@ -79,6 +79,13 @@ class _DeckLibraryState extends State<DeckLibrary> {
               .clamp(1, 3);
           final end = math.min(first + pageSize, deck.cards.length);
           final previous = math.max(0, first - pageSize);
+          final renderedDeck = deck;
+          final renderedFirst = first;
+          void turnPage(int target) {
+            if (deck != renderedDeck || first != renderedFirst) return;
+            setState(() => first = target);
+          }
+
           return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -139,9 +146,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
                     children: [
                       IconButton(
                         tooltip: context.tr('Previous page'),
-                        onPressed: first == 0
-                            ? null
-                            : () => setState(() => first = previous),
+                        onPressed: first == 0 ? null : () => turnPage(previous),
                         icon: const Icon(Icons.chevron_left),
                       ),
                       Flexible(
@@ -159,7 +164,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
                         tooltip: context.tr('Next page'),
                         onPressed: end >= deck.cards.length
                             ? null
-                            : () => setState(() => first = end),
+                            : () => turnPage(end),
                         icon: const Icon(Icons.chevron_right),
                       ),
                     ],

@@ -2,6 +2,8 @@ import 'package:arcana_observatory/main.dart';
 import 'package:arcana_observatory/reading.dart';
 import 'package:arcana_observatory/strings.dart';
 import 'package:arcana_observatory/ui/observatory.dart';
+import 'package:arcana_observatory/ui/reading_table.dart';
+import 'package:arcana_observatory/ui/setup.dart';
 import 'package:arcana_observatory/ui/style.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -29,6 +31,36 @@ Future<List<TarotDeck>> _loadDecks() async => [
 ];
 
 void main() {
+  testWidgets('Begin reading uses the deck selected before the next frame', (
+    tester,
+  ) async {
+    final first = (await _loadDecks()).single;
+    final second = TarotDeck(
+      id: 'second',
+      name: 'Second deck',
+      credit: first.credit,
+      source: first.source,
+      rights: first.rights,
+      cards: first.cards,
+    );
+    await tester.pumpWidget(
+      ObservatoryApp(loadDecks: () async => [first, second]),
+    );
+    await tester.pumpAndSettle();
+    final begin = tester
+        .widget<FilledButton>(find.byKey(const ValueKey('begin-reading')))
+        .onPressed!;
+    tester
+        .widget<DeckOption>(find.byKey(const ValueKey('select-deck-second')))
+        .onTap();
+    begin();
+    await tester.pumpAndSettle();
+    expect(
+      tester.widget<ReadingTable>(find.byType(ReadingTable)).session.deck,
+      same(second),
+    );
+  });
+
   for (final language in ['he', 'ru']) {
     testWidgets(
       'compact $language layouts support 180 percent text across pages',
