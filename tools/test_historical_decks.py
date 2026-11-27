@@ -1,6 +1,7 @@
 import json
 import unittest
 from pathlib import Path
+from zipfile import ZipFile
 
 from PIL import Image
 
@@ -25,15 +26,19 @@ class HistoricalDeckTests(unittest.TestCase):
                 self.assertEqual(len(cards), 78)
                 self.assertEqual({card['id'] for card in cards}, expected)
                 self.assertEqual(len({card['image'] for card in cards}), 78)
-                for card in cards:
-                    for field in ('title', 'meaning', 'reversed', 'symbolism', 'source'):
-                        self.assertTrue(card[field].strip(), (card['id'], field))
-                    self.assertTrue(card['source'].startswith('https://'))
-                    with Image.open(ASSETS / deck_id / card['image']) as img:
-                        self.assertEqual(img.format, 'WEBP')
-                        self.assertGreaterEqual(img.height, 800)
-                        self.assertTrue(0.44 < img.width / img.height < 0.64, card['id'])
-                        img.verify()
+                with ZipFile(ASSETS / deck_id / 'faces.zip') as archive:
+                    self.check_cards(cards, archive)
+
+    def check_cards(self, cards, archive):
+        for card in cards:
+            for field in ('title', 'meaning', 'reversed', 'symbolism', 'source'):
+                self.assertTrue(card[field].strip(), (card['id'], field))
+            self.assertTrue(card['source'].startswith('https://'))
+            with archive.open(card['image']) as face, Image.open(face) as img:
+                self.assertEqual(img.format, 'WEBP')
+                self.assertGreaterEqual(img.height, 800)
+                self.assertTrue(0.44 < img.width / img.height < 0.64, card['id'])
+                img.verify()
 
     def test_strength_and_justice_have_their_own_deck_numbers(self):
         for deck_id, strength, justice in [('waite_smith', 'VIII', 'XI'), ('marseille', 'XI', 'VIII')]:

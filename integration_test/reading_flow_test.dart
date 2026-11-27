@@ -1,5 +1,5 @@
 import 'package:arcana_observatory/main.dart' as app;
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
@@ -23,6 +23,13 @@ void main() {
     for (var index = 0; index < 10; index++) {
       await tapControl('fan-card-0');
       await tapControl('reveal-card');
+      expect(find.byIcon(Icons.broken_image_outlined), findsNothing);
+      expect(
+        tester
+            .widgetList<RawImage>(find.byType(RawImage))
+            .any((image) => image.image != null),
+        isTrue,
+      );
       if (index < 9) await tapControl('next-position');
     }
     expect(find.text('Reading complete'), findsOneWidget);

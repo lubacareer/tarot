@@ -5,7 +5,7 @@
 
 Coordinates in the catalog are pixel bounds (left, top, right, bottom) on the
 exact sourceImage rendition. Right and bottom are exclusive. The current app
-ships its WebPs and never needs to run this tool or contact either collection.
+ships its WebPs inside faces.zip and runs offline.
 """
 
 import argparse
@@ -14,11 +14,11 @@ import io
 import json
 from collections import defaultdict
 from pathlib import Path
-from tempfile import NamedTemporaryFile
 from urllib.request import Request, urlopen
 
 from PIL import Image
 
+from face_archive import write_faces_archive
 
 DECKS = Path(__file__).resolve().parents[1] / 'assets' / 'decks'
 USER_AGENT = 'TarotDeckCatalog/1.0 (+https://github.com/lubacareer/tarot)'
@@ -49,19 +49,17 @@ def main():
     for card in catalog['cards']:
         by_source[card['sourceImage']].append(card)
 
+    faces = {}
     for source_url, cards in by_source.items():
         request = Request(source_url, headers={'User-Agent': USER_AGENT})
         with urlopen(request, timeout=60) as response:
             source = response.read()
         for card in cards:
-            artwork = prepare_card(card, source)
-            with NamedTemporaryFile(dir=directory, delete=False) as temporary:
-                temporary.write(artwork)
-            path = Path(temporary.name)
-            try:
-                path.replace(directory / card['image'])
-            finally:
-                path.unlink(missing_ok=True)
+            name = card['image']
+            if name in faces:
+                raise ValueError(f'Duplicate face in catalog: {name}')
+            faces[name] = prepare_card(card, source)
+    write_faces_archive(directory / 'faces.zip', faces)
 
 
 if __name__ == '__main__':

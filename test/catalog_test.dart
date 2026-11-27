@@ -1,5 +1,5 @@
 import 'package:arcana_observatory/reading.dart';
-import 'package:flutter/services.dart';
+import 'package:arcana_observatory/src/card_art_bundle.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
@@ -18,7 +18,7 @@ void main() {
         );
         for (final card in deck.cards) {
           expect(art.add(card.imageAsset), isTrue);
-          final bytes = await rootBundle.load(card.imageAsset);
+          final bytes = await CardArtBundle.instance.load(card.imageAsset);
           expect(
             String.fromCharCodes(
               bytes.buffer.asUint8List(bytes.offsetInBytes + 8, 4),

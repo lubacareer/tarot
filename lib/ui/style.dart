@@ -3,6 +3,7 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../reading.dart';
+import '../src/card_art_bundle.dart';
 
 const paper = Color(0xfff7f3eb);
 const ivory = Color(0xfffffcf4);
@@ -227,6 +228,7 @@ class CardArt extends StatelessWidget {
                 quarterTurns: reversed ? 2 : 0,
                 child: Image.asset(
                   card.imageAsset,
+                  bundle: CardArtBundle.instance,
                   fit: BoxFit.contain,
                   excludeFromSemantics: true,
                   errorBuilder: (_, _, _) => const Center(
