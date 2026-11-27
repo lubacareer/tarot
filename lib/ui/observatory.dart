@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../interpretation.dart';
 import '../reading.dart';
 import '../language_picker.dart';
 import '../strings.dart';
@@ -12,8 +13,13 @@ import 'style.dart';
 enum _Page { table, library, guide }
 
 class Observatory extends StatefulWidget {
-  const Observatory({super.key, required this.loadDecks});
+  const Observatory({
+    super.key,
+    required this.loadDecks,
+    this.interpretationClient = const InterpretationClient(),
+  });
   final Future<List<TarotDeck>> Function() loadDecks;
+  final InterpretationClient interpretationClient;
   @override
   State<Observatory> createState() => _ObservatoryState();
 }
@@ -24,12 +30,17 @@ class _ObservatoryState extends State<Observatory> {
   TarotDeck? chosen;
   SpreadType spread = SpreadType.one;
   bool reversals = false;
+  bool online = true;
+  final question = TextEditingController();
   ReadingSession? session;
+  ReadingInterpretations? interpretations;
   final scroll = ScrollController();
 
   @override
   void dispose() {
     scroll.dispose();
+    question.dispose();
+    interpretations?.dispose();
     super.dispose();
   }
 
@@ -76,7 +87,7 @@ class _ObservatoryState extends State<Observatory> {
       _open(_Page.table);
     } else if (session != null && !session!.complete) {
       if (!await _canEndReading(exiting: true) || !mounted) return;
-      setState(() => session = null);
+      setState(_clearReading);
       await SystemNavigator.pop();
     }
   }
@@ -84,7 +95,7 @@ class _ObservatoryState extends State<Observatory> {
   Future<void> _setup([TarotDeck? deck]) async {
     if (!await _canEndReading() || !mounted) return;
     setState(() {
-      session = null;
+      if (session != null) _clearReading();
       if (deck != null) chosen = deck;
       page = _Page.table;
     });
@@ -92,10 +103,26 @@ class _ObservatoryState extends State<Observatory> {
   }
 
   void _start(TarotDeck deck) {
-    setState(
-      () => session = ReadingSession.start(deck, spread, reversals: reversals),
-    );
+    if (session != null) return;
+    final reading = ReadingSession.start(deck, spread, reversals: reversals);
+    FocusManager.instance.primaryFocus?.unfocus();
+    setState(() {
+      session = reading;
+      interpretations = ReadingInterpretations(
+        session: reading,
+        client: widget.interpretationClient,
+        online: online,
+        question: question.text.trim(),
+      );
+    });
     _toTop();
+  }
+
+  void _clearReading() {
+    session = null;
+    interpretations?.dispose();
+    interpretations = null;
+    question.clear();
   }
 
   @override
@@ -207,6 +234,8 @@ class _ObservatoryState extends State<Observatory> {
                               child: ReadingTable(
                                 key: ObjectKey(session),
                                 session: session!,
+                                interpretations: interpretations,
+                                active: page == _Page.table,
                                 onNew: _setup,
                                 // Rebuild PopScope so Android Back can exit a completed reading.
                                 onComplete: () => setState(() {}),
@@ -218,6 +247,10 @@ class _ObservatoryState extends State<Observatory> {
                               selected: deck,
                               spread: spread,
                               reversals: reversals,
+                              online: online,
+                              question: question,
+                              onOnline: (value) =>
+                                  setState(() => online = value),
                               onDeck: (v) => setState(() => chosen = v),
                               onSpread: (v) => setState(() => spread = v),
                               onReversals: (v) => setState(() => reversals = v),

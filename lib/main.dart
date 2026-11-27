@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'interpretation.dart';
 import 'language_picker.dart';
 import 'localized_reading.dart';
 import 'reading.dart';
@@ -14,10 +15,12 @@ class ObservatoryApp extends StatefulWidget {
     super.key,
     this.loadDecks = DeckCatalog.load,
     this.preferences = const LocalLanguagePreferences(),
+    this.interpretationClient = const InterpretationClient(),
   });
 
   final Future<List<TarotDeck>> Function() loadDecks;
   final LanguagePreferences preferences;
+  final InterpretationClient interpretationClient;
 
   @override
   State<ObservatoryApp> createState() => _ObservatoryAppState();
@@ -91,7 +94,10 @@ class _ObservatoryAppState extends State<ObservatoryApp>
           },
         );
       },
-      child: Observatory(loadDecks: widget.loadDecks),
+      child: Observatory(
+        loadDecks: widget.loadDecks,
+        interpretationClient: widget.interpretationClient,
+      ),
     ),
   );
 }

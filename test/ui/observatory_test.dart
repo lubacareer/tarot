@@ -9,6 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../support/fixture_interpretations.dart';
+
 Future<List<TarotDeck>> _loadDecks() async => [
   TarotDeck(
     id: 'fixture',
@@ -44,7 +46,10 @@ void main() {
       cards: first.cards,
     );
     await tester.pumpWidget(
-      ObservatoryApp(loadDecks: () async => [first, second]),
+      ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: () async => [first, second],
+      ),
     );
     await tester.pumpAndSettle();
     final begin = tester
@@ -76,7 +81,10 @@ void main() {
             supportedLocales: AppLocalizations.supportedLocales,
             localizationsDelegates: AppLocalizations.localizationsDelegates,
             theme: observatoryTheme(),
-            home: const Observatory(loadDecks: _loadDecks),
+            home: const Observatory(
+              interpretationClient: fixtureInterpretations,
+              loadDecks: _loadDecks,
+            ),
           ),
         );
         await tester.pumpAndSettle();
@@ -105,7 +113,12 @@ void main() {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(1200, 800);
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpWidget(
+      const ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: _loadDecks,
+      ),
+    );
     await tester.pumpAndSettle();
     const key = ValueKey('begin-reading');
     bool focused() =>
@@ -129,7 +142,12 @@ void main() {
       tester.view.devicePixelRatio = 1;
       tester.view.physicalSize = const Size(1180, 760);
       addTearDown(tester.view.reset);
-      await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+      await tester.pumpWidget(
+        const ObservatoryApp(
+          interpretationClient: fixtureInterpretations,
+          loadDecks: _loadDecks,
+        ),
+      );
       await tester.pumpAndSettle();
       expect(find.byKey(const ValueKey('observatory-sky')), findsOneWidget);
       final fan = find.byType(DeckPortrait);
@@ -153,7 +171,12 @@ void main() {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(1200, 850);
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpWidget(
+      const ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: _loadDecks,
+      ),
+    );
     await tester.pumpAndSettle();
     await tester.ensureVisible(find.text('Begin reading'));
     await tester.tap(find.text('Begin reading'));
@@ -176,7 +199,12 @@ void main() {
     tester.view.devicePixelRatio = 1;
     tester.view.physicalSize = const Size(360, 710);
     addTearDown(tester.view.reset);
-    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpWidget(
+      const ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: _loadDecks,
+      ),
+    );
     await tester.pumpAndSettle();
     expect(find.byKey(const ValueKey('begin-configured')), findsOneWidget);
     await tester.tap(find.byKey(const ValueKey('nav-library')));
@@ -196,7 +224,12 @@ void main() {
     tester.platformDispatcher.textScaleFactorTestValue = 2.0;
     addTearDown(tester.view.reset);
     addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
-    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpWidget(
+      const ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: _loadDecks,
+      ),
+    );
     await tester.pumpAndSettle();
     await tester.tap(find.byKey(const ValueKey('nav-library')));
     await tester.pumpAndSettle();
@@ -214,7 +247,12 @@ void main() {
       tester.view.devicePixelRatio = 1;
       tester.view.physicalSize = const Size(390, 844);
       addTearDown(tester.view.reset);
-      await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+      await tester.pumpWidget(
+        const ObservatoryApp(
+          interpretationClient: fixtureInterpretations,
+          loadDecks: _loadDecks,
+        ),
+      );
       await tester.pumpAndSettle();
       Future<void> tapKey(String key) async {
         final control = find.byKey(ValueKey(key));

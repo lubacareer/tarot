@@ -15,6 +15,9 @@ class ReadingSetup extends StatelessWidget {
     required this.selected,
     required this.spread,
     required this.reversals,
+    required this.online,
+    required this.question,
+    required this.onOnline,
     required this.onDeck,
     required this.onSpread,
     required this.onReversals,
@@ -24,6 +27,9 @@ class ReadingSetup extends StatelessWidget {
   final TarotDeck selected;
   final SpreadType spread;
   final bool reversals;
+  final bool online;
+  final TextEditingController question;
+  final ValueChanged<bool> onOnline;
   final ValueChanged<TarotDeck> onDeck;
   final ValueChanged<SpreadType> onSpread;
   final ValueChanged<bool> onReversals;
@@ -162,7 +168,38 @@ class ReadingSetup extends StatelessWidget {
                   style: const TextStyle(fontSize: 15),
                 ),
               ),
-              const SizedBox(height: 4),
+              const Divider(height: 22),
+              SwitchListTile.adaptive(
+                key: const ValueKey('gemini-reading'),
+                value: online,
+                onChanged: onOnline,
+                controlAffinity: ListTileControlAffinity.leading,
+                contentPadding: EdgeInsets.zero,
+                title: Text(context.tr('Read with Gemini 4 Carbon')),
+                subtitle: Text(
+                  context.tr(
+                    online
+                        ? 'Your optional question and revealed cards are sent to Google Gemini.'
+                        : 'Offline reading uses the meanings stored on this device.',
+                  ),
+                ),
+              ),
+              if (online) ...[
+                const SizedBox(height: 10),
+                TextField(
+                  key: const ValueKey('reading-question'),
+                  controller: question,
+                  minLines: 1,
+                  maxLines: 3,
+                  maxLength: 500,
+                  textInputAction: TextInputAction.done,
+                  decoration: InputDecoration(
+                    labelText: context.tr('Your question (optional)'),
+                    border: const OutlineInputBorder(),
+                  ),
+                ),
+              ],
+              const SizedBox(height: 10),
               KeyedSubtree(
                 key: const ValueKey('begin-configured'),
                 child: FilledButton(

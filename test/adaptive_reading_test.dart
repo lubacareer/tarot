@@ -3,6 +3,8 @@ import 'package:arcana_observatory/reading.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import 'support/fixture_interpretations.dart';
+
 void main() {
   testWidgets('a large-text reading survives a resize and app backgrounding', (
     tester,
@@ -19,7 +21,12 @@ void main() {
     addTearDown(dispatcher.clearAccessibilityFeaturesTestValue);
     // Large catalog JSON is decoded on a worker isolate outside the fake clock.
     final decks = (await tester.runAsync(DeckCatalog.load))!;
-    await tester.pumpWidget(ObservatoryApp(loadDecks: () async => decks));
+    await tester.pumpWidget(
+      ObservatoryApp(
+        interpretationClient: fixtureInterpretations,
+        loadDecks: () async => decks,
+      ),
+    );
     await tester.pumpAndSettle();
     Future<void> tap(String id) async {
       final item = find.byKey(ValueKey(id));

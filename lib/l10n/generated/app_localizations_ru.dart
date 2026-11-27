@@ -10,6 +10,44 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get geminiReading => 'Расклад с Gemini 4 Carbon';
+
+  @override
+  String get geminiDisclosure =>
+      'Ваш вопрос, если вы его укажете, и открытые карты отправляются в Google Gemini.';
+
+  @override
+  String get offlineReading =>
+      'В автономном режиме используются толкования, сохранённые на устройстве.';
+
+  @override
+  String get readingQuestion => 'Ваш вопрос (необязательно)';
+
+  @override
+  String get interpretationHeading => 'Толкование Gemini';
+
+  @override
+  String get synthesisHeading => 'Ваш расклад';
+
+  @override
+  String get quotaMessage =>
+      'Месячный лимит обращений к Gemini исчерпан. Толкования из колоды по-прежнему доступны.';
+
+  @override
+  String get rateLimitMessage =>
+      'Сейчас поступает много запросов. Попробуйте ещё раз чуть позже.';
+
+  @override
+  String get interpretationError =>
+      'Gemini не удалось завершить толкование. Значения карт из колоды по-прежнему доступны.';
+
+  @override
+  String get synthesisLoading => 'Gemini ищет связи между картами…';
+
+  @override
+  String get interpretationLoading => 'Gemini толкует эту карту…';
+
+  @override
   String get navTable => 'Стол';
 
   @override

@@ -100,6 +100,72 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @geminiReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Read with Gemini 4 Carbon'**
+  String get geminiReading;
+
+  /// No description provided for @geminiDisclosure.
+  ///
+  /// In en, this message translates to:
+  /// **'Your optional question and revealed cards are sent to Google Gemini.'**
+  String get geminiDisclosure;
+
+  /// No description provided for @offlineReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline reading uses the meanings stored on this device.'**
+  String get offlineReading;
+
+  /// No description provided for @readingQuestion.
+  ///
+  /// In en, this message translates to:
+  /// **'Your question (optional)'**
+  String get readingQuestion;
+
+  /// No description provided for @interpretationHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini’s interpretation'**
+  String get interpretationHeading;
+
+  /// No description provided for @synthesisHeading.
+  ///
+  /// In en, this message translates to:
+  /// **'Your reading'**
+  String get synthesisHeading;
+
+  /// No description provided for @quotaMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'The monthly Gemini reading limit has been reached. The deck’s meanings are still available.'**
+  String get quotaMessage;
+
+  /// No description provided for @rateLimitMessage.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini is receiving many requests. Try again shortly.'**
+  String get rateLimitMessage;
+
+  /// No description provided for @interpretationError.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini could not finish this interpretation. The deck’s meanings are still available.'**
+  String get interpretationError;
+
+  /// No description provided for @synthesisLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini is connecting the cards…'**
+  String get synthesisLoading;
+
+  /// No description provided for @interpretationLoading.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini is interpreting this card…'**
+  String get interpretationLoading;
+
   /// No description provided for @navTable.
   ///
   /// In en, this message translates to:

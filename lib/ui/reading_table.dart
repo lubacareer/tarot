@@ -2,6 +2,7 @@ import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 
+import '../interpretation.dart';
 import '../reading.dart';
 import '../strings.dart';
 import '../localized_reading.dart';
@@ -13,8 +14,12 @@ class ReadingTable extends StatefulWidget {
     required this.session,
     required this.onNew,
     required this.onComplete,
+    this.interpretations,
+    this.active = true,
   });
   final ReadingSession session;
+  final ReadingInterpretations? interpretations;
+  final bool active;
   final VoidCallback onNew;
   final VoidCallback onComplete;
   @override
@@ -25,17 +30,49 @@ class _ReadingTableState extends State<ReadingTable> {
   int offset = 0;
   int? inspected;
   bool next = false;
+  String language = '';
   ReadingSession get session => widget.session;
   Duration get duration => MediaQuery.disableAnimationsOf(context)
       ? Duration.zero
       : const Duration(milliseconds: 420);
   void _showStage(VoidCallback update) {
     setState(update);
+    _loadVisible();
     Scrollable.ensureVisible(
       context,
       duration: duration,
       curve: Curves.easeOut,
     );
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final locale = Localizations.localeOf(context).languageCode;
+    if (locale != language) {
+      language = locale;
+      WidgetsBinding.instance.addPostFrameCallback((_) => _loadVisible());
+    }
+  }
+
+  @override
+  void didUpdateWidget(ReadingTable oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.active && !oldWidget.active) {
+      WidgetsBinding.instance.addPostFrameCallback((_) => _loadVisible());
+    }
+  }
+
+  void _loadVisible() {
+    if (!mounted || !widget.active) return;
+    final readings = widget.interpretations;
+    if (readings == null || !readings.online) return;
+    final last = session.draws.length - 1;
+    final index = inspected ?? last;
+    if (!next && index >= 0 && session.draws[index].isRevealed) {
+      readings.load(index, language);
+    }
+    if (session.complete && index != last) readings.load(last, language);
   }
 
   void _pick(int index) {
@@ -80,6 +117,8 @@ class _ReadingTableState extends State<ReadingTable> {
         ? null
         : context.cardText(session.deck, viewing.card);
     final spread = session.spread;
+    final readings = widget.interpretations;
+    final online = readings != null && readings.online;
     final position = choosing
         ? spread.positions[draws.length]
         : viewing.position;
@@ -185,6 +224,7 @@ class _ReadingTableState extends State<ReadingTable> {
               ),
               onPressed: () {
                 setState(() => session.reveal(index));
+                _loadVisible();
                 if (session.complete) widget.onComplete();
               },
               icon: const Icon(Icons.flip, size: 18),
@@ -238,6 +278,15 @@ class _ReadingTableState extends State<ReadingTable> {
             const Divider(height: 1),
             const SizedBox(height: 16),
             if (viewing != null && viewing.isRevealed) ...[
+              if (online && spread != SpreadType.one)
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 16),
+                  child: _InterpretationSection(
+                    key: const ValueKey('card-interpretation'),
+                    readings: readings,
+                    index: index,
+                  ),
+                ),
               if (context.familyText(session.deck, viewing.card)
                   case final family?)
                 _Lesson(family.$1, family.$2),
@@ -253,7 +302,7 @@ class _ReadingTableState extends State<ReadingTable> {
                   {'card': card.title, 'position': context.tr(position.title)},
                 ),
               ),
-              if (session.complete) ...[
+              if (session.complete && !online) ...[
                 _Lesson(
                   context.tr('Closing reflection'),
                   context.tr(
@@ -267,7 +316,7 @@ class _ReadingTableState extends State<ReadingTable> {
                   onPressed: widget.onNew,
                   child: Text(context.tr('New reading')),
                 ),
-              ] else
+              ] else if (!session.complete)
                 FilledButton(
                   onPressed: () => _showStage(() {
                     inspected = null;
@@ -295,6 +344,31 @@ class _ReadingTableState extends State<ReadingTable> {
         ),
       ),
     );
+    final finale = online && session.complete
+        ? SkyPanel(
+            key: const ValueKey('whole-reading'),
+            child: Padding(
+              padding: const EdgeInsets.all(22),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  _InterpretationSection(
+                    readings: readings,
+                    index: draws.length - 1,
+                    wholeReading: true,
+                    singleCard: spread == SpreadType.one,
+                  ),
+                  const SizedBox(height: 14),
+                  OutlinedButton(
+                    key: const ValueKey('new-reading'),
+                    onPressed: widget.onNew,
+                    child: Text(context.tr('New reading')),
+                  ),
+                ],
+              ),
+            ),
+          )
+        : null;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
@@ -331,6 +405,7 @@ class _ReadingTableState extends State<ReadingTable> {
             ),
           ),
           const SizedBox(height: 20),
+          if (finale != null) ...[finale, const SizedBox(height: 20)],
           info,
         ] else
           Row(
@@ -352,6 +427,7 @@ class _ReadingTableState extends State<ReadingTable> {
               Expanded(flex: 5, child: info),
             ],
           ),
+        if (!narrow && finale != null) ...[const SizedBox(height: 20), finale],
         if (spread.positions.length > 1) ...[
           const SizedBox(height: 22),
           const Divider(),
@@ -368,6 +444,95 @@ class _ReadingTableState extends State<ReadingTable> {
           ),
         ],
       ],
+    );
+  }
+}
+
+class _InterpretationSection extends StatelessWidget {
+  const _InterpretationSection({
+    super.key,
+    required this.readings,
+    required this.index,
+    this.wholeReading = false,
+    this.singleCard = false,
+  });
+
+  final ReadingInterpretations readings;
+  final int index;
+  final bool wholeReading, singleCard;
+
+  @override
+  Widget build(BuildContext context) {
+    final language = Localizations.localeOf(context).languageCode;
+    return ListenableBuilder(
+      listenable: readings,
+      builder: (context, _) {
+        final result = readings.result(index, language);
+        final text = wholeReading && !singleCard
+            ? result?.synthesis
+            : result?.card;
+        final error = readings.error(index, language);
+        return ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 820),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Semantics(
+                header: true,
+                child: Text(
+                  context.tr(
+                    wholeReading ? 'Your reading' : 'Gemini’s interpretation',
+                  ),
+                  style: display(wholeReading ? 29 : 22, color: mint),
+                ),
+              ),
+              if (wholeReading && readings.question.isNotEmpty) ...[
+                const SizedBox(height: 5),
+                Text(
+                  readings.question,
+                  style: const TextStyle(color: accent, fontSize: 16),
+                ),
+              ],
+              const SizedBox(height: 8),
+              if (text != null)
+                SelectionArea(
+                  child: Text(
+                    text,
+                    style: const TextStyle(fontSize: 16, height: 1.55),
+                  ),
+                )
+              else if (error != null) ...[
+                Text(
+                  context.tr(switch (error) {
+                    'quota' => 'The monthly Gemini reading limit has been reached. The deck’s meanings are still available.',
+                    'rate_limit' =>
+                      'Gemini is receiving many requests. Try again shortly.',
+                    _ => 'Gemini could not finish this interpretation. The deck’s meanings are still available.',
+                  }),
+                ),
+                if (error != 'quota' && error != 'invalid_request')
+                  TextButton.icon(
+                    onPressed: () =>
+                        readings.load(index, language, retry: true),
+                    icon: const Icon(Icons.refresh, size: 17),
+                    label: Text(context.tr('Try again')),
+                  ),
+              ] else
+                Semantics(
+                  liveRegion: true,
+                  child: Text(
+                    context.tr(
+                      wholeReading && !singleCard
+                          ? 'Gemini is connecting the cards…'
+                          : 'Gemini is interpreting this card…',
+                    ),
+                    style: const TextStyle(color: muted),
+                  ),
+                ),
+            ],
+          ),
+        );
+      },
     );
   }
 }

@@ -10,6 +10,44 @@ class AppLocalizationsHe extends AppLocalizations {
   AppLocalizationsHe([String locale = 'he']) : super(locale);
 
   @override
+  String get geminiReading => 'קריאה עם Gemini 4 Carbon';
+
+  @override
+  String get geminiDisclosure =>
+      'השאלה, אם הוספת אותה, והקלפים שנחשפו נשלחים ל־Google Gemini.';
+
+  @override
+  String get offlineReading =>
+      'בקריאה ללא חיבור משתמשים בפירושי הקלפים השמורים במכשיר.';
+
+  @override
+  String get readingQuestion => 'השאלה שלך (לא חובה)';
+
+  @override
+  String get interpretationHeading => 'הפירוש של Gemini';
+
+  @override
+  String get synthesisHeading => 'הקריאה שלך';
+
+  @override
+  String get quotaMessage =>
+      'מכסת הקריאות החודשית של Gemini נוצלה. אפשר להמשיך לקרוא את פירושי החפיסה.';
+
+  @override
+  String get rateLimitMessage =>
+      'יש כרגע עומס של בקשות. אפשר לנסות שוב בעוד מעט.';
+
+  @override
+  String get interpretationError =>
+      'Gemini לא הצליח להשלים את הפירוש. אפשר להמשיך לקרוא את פירושי החפיסה.';
+
+  @override
+  String get synthesisLoading => 'Gemini מפרש את הקשרים בין הקלפים…';
+
+  @override
+  String get interpretationLoading => 'Gemini מפרש את הקלף…';
+
+  @override
   String get navTable => 'שולחן';
 
   @override
