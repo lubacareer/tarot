@@ -18,6 +18,13 @@ class _TestPreferences implements LanguagePreferences {
 
 Future<void> _tapControl(WidgetTester tester, String key) async {
   final control = find.byKey(ValueKey(key));
+  // Preference I/O and loading the saved language can finish between frames.
+  final deadline = tester.binding.clock.fromNowBy(const Duration(seconds: 10));
+  while (control.evaluate().isEmpty &&
+      tester.binding.clock.now().isBefore(deadline)) {
+    await tester.pump(const Duration(milliseconds: 100));
+  }
+  expect(control, findsOneWidget, reason: 'The $key control did not appear.');
   await tester.ensureVisible(control);
   await tester.pumpAndSettle();
   await tester.tap(control);
