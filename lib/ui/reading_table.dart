@@ -3,6 +3,8 @@ import 'dart:math' as math;
 import 'package:flutter/material.dart';
 
 import '../reading.dart';
+import '../strings.dart';
+import '../localized_reading.dart';
 import 'style.dart';
 
 class ReadingTable extends StatefulWidget {
@@ -50,30 +52,53 @@ class _ReadingTableState extends State<ReadingTable> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, size) => _layout(context, size.maxWidth),
+  );
+
+  Widget _layout(BuildContext context, double width) {
     final draws = session.draws;
+    final renderedOffset = offset;
+    final renderedCount = session.remainingCount;
+    void turnPage(int target) {
+      if (offset != renderedOffset ||
+          session.remainingCount != renderedCount ||
+          target < 0 ||
+          target >= session.remainingCount) {
+        return;
+      }
+      setState(() => offset = target);
+    }
+
     final nextOffset = offset + 5;
     final previousOffset = math.max(0, offset - 5);
     final unseen = draws.isNotEmpty && !draws.last.isRevealed;
     final index = inspected ?? (draws.length - 1);
     final DrawnCard? viewing = index >= 0 && !next ? draws[index] : null;
     final choosing = viewing == null;
+    final card = viewing == null
+        ? null
+        : context.cardText(session.deck, viewing.card);
     final spread = session.spread;
     final position = choosing
         ? spread.positions[draws.length]
         : viewing.position;
     final number = choosing ? draws.length + 1 : index + 1;
-    final narrow = MediaQuery.sizeOf(context).width < 840;
+    final narrow = width < 780;
     final heading = choosing
-        ? 'Choose a card'
+        ? context.tr('Choose a card')
         : !viewing.isRevealed
-        ? 'Turn your card'
-        : viewing.card.title;
+        ? context.tr('Turn your card')
+        : card!.title;
     final stage = Column(
       mainAxisSize: MainAxisSize.min,
       children: [
         Text(
-          'POSITION $number OF ${spread.positions.length}  ·  ${position.title.toUpperCase()}',
+          context.tr('Position {number} of {total} · {position}', {
+            'number': number,
+            'total': spread.positions.length,
+            'position': context.tr(position.title),
+          }).toUpperCase(),
           textAlign: TextAlign.center,
           style: smallCaps.copyWith(color: brass),
         ),
@@ -99,28 +124,30 @@ class _ReadingTableState extends State<ReadingTable> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                tooltip: 'Previous cards',
+                tooltip: context.tr('Previous cards'),
                 color: brass,
                 disabledColor: Colors.white24,
-                onPressed: offset == 0
-                    ? null
-                    : () => setState(() => offset = previousOffset),
+                onPressed: offset == 0 ? null : () => turnPage(previousOffset),
                 icon: const Icon(Icons.chevron_left),
               ),
               Flexible(
                 child: Text(
-                  '${offset + 1}–${math.min(nextOffset, session.remainingCount)} of ${session.remainingCount}',
+                  context.tr('{start}–{end} of {total}', {
+                    'start': offset + 1,
+                    'end': math.min(nextOffset, session.remainingCount),
+                    'total': session.remainingCount,
+                  }),
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: ivory),
                 ),
               ),
               IconButton(
-                tooltip: 'Next cards',
+                tooltip: context.tr('Next cards'),
                 color: brass,
                 disabledColor: Colors.white24,
                 onPressed: nextOffset >= session.remainingCount
                     ? null
-                    : () => setState(() => offset = nextOffset),
+                    : () => turnPage(nextOffset),
                 icon: const Icon(Icons.chevron_right),
               ),
             ],
@@ -141,7 +168,7 @@ class _ReadingTableState extends State<ReadingTable> {
               height: narrow ? 184 : 219,
               child: viewing.isRevealed
                   ? CardArt(
-                      viewing.card,
+                      card!,
                       key: const ValueKey('revealed-stage-card'),
                       reversed: viewing.isReversed,
                     )
@@ -153,7 +180,7 @@ class _ReadingTableState extends State<ReadingTable> {
             FilledButton.icon(
               key: const ValueKey('reveal-card'),
               style: FilledButton.styleFrom(
-                backgroundColor: brass,
+                backgroundColor: mint,
                 foregroundColor: night,
               ),
               onPressed: () {
@@ -161,25 +188,26 @@ class _ReadingTableState extends State<ReadingTable> {
                 if (session.complete) widget.onComplete();
               },
               icon: const Icon(Icons.flip, size: 18),
-              label: const Text('Reveal card'),
+              label: Text(context.tr('Reveal card')),
             )
           else
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
-                  viewing.isReversed ? 'Reversed' : 'Upright',
+                  context.tr(viewing.isReversed ? 'Reversed' : 'Upright'),
                   style: const TextStyle(
                     color: brass,
                     fontWeight: FontWeight.w700,
                   ),
                 ),
                 IconButton(
-                  tooltip: 'Enlarge card',
+                  tooltip: context.tr('Enlarge card'),
                   icon: const Icon(Icons.zoom_in, color: brass),
                   onPressed: () => showDialog<void>(
                     context: context,
-                    builder: (_) => _CardViewer(draw: viewing),
+                    builder: (_) =>
+                        _CardViewer(draw: viewing, deck: session.deck),
                   ),
                 ),
               ],
@@ -187,64 +215,85 @@ class _ReadingTableState extends State<ReadingTable> {
         ],
       ],
     );
-    final info = Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Text(
-          session.complete ? 'Reading complete' : 'Position guide',
-          style: smallCaps,
+    final info = SkyPanel(
+      child: Padding(
+        padding: const EdgeInsets.all(21),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              context.tr(
+                session.complete ? 'Reading complete' : 'Position guide',
+              ),
+              style: smallCaps,
+            ),
+            const SizedBox(height: 6),
+            Text(context.tr(position.title), style: display(35)),
+            const SizedBox(height: 10),
+            Text(
+              context.tr(position.prompt),
+              style: const TextStyle(fontSize: 16, height: 1.45),
+            ),
+            const SizedBox(height: 16),
+            const Divider(height: 1),
+            const SizedBox(height: 16),
+            if (viewing != null && viewing.isRevealed) ...[
+              if (context.familyText(session.deck, viewing.card)
+                  case final family?)
+                _Lesson(family.$1, family.$2),
+              _Lesson(context.tr('Look at the image'), card!.symbolism),
+              _Lesson(
+                context.tr('Card meaning'),
+                viewing.isReversed ? card.reversed : card.meaning,
+              ),
+              _Lesson(
+                context.tr('Read the position'),
+                context.tr(
+                  'What detail in {card} connects its meaning to “{position}” in your reading?',
+                  {'card': card.title, 'position': context.tr(position.title)},
+                ),
+              ),
+              if (session.complete) ...[
+                _Lesson(
+                  context.tr('Closing reflection'),
+                  context.tr(
+                    spread == SpreadType.one
+                        ? 'What is one small action this card invites you to try?'
+                        : 'Which two cards seem to speak to each other? Use their positions to explain the connection, then name one action to take.',
+                  ),
+                ),
+                OutlinedButton(
+                  key: const ValueKey('new-reading'),
+                  onPressed: widget.onNew,
+                  child: Text(context.tr('New reading')),
+                ),
+              ] else
+                FilledButton(
+                  onPressed: () => _showStage(() {
+                    inspected = null;
+                    next = !unseen;
+                  }),
+                  key: const ValueKey('next-position'),
+                  child: Text(
+                    context.tr(
+                      unseen ? 'Return to drawn card' : 'Choose next card',
+                    ),
+                  ),
+                ),
+            ] else
+              _Lesson(
+                context.tr(
+                  choosing ? 'Draw from the deck' : 'Before you reveal',
+                ),
+                context.tr(
+                  choosing
+                      ? 'Select a face-down card from the shuffled deck for this position.'
+                      : 'Hold the position’s question in mind, then turn the card to explore its imagery.',
+                ),
+              ),
+          ],
         ),
-        const SizedBox(height: 6),
-        Text(position.title, style: display(35)),
-        const SizedBox(height: 10),
-        Text(
-          position.prompt,
-          style: const TextStyle(fontSize: 16, height: 1.45),
-        ),
-        const SizedBox(height: 16),
-        const Divider(height: 1),
-        const SizedBox(height: 16),
-        if (viewing != null && viewing.isRevealed) ...[
-          if (session.deck.familyLesson(viewing.card) case final family?)
-            _Lesson(family.$1, family.$2),
-          _Lesson('Look at the image', viewing.card.symbolism),
-          _Lesson(
-            'Card meaning',
-            viewing.isReversed ? viewing.card.reversed : viewing.card.meaning,
-          ),
-          _Lesson(
-            'Read the position',
-            'What detail in ${viewing.card.title} connects its meaning to “${position.title}” in your reading?',
-          ),
-          if (session.complete) ...[
-            _Lesson(
-              'Closing reflection',
-              spread == SpreadType.one
-                  ? 'What is one small action this card invites you to try?'
-                  : 'Which two cards seem to speak to each other? Use their positions to explain the connection, then name one action to take.',
-            ),
-            OutlinedButton(
-              key: const ValueKey('new-reading'),
-              onPressed: widget.onNew,
-              child: const Text('New reading'),
-            ),
-          ] else
-            FilledButton(
-              onPressed: () => _showStage(() {
-                inspected = null;
-                next = !unseen;
-              }),
-              key: const ValueKey('next-position'),
-              child: Text(unseen ? 'Return to drawn card' : 'Choose next card'),
-            ),
-        ] else
-          _Lesson(
-            choosing ? 'Draw from the deck' : 'Before you reveal',
-            choosing
-                ? 'Select a face-down card from the shuffled deck for this position.'
-                : 'Hold the position’s question in mind, then turn the card to explore its imagery.',
-          ),
-      ],
+      ),
     );
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -257,16 +306,19 @@ class _ReadingTableState extends State<ReadingTable> {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(spread.title, style: display(36)),
+                Text(context.tr(spread.title), style: display(36)),
                 const SizedBox(height: 4),
-                Text(session.deck.name, style: const TextStyle(color: muted)),
+                Text(
+                  context.deckName(session.deck),
+                  style: const TextStyle(color: muted),
+                ),
               ],
             ),
             if (!session.complete)
               TextButton.icon(
                 onPressed: widget.onNew,
                 icon: const Icon(Icons.restart_alt),
-                label: const Text('Start again'),
+                label: Text(context.tr('Start again')),
               ),
           ],
         ),
@@ -304,7 +356,7 @@ class _ReadingTableState extends State<ReadingTable> {
           const SizedBox(height: 22),
           const Divider(),
           const SizedBox(height: 10),
-          Text('Spread layout', style: display(29)),
+          Text(context.tr('Spread layout'), style: display(29)),
           const SizedBox(height: 9),
           _SpreadLayout(
             session: session,
@@ -331,7 +383,7 @@ class _Lesson extends StatelessWidget {
       children: [
         Text(
           title,
-          style: const TextStyle(color: night, fontWeight: FontWeight.w700),
+          style: const TextStyle(color: ink, fontWeight: FontWeight.w700),
         ),
         const SizedBox(height: 3),
         Text(body, style: const TextStyle(color: muted, height: 1.5)),
@@ -376,7 +428,9 @@ class _Fan extends StatelessWidget {
                     child: SizedBox(
                       width: width,
                       child: Tooltip(
-                        message: 'Draw card ${offset + i + 1}',
+                        message: context.tr('Draw card {number}', {
+                          'number': offset + i + 1,
+                        }),
                         child: Material(
                           color: Colors.transparent,
                           child: InkWell(
@@ -386,7 +440,10 @@ class _Fan extends StatelessWidget {
                             borderRadius: BorderRadius.circular(6),
                             child: Semantics(
                               button: true,
-                              label: 'Draw face-down card ${offset + i + 1}',
+                              label: context.tr(
+                                'Draw face-down card {number}',
+                                {'number': offset + i + 1},
+                              ),
                               child: const Padding(
                                 padding: EdgeInsets.all(3),
                                 child: CardBack(),
@@ -437,7 +494,7 @@ class _SpreadLayout extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Align(
-          alignment: Alignment.centerLeft,
+          alignment: AlignmentDirectional.centerStart,
           child: ConstrainedBox(
             constraints: const BoxConstraints(maxWidth: 610),
             child: SkyPanel(
@@ -480,10 +537,12 @@ class _SpreadLayout extends StatelessWidget {
           children: [
             for (final (i, p) in session.spread.positions.indexed)
               ActionChip(
-                label: Text('${i + 1}. ${p.title}'),
+                label: Text('${i + 1}. ${context.tr(p.title)}'),
                 tooltip: i < session.draws.length && session.draws[i].isRevealed
-                    ? session.draws[i].card.title
-                    : p.title,
+                    ? context
+                          .cardText(session.deck, session.draws[i].card)
+                          .title
+                    : context.tr(p.title),
                 onPressed:
                     i < session.draws.length && session.draws[i].isRevealed
                     ? () => onSelect(i)
@@ -511,11 +570,12 @@ class _PlacementCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final draw = index < session.draws.length ? session.draws[index] : null;
     if (draw != null && draw.isRevealed) {
+      final card = context.cardText(session.deck, draw.card);
       return Tooltip(
-        message: '${draw.position.title} · ${draw.card.title}',
+        message: '${context.tr(draw.position.title)} · ${card.title}',
         child: InkWell(
           onTap: () => onSelect(index),
-          child: CardArt(draw.card, reversed: draw.isReversed),
+          child: CardArt(card, reversed: draw.isReversed),
         ),
       );
     }
@@ -536,7 +596,8 @@ class _PlacementCard extends StatelessWidget {
 }
 
 class _CardViewer extends StatefulWidget {
-  const _CardViewer({required this.draw});
+  const _CardViewer({required this.draw, required this.deck});
+  final TarotDeck deck;
   final DrawnCard draw;
   @override
   State<_CardViewer> createState() => _CardViewerState();
@@ -544,19 +605,31 @@ class _CardViewer extends StatefulWidget {
 
 class _CardViewerState extends State<_CardViewer> {
   final transform = TransformationController();
-  final viewportKey = GlobalKey();
+  GlobalKey viewportKey = GlobalKey();
+
+  void _setZoom(Matrix4 target) {
+    // Dispose the old viewer's pinch and pan animation controllers before
+    // setting the shared transform. A pending fling could otherwise overwrite it.
+    final replacement = GlobalKey();
+    setState(() => viewportKey = replacement);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted && viewportKey == replacement) transform.value = target;
+    });
+  }
 
   void _zoomIn() {
-    final viewport = viewportKey.currentContext!.size!;
+    final viewport = viewportKey.currentContext?.size;
+    if (viewport == null) return;
     final center = viewport.center(Offset.zero);
     final point = transform.toScene(center);
     final scale = (transform.value.getMaxScaleOnAxis() * 1.5).clamp(1.0, 4.0);
-    transform.value = Matrix4.diagonal3Values(scale, scale, 1)
-      ..setTranslationRaw(
+    _setZoom(
+      Matrix4.diagonal3Values(scale, scale, 1)..setTranslationRaw(
         center.dx - point.dx * scale,
         center.dy - point.dy * scale,
         0,
-      );
+      ),
+    );
   }
 
   @override
@@ -577,10 +650,13 @@ class _CardViewerState extends State<_CardViewer> {
             Row(
               children: [
                 Expanded(
-                  child: Text(widget.draw.card.title, style: display(25)),
+                  child: Text(
+                    context.cardText(widget.deck, widget.draw.card).title,
+                    style: display(25),
+                  ),
                 ),
                 IconButton(
-                  tooltip: 'Close',
+                  tooltip: context.tr('Close'),
                   icon: const Icon(Icons.close),
                   onPressed: () => Navigator.pop(context),
                 ),
@@ -597,7 +673,7 @@ class _CardViewerState extends State<_CardViewer> {
                   child: Padding(
                     padding: const EdgeInsets.all(5),
                     child: CardArt(
-                      widget.draw.card,
+                      context.cardText(widget.deck, widget.draw.card),
                       reversed: widget.draw.isReversed,
                     ),
                   ),
@@ -608,12 +684,12 @@ class _CardViewerState extends State<_CardViewer> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 IconButton(
-                  tooltip: 'Reset zoom',
+                  tooltip: context.tr('Reset zoom'),
                   icon: const Icon(Icons.zoom_out_map),
-                  onPressed: () => transform.value = Matrix4.identity(),
+                  onPressed: () => _setZoom(Matrix4.identity()),
                 ),
                 IconButton(
-                  tooltip: 'Zoom in',
+                  tooltip: context.tr('Zoom in'),
                   icon: const Icon(Icons.zoom_in),
                   onPressed: _zoomIn,
                 ),

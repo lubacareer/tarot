@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import '../reading.dart';
+import '../language_picker.dart';
+import '../strings.dart';
 import 'library.dart';
 import 'reading_table.dart';
 import 'setup.dart';
@@ -45,20 +47,22 @@ class _ObservatoryState extends State<Observatory> {
     return await showDialog<bool>(
           context: context,
           builder: (context) => AlertDialog(
-            title: const Text('Leave this reading?'),
+            title: Text(context.tr('Leave this reading?')),
             content: Text(
-              exiting
-                  ? 'Exiting clears the cards on this table.'
-                  : 'Starting again clears the cards on this table.',
+              context.tr(
+                exiting
+                    ? 'Exiting clears the cards on this table.'
+                    : 'Starting again clears the cards on this table.',
+              ),
             ),
             actions: [
               TextButton(
                 onPressed: () => Navigator.pop(context, false),
-                child: const Text('Keep reading'),
+                child: Text(context.tr('Keep reading')),
               ),
               FilledButton(
                 onPressed: () => Navigator.pop(context, true),
-                child: Text(exiting ? 'Exit app' : 'Start again'),
+                child: Text(context.tr(exiting ? 'Exit app' : 'Start again')),
               ),
             ],
           ),
@@ -95,152 +99,181 @@ class _ObservatoryState extends State<Observatory> {
   }
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) => LayoutBuilder(
+    builder: (context, size) => _layout(context, size.maxWidth),
+  );
+
+  Widget _layout(BuildContext context, double width) {
     final labelScale = MediaQuery.textScalerOf(context).scale(14) / 14;
-    final narrow =
-        MediaQuery.sizeOf(context).width < 760 * labelScale.clamp(1.0, 3.0);
-    final scaffold = Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            Container(
-              decoration: const BoxDecoration(
-                color: ivory,
-                border: Border(bottom: BorderSide(color: line)),
-              ),
-              alignment: Alignment.center,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 1300),
-                child: Padding(
-                  padding: EdgeInsets.symmetric(
-                    horizontal: narrow ? 18 : 32,
-                    vertical: narrow ? 11 : 14,
-                  ),
-                  child: Row(
-                    children: [
-                      const ObservatoryMark(),
-                      const SizedBox(width: 10),
-                      Expanded(
-                        child: Text(
-                          'Arcana Observatory',
-                          style: display(narrow ? 25 : 29),
-                        ),
+    final narrow = width < 970 * labelScale.clamp(1.0, 3.0);
+    final scaffold = Stack(
+      fit: StackFit.expand,
+      children: [
+        ObservatorySky(key: const ValueKey("observatory-sky"), compact: narrow),
+        Scaffold(
+          backgroundColor: Colors.transparent,
+          body: SafeArea(
+            child: Column(
+              children: [
+                Center(
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 1480),
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(
+                        horizontal: narrow ? 8 : 16,
+                        vertical: narrow ? 5 : 14,
                       ),
-                      if (!narrow)
-                        ..._Page.values.map(
-                          (value) => _navItem(value, compact: false),
-                        ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
-            Expanded(
-              child: FutureBuilder<List<TarotDeck>>(
-                future: catalog,
-                builder: (context, snap) {
-                  if (snap.connectionState != ConnectionState.done) {
-                    return const Center(
-                      child: CircularProgressIndicator(
-                        semanticsLabel: 'Opening deck library',
-                      ),
-                    );
-                  }
-                  if (snap.hasError ||
-                      snap.data == null ||
-                      snap.data!.isEmpty) {
-                    return Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Text('The deck library could not be opened.'),
-                          const SizedBox(height: 12),
-                          FilledButton(
-                            onPressed: () =>
-                                setState(() => catalog = widget.loadDecks()),
-                            child: const Text('Try again'),
-                          ),
-                        ],
-                      ),
-                    );
-                  }
-                  final decks = snap.data!;
-                  final deck = chosen ?? decks.first;
-                  final body = Column(
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
-                    children: [
-                      if (session != null)
-                        Visibility(
-                          visible: page == _Page.table,
-                          maintainState: true,
-                          child: ReadingTable(
-                            key: ObjectKey(session),
-                            session: session!,
-                            onNew: _setup,
-                            // Rebuild PopScope so Android Back can exit a completed reading.
-                            onComplete: () => setState(() {}),
-                          ),
-                        ),
-                      if (page == _Page.table && session == null)
-                        ReadingSetup(
-                          decks: decks,
-                          selected: deck,
-                          spread: spread,
-                          reversals: reversals,
-                          onDeck: (v) => setState(() => chosen = v),
-                          onSpread: (v) => setState(() => spread = v),
-                          onReversals: (v) => setState(() => reversals = v),
-                          onStart: () => _start(deck),
-                        ),
-                      if (page == _Page.library)
-                        DeckLibrary(
-                          decks: decks,
-                          selected: deck,
-                          onUse: _setup,
-                        ),
-                      if (page == _Page.guide) const FieldGuide(),
-                    ],
-                  );
-                  return SingleChildScrollView(
-                    controller: scroll,
-                    child: Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 1300),
+                      child: SkyPanel(
+                        radius: 12,
                         child: Padding(
-                          padding: EdgeInsets.fromLTRB(
-                            narrow ? 16 : 32,
-                            narrow ? 18 : 26,
-                            narrow ? 16 : 32,
-                            32,
+                          padding: EdgeInsets.symmetric(
+                            horizontal: narrow ? 9 : 20,
+                            vertical: narrow ? 7 : 10,
                           ),
-                          child: body,
+                          child: Row(
+                            children: [
+                              ObservatoryMark(size: narrow ? 23 : 36),
+                              SizedBox(width: narrow ? 6 : 12),
+                              Expanded(
+                                child: Text(
+                                  context.tr('Arcana Observatory'),
+                                  style: display(narrow ? 16 : 24),
+                                  maxLines: 2,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                              ),
+                              if (!narrow) ...[
+                                ..._Page.values.map(
+                                  (value) => _navItem(value, compact: false),
+                                ),
+                                const SizedBox(width: 20),
+                              ],
+                              LanguagePicker(
+                                compact:
+                                    narrow &&
+                                    (MediaQuery.sizeOf(context).width < 350 ||
+                                        labelScale > 1.32),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                  );
-                },
-              ),
+                  ),
+                ),
+                Expanded(
+                  child: FutureBuilder<List<TarotDeck>>(
+                    future: catalog,
+                    builder: (context, snap) {
+                      if (snap.connectionState != ConnectionState.done) {
+                        return Center(
+                          child: CircularProgressIndicator(
+                            semanticsLabel: context.tr('Opening deck library'),
+                          ),
+                        );
+                      }
+                      if (snap.hasError ||
+                          snap.data == null ||
+                          snap.data!.isEmpty) {
+                        return Center(
+                          child: Column(
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              Text(
+                                context.tr(
+                                  'The deck library could not be opened.',
+                                ),
+                              ),
+                              const SizedBox(height: 12),
+                              FilledButton(
+                                onPressed: () => setState(
+                                  () => catalog = widget.loadDecks(),
+                                ),
+                                child: Text(context.tr('Try again')),
+                              ),
+                            ],
+                          ),
+                        );
+                      }
+                      final decks = snap.data!;
+                      final deck = chosen ?? decks.first;
+                      final body = Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          if (session != null)
+                            Visibility(
+                              visible: page == _Page.table,
+                              maintainState: true,
+                              child: ReadingTable(
+                                key: ObjectKey(session),
+                                session: session!,
+                                onNew: _setup,
+                                // Rebuild PopScope so Android Back can exit a completed reading.
+                                onComplete: () => setState(() {}),
+                              ),
+                            ),
+                          if (page == _Page.table && session == null)
+                            ReadingSetup(
+                              decks: decks,
+                              selected: deck,
+                              spread: spread,
+                              reversals: reversals,
+                              onDeck: (v) => setState(() => chosen = v),
+                              onSpread: (v) => setState(() => spread = v),
+                              onReversals: (v) => setState(() => reversals = v),
+                              onStart: () => _start(deck),
+                            ),
+                          if (page == _Page.library)
+                            DeckLibrary(
+                              decks: decks,
+                              selected: deck,
+                              onUse: _setup,
+                            ),
+                          if (page == _Page.guide) const FieldGuide(),
+                        ],
+                      );
+                      return SingleChildScrollView(
+                        controller: scroll,
+                        child: Center(
+                          child: ConstrainedBox(
+                            constraints: const BoxConstraints(maxWidth: 1460),
+                            child: Padding(
+                              padding: EdgeInsets.fromLTRB(
+                                narrow ? 12 : 40,
+                                narrow ? 7 : 19,
+                                narrow ? 12 : 40,
+                                32,
+                              ),
+                              child: body,
+                            ),
+                          ),
+                        ),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
+          bottomNavigationBar: narrow
+              ? SafeArea(
+                  top: false,
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Color(0xf00b1824),
+                      border: Border(top: BorderSide(color: line)),
+                    ),
+                    child: Row(
+                      children: [
+                        for (final value in _Page.values)
+                          Expanded(child: _navItem(value, compact: true)),
+                      ],
+                    ),
+                  ),
+                )
+              : null,
         ),
-      ),
-      bottomNavigationBar: narrow
-          ? SafeArea(
-              top: false,
-              child: Container(
-                decoration: const BoxDecoration(
-                  color: ivory,
-                  border: Border(top: BorderSide(color: line)),
-                ),
-                child: Row(
-                  children: [
-                    for (final value in _Page.values)
-                      Expanded(child: _navItem(value, compact: true)),
-                  ],
-                ),
-              ),
-            )
-          : null,
+      ],
     );
     if (Theme.of(context).platform != TargetPlatform.android) return scaffold;
     return PopScope<Object?>(
@@ -257,12 +290,20 @@ class _ObservatoryState extends State<Observatory> {
       _Page.library => (Icons.style_outlined, 'Deck library', 'library'),
       _Page.guide => (Icons.menu_book_outlined, 'Field guide', 'guide'),
     };
-    final color = active ? night : muted;
+    final color = active ? ivory : muted;
     final children = [
       Icon(icon, size: compact ? 19 : 17, color: active ? accent : color),
       SizedBox(width: compact ? 0 : 7, height: compact ? 4 : 0),
       Text(
-        title,
+        context.tr(
+          compact
+              ? switch (dest) {
+                  _Page.table => 'Table',
+                  _Page.library => 'Library',
+                  _Page.guide => 'Guide',
+                }
+              : title,
+        ),
         textAlign: TextAlign.center,
         style: TextStyle(
           color: color,
@@ -275,8 +316,14 @@ class _ObservatoryState extends State<Observatory> {
       selected: active,
       button: true,
       child: Material(
-        color: active ? const Color(0xffebe7dc) : Colors.transparent,
-        borderRadius: BorderRadius.circular(compact ? 0 : 8),
+        color: active ? const Color(0x70413b51) : Colors.transparent,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(compact ? 0 : 8),
+          side: BorderSide(
+            color: active ? accent : Colors.transparent,
+            width: 1.2,
+          ),
+        ),
         child: InkWell(
           key: ValueKey('nav-$key'),
           borderRadius: BorderRadius.circular(compact ? 0 : 8),

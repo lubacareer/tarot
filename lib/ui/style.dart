@@ -1,160 +1,140 @@
 import 'dart:math' as math;
+import 'dart:ui' as ui;
 
 import 'package:flutter/material.dart';
 
 import '../reading.dart';
 import '../src/card_art_bundle.dart';
 
-const paper = Color(0xfff7f3eb);
-const ivory = Color(0xfffffcf4);
-const ink = Color(0xff252c32);
-const muted = Color(0xff595c5b);
-const line = Color(0xffd8d3c7);
-const night = Color(0xff122d34);
-const brass = Color(0xffd7b77c);
-const accent = Color(0xff885126);
+const paper = Color(0xff071019);
+const ivory = Color(0xfffcfbff);
+const ink = Color(0xfff5f4fc);
+const muted = Color(0xffc7cbd9);
+const line = Color(0xff596471);
+const night = Color(0xff0a1821);
+const brass = Color(0xffdcc18a);
+const accent = Color(0xffd3b2ff);
+const mint = Color(0xff77efc8);
 
 ThemeData observatoryTheme() {
-  final scheme = ColorScheme.fromSeed(seedColor: night, surface: paper);
+  const scheme = ColorScheme.dark(
+    primary: mint,
+    onPrimary: night,
+    secondary: accent,
+    onSecondary: night,
+    surface: Color(0xff14212c),
+    onSurface: ink,
+    onSurfaceVariant: muted,
+    outline: line,
+  );
   return ThemeData(
-    colorScheme: scheme.copyWith(
-      primary: night,
-      onPrimary: ivory,
-      onSurface: ink,
-    ),
+    colorScheme: scheme,
     scaffoldBackgroundColor: paper,
-    fontFamily: 'DM Sans',
+    fontFamily: 'Rubik',
+    brightness: Brightness.dark,
     useMaterial3: true,
     dividerColor: line,
+    focusColor: accent.withValues(alpha: .48),
     filledButtonTheme: FilledButtonThemeData(
       style: FilledButton.styleFrom(
-        padding: const EdgeInsets.symmetric(horizontal: 22, vertical: 15),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(7)),
+        foregroundColor: night,
+        backgroundColor: mint,
+        padding: const EdgeInsets.symmetric(horizontal: 17, vertical: 13),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         textStyle: const TextStyle(
-          fontSize: 15,
+          fontFamily: 'Rubik',
           fontWeight: FontWeight.w700,
-          fontFamily: 'DM Sans',
+          fontSize: 16,
         ),
       ),
+    ),
+    dialogTheme: const DialogThemeData(backgroundColor: Color(0xff11202b)),
+    tooltipTheme: TooltipThemeData(
+      decoration: BoxDecoration(
+        color: const Color(0xff23283d),
+        borderRadius: BorderRadius.circular(6),
+      ),
+      textStyle: const TextStyle(fontFamily: 'Rubik', color: ink),
     ),
   );
 }
 
 TextStyle display(double size, {Color color = ink}) => TextStyle(
-  fontFamily: 'Cormorant Garamond',
-  fontFamilyFallback: const ['Georgia', 'serif'],
+  fontFamily: 'Rubik',
   fontSize: size,
-  height: 1.03,
+  height: 1.13,
   fontWeight: FontWeight.w600,
+  letterSpacing: -.5,
   color: color,
+  shadows: const [Shadow(color: Color(0x80040914), blurRadius: 8)],
 );
-
 const smallCaps = TextStyle(
-  fontSize: 11,
+  fontSize: 12,
   height: 1.4,
-  fontWeight: FontWeight.w700,
-  letterSpacing: 1.6,
+  fontWeight: FontWeight.w600,
+  letterSpacing: .6,
   color: accent,
 );
 
-class SkyPanel extends StatelessWidget {
-  const SkyPanel({super.key, required this.child});
-  final Widget child;
-
+class ObservatorySky extends StatelessWidget {
+  const ObservatorySky({super.key, required this.compact});
+  final bool compact;
   @override
-  Widget build(BuildContext context) => ClipRRect(
-    borderRadius: BorderRadius.circular(15),
-    child: DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xff11272e), Color(0xff20474b), Color(0xff11292f)],
+  Widget build(BuildContext context) => ExcludeSemantics(
+    child: Stack(
+      fit: StackFit.expand,
+      children: [
+        Image.asset(
+          'assets/visuals/observatory.webp',
+          fit: BoxFit.cover,
+          alignment: compact ? const Alignment(.6, -.8) : Alignment.center,
         ),
-      ),
-      child: CustomPaint(painter: const _SkyPainter(), child: child),
+        const DecoratedBox(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+              colors: [Color(0x3a020913), Color(0x15030a14), Color(0x33010b15)],
+            ),
+          ),
+        ),
+      ],
     ),
   );
 }
 
-// A fixed astronomical chart keeps the reading table sharp at every window size.
-class _SkyPainter extends CustomPainter {
-  const _SkyPainter();
+class SkyPanel extends StatelessWidget {
+  const SkyPanel({super.key, required this.child, this.radius = 15});
+  final Widget child;
+  final double radius;
   @override
-  void paint(Canvas canvas, Size size) {
-    final random = math.Random(1922);
-    final dot = Paint();
-    for (int i = 0; i < size.width * size.height / 1250; i++) {
-      final point = Offset(
-        random.nextDouble() * size.width,
-        random.nextDouble() * size.height,
-      );
-      dot.color = brass.withValues(alpha: .13 + random.nextDouble() * .37);
-      canvas.drawCircle(point, .3 + random.nextDouble() * .85, dot);
-      if (i % 27 == 0) {
-        canvas.drawLine(
-          point - const Offset(3, 0),
-          point + const Offset(3, 0),
-          dot,
-        );
-        canvas.drawLine(
-          point - const Offset(0, 3),
-          point + const Offset(0, 3),
-          dot,
-        );
-      }
-    }
-    final center = Offset(size.width * .77, size.height * .54);
-    final radius = math.min(size.width * .44, size.height * .72);
-    final stroke = Paint()
-      ..style = PaintingStyle.stroke
-      ..strokeWidth = .8
-      ..color = brass.withValues(alpha: .30);
-    for (final scale in [.57, .77, .91, .95, 1.0, 1.17]) {
-      canvas.drawCircle(center, radius * scale, stroke);
-    }
-    for (var i = 0; i < 120; i++) {
-      final angle = i * math.pi / 60;
-      final radial = Offset(math.cos(angle), math.sin(angle));
-      canvas.drawLine(
-        center + radial * radius * (i % 10 == 0 ? .91 : .97),
-        center + radial * radius,
-        stroke,
-      );
-    }
-    canvas.save();
-    canvas.translate(center.dx, center.dy);
-    canvas.rotate(-.53);
-    canvas.drawOval(
-      Rect.fromCenter(
-        center: Offset.zero,
-        width: radius * 2.75,
-        height: radius * .89,
+  Widget build(BuildContext context) => ClipRRect(
+    borderRadius: BorderRadius.circular(radius),
+    child: BackdropFilter(
+      filter: ui.ImageFilter.blur(sigmaX: 7, sigmaY: 7),
+      child: DecoratedBox(
+        decoration: BoxDecoration(
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xe70c1b25), Color(0xe622202f), Color(0xe1122730)],
+          ),
+          borderRadius: BorderRadius.circular(radius),
+          border: Border.all(color: const Color(0xff697486), width: 1),
+        ),
+        child: child,
       ),
-      stroke,
-    );
-    canvas.rotate(1.5);
-    canvas.drawOval(
-      Rect.fromCenter(
-        center: Offset.zero,
-        width: radius * 2.35,
-        height: radius * 1.05,
-      ),
-      stroke,
-    );
-    canvas.restore();
-  }
-
-  @override
-  bool shouldRepaint(_SkyPainter oldDelegate) => false;
+    ),
+  );
 }
 
 class ObservatoryMark extends StatelessWidget {
-  const ObservatoryMark({super.key, this.size = 38});
+  const ObservatoryMark({super.key, this.size = 40});
   final double size;
   @override
-  Widget build(BuildContext context) => SizedBox.square(
-    dimension: size,
+  Widget build(BuildContext context) => SizedBox(
+    width: size * 1.35,
+    height: size,
     child: CustomPaint(painter: const _MarkPainter()),
   );
 }
@@ -164,33 +144,53 @@ class _MarkPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     final center = size.center(Offset.zero);
-    final r = size.width / 2;
-    final paint = Paint()..color = night;
-    canvas.drawCircle(center, r, paint);
-    paint
-      ..color = brass
+    canvas.translate(center.dx, center.dy);
+    canvas.scale(size.height / 40);
+    final paint = Paint()
+      ..color = ink
       ..style = PaintingStyle.stroke
-      ..strokeWidth = .8;
-    canvas.drawCircle(center, r * .76, paint);
-    canvas.drawCircle(center, r * .52, paint);
+      ..strokeWidth = 1.1
+      ..isAntiAlias = true;
+    canvas.save();
+    canvas.rotate(-.4);
+    canvas.drawArc(
+      const Rect.fromLTWH(-24, -9, 48, 18),
+      .26,
+      math.pi * 1.75,
+      false,
+      paint,
+    );
+    canvas.restore();
+    canvas.save();
+    canvas.rotate(-.93);
+    canvas.drawArc(
+      const Rect.fromLTWH(-18, -10, 36, 20),
+      .6,
+      math.pi * 1.63,
+      false,
+      paint,
+    );
+    canvas.restore();
+    paint.style = PaintingStyle.fill;
     final star = Path();
-    for (int i = 0; i < 16; i++) {
-      final theta = -math.pi / 2 + math.pi * i / 8;
-      final distance =
-          r *
-          (i.isOdd
-              ? .16
-              : i % 4 == 0
-              ? .91
-              : .50);
-      final p = center + Offset(math.cos(theta), math.sin(theta)) * distance;
+    for (var i = 0; i < 16; i++) {
+      final a = i * math.pi / 8 - math.pi / 2;
+      final d = i.isOdd ? 2.8 : (i % 4 == 0 ? 13.0 : 6.6);
+      final x = math.cos(a) * d, y = math.sin(a) * d;
       if (i == 0) {
-        star.moveTo(p.dx, p.dy);
+        star.moveTo(x, y);
       } else {
-        star.lineTo(p.dx, p.dy);
+        star.lineTo(x, y);
       }
     }
-    canvas.drawPath(star..close(), paint..style = PaintingStyle.fill);
+    canvas.drawPath(star..close(), paint);
+    for (final point in const [
+      Offset(-18, 11),
+      Offset(20, -8),
+      Offset(5, -16),
+    ]) {
+      canvas.drawCircle(point, 1.7, paint);
+    }
   }
 
   @override
@@ -210,8 +210,9 @@ class CardArt extends StatelessWidget {
         aspectRatio: .585,
         child: DecoratedBox(
           decoration: BoxDecoration(
-            color: ivory,
-            borderRadius: BorderRadius.circular(5),
+            color: const Color(0xff13121a),
+            border: Border.all(color: brass, width: 1.5),
+            borderRadius: BorderRadius.circular(9),
             boxShadow: const [
               BoxShadow(
                 color: Color(0x4d000000),
@@ -223,7 +224,7 @@ class CardArt extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(3),
             child: ClipRRect(
-              borderRadius: BorderRadius.circular(3),
+              borderRadius: BorderRadius.circular(6),
               child: RotatedBox(
                 quarterTurns: reversed ? 2 : 0,
                 child: Image.asset(
@@ -245,21 +246,26 @@ class CardArt extends StatelessWidget {
 }
 
 class DeckPortrait extends StatelessWidget {
-  const DeckPortrait(this.deck, {super.key, this.height = 210});
+  const DeckPortrait(this.deck, {super.key, this.height = 330});
   final TarotDeck deck;
   final double height;
   @override
   Widget build(BuildContext context) {
     if (deck.cards.isEmpty) return const SizedBox.shrink();
-    TarotCard pick(String name, int fallback) => deck.cards.firstWhere(
-      (card) => card.title.toLowerCase().contains(name),
+    TarotCard pick(String id, int fallback) => deck.cards.firstWhere(
+      (card) => card.id == id,
       orElse: () => deck.cards[fallback % deck.cards.length],
     );
-    final cards = [pick('moon', 18), pick('sun', 19), pick('star', 17)];
+    final celestial = deck.id == 'celestial';
+    final cards = [
+      pick('moon', 18),
+      pick(celestial ? 'pentacles_ace' : 'sun', 19),
+      pick(celestial ? 'wheel_of_fortune' : 'star', 17),
+    ];
     return ExcludeSemantics(
       child: SizedBox(
         height: height,
-        width: height * 1.45,
+        width: height * 1.54,
         child: Stack(
           alignment: Alignment.center,
           children: [
@@ -269,18 +275,21 @@ class DeckPortrait extends StatelessWidget {
                   (i == 2
                           ? 0
                           : i == 0
-                          ? -.31
-                          : .31) *
+                          ? -.43
+                          : .43) *
                       height,
-                  (i == 2 ? -.005 : .065) * height,
+                  i == 2 ? -height * .04 : height * .055,
                 ),
                 child: Transform.rotate(
                   angle: i == 0
-                      ? -.235
+                      ? -.17
                       : i == 1
-                      ? .235
-                      : -.025,
-                  child: SizedBox(height: height * .83, child: CardArt(card)),
+                      ? .17
+                      : 0,
+                  child: SizedBox(
+                    height: height * (i == 2 ? .88 : .80),
+                    child: CardArt(card),
+                  ),
                 ),
               ),
           ],
@@ -297,7 +306,7 @@ class CardBack extends StatelessWidget {
     aspectRatio: .585,
     child: DecoratedBox(
       decoration: BoxDecoration(
-        color: const Color(0xff223e49),
+        color: const Color(0xff211d38),
         borderRadius: BorderRadius.circular(6),
         border: Border.all(color: brass, width: 2),
         boxShadow: const [

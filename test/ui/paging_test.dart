@@ -48,6 +48,32 @@ Future<void> _activateTwice(WidgetTester tester, String tooltip) async {
 }
 
 void main() {
+  testWidgets('a queued Next loses its authority after a card is picked', (
+    tester,
+  ) async {
+    final session = ReadingSession.start(_deck(6), SpreadType.three);
+    await _show(
+      tester,
+      ReadingTable(session: session, onNew: () {}, onComplete: () {}),
+    );
+    final stale = _button(tester, 'Next cards').onPressed!;
+    tester.widget<InkWell>(find.byKey(const ValueKey('fan-card-0'))).onTap!();
+    stale();
+    await tester.pumpAndSettle();
+    final reveal = find.byKey(const ValueKey('reveal-card'));
+    await tester.ensureVisible(reveal);
+    await tester.pumpAndSettle();
+    await tester.tap(reveal);
+    await tester.pumpAndSettle();
+    await tester.ensureVisible(find.byKey(const ValueKey('next-position')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('next-position')));
+    await tester.pumpAndSettle();
+    expect(find.text('1–5 of 5'), findsOneWidget);
+    expect(find.byKey(const ValueKey('fan-card-4')), findsOneWidget);
+    expect(_button(tester, 'Next cards').onPressed, isNull);
+  });
+
   testWidgets('two fan Next activations stop on the final partial page', (
     tester,
   ) async {

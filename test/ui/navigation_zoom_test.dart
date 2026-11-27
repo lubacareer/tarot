@@ -41,6 +41,57 @@ Future<void> _tap(WidgetTester tester, Finder finder) async {
 Finder _key(String id) => find.byKey(ValueKey(id));
 
 void main() {
+  for (final command in ['Reset zoom', 'Zoom in']) {
+    testWidgets(
+      '$command overrides a pinched card still moving under inertia',
+      (tester) async {
+        await _open(tester);
+        await _tap(tester, _key('begin-reading'));
+        await _tap(tester, _key('fan-card-0'));
+        await _tap(tester, _key('reveal-card'));
+        await _tap(tester, find.byTooltip('Enlarge card'));
+        final viewer = find.byType(InteractiveViewer);
+        final controller = tester
+            .widget<InteractiveViewer>(viewer)
+            .transformationController!;
+        final focal = tester.getSize(viewer).center(Offset.zero);
+        final detector = tester
+            .widgetList<GestureDetector>(
+              find.descendant(
+                of: viewer,
+                matching: find.byType(GestureDetector),
+              ),
+            )
+            .singleWhere((it) => it.onScaleUpdate != null);
+        detector.onScaleStart!(ScaleStartDetails(focalPoint: focal));
+        detector.onScaleUpdate!(
+          ScaleUpdateDetails(focalPoint: focal, scale: 1.5, pointerCount: 2),
+        );
+        detector.onScaleEnd!(ScaleEndDetails(scaleVelocity: 4));
+        await tester.pump();
+        final start = controller.value.getMaxScaleOnAxis();
+        await tester.pump(const Duration(milliseconds: 20));
+        final moving = controller.value.getMaxScaleOnAxis();
+        expect(moving, greaterThan(start));
+        final focus = controller.toScene(focal);
+        await tester.tap(find.byTooltip(command));
+        await tester.pumpAndSettle();
+        final result = tester
+            .widget<InteractiveViewer>(viewer)
+            .transformationController!;
+        final expectedScale = command == 'Reset zoom'
+            ? 1.0
+            : (moving * 1.5).clamp(1.0, 4.0);
+        expect(result.value.getMaxScaleOnAxis(), closeTo(expectedScale, .001));
+        expect(
+          (result.toScene(focal) - (command == 'Reset zoom' ? focal : focus))
+              .distance,
+          lessThan(.001),
+        );
+      },
+    );
+  }
+
   testWidgets(
     'Android Back exits immediately after the final card is revealed',
     (tester) async {

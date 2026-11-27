@@ -1,6 +1,10 @@
 import 'package:arcana_observatory/main.dart';
 import 'package:arcana_observatory/reading.dart';
+import 'package:arcana_observatory/strings.dart';
+import 'package:arcana_observatory/ui/observatory.dart';
+import 'package:arcana_observatory/ui/style.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 Future<List<TarotDeck>> _loadDecks() async => [
@@ -25,6 +29,92 @@ Future<List<TarotDeck>> _loadDecks() async => [
 ];
 
 void main() {
+  for (final language in ['he', 'ru']) {
+    testWidgets(
+      'compact $language layouts support 180 percent text across pages',
+      (tester) async {
+        tester.view.devicePixelRatio = 1;
+        tester.view.physicalSize = const Size(360, 740);
+        tester.platformDispatcher.textScaleFactorTestValue = 1.8;
+        addTearDown(tester.view.reset);
+        addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+        await tester.pumpWidget(
+          MaterialApp(
+            locale: Locale(language),
+            supportedLocales: AppLocalizations.supportedLocales,
+            localizationsDelegates: AppLocalizations.localizationsDelegates,
+            theme: observatoryTheme(),
+            home: const Observatory(loadDecks: _loadDecks),
+          ),
+        );
+        await tester.pumpAndSettle();
+        final context = tester.element(find.byType(Observatory));
+        expect(
+          Directionality.of(context),
+          language == 'he' ? TextDirection.rtl : TextDirection.ltr,
+        );
+        expect(find.text(context.tr('Choose your deck')), findsOneWidget);
+        for (final (tab, heading) in [
+          ('library', 'Card gallery'),
+          ('guide', 'Read the position'),
+          ('table', 'Choose your spread'),
+        ]) {
+          await tester.tap(find.byKey(ValueKey('nav-$tab')));
+          await tester.pumpAndSettle();
+          expect(find.text(context.tr(heading)), findsOneWidget);
+        }
+        expect(tester.takeException(), isNull);
+      },
+    );
+  }
+  testWidgets('Tab and Enter can begin a reading without a pointer', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(1200, 800);
+    addTearDown(tester.view.reset);
+    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpAndSettle();
+    const key = ValueKey('begin-reading');
+    bool focused() =>
+        FocusManager.instance.primaryFocus?.context
+            ?.findAncestorWidgetOfExactType<FilledButton>()
+            ?.key ==
+        key;
+    for (int i = 0; i < 30 && !focused(); i++) {
+      await tester.sendKeyEvent(LogicalKeyboardKey.tab);
+      await tester.pumpAndSettle();
+    }
+    expect(focused(), isTrue);
+    await tester.sendKeyEvent(LogicalKeyboardKey.enter);
+    await tester.pumpAndSettle();
+    expect(find.text('Choose a card'), findsOneWidget);
+  });
+
+  testWidgets(
+    'observatory layout places the deck fan beside desktop controls and above phone controls',
+    (tester) async {
+      tester.view.devicePixelRatio = 1;
+      tester.view.physicalSize = const Size(1180, 760);
+      addTearDown(tester.view.reset);
+      await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+      await tester.pumpAndSettle();
+      expect(find.byKey(const ValueKey('observatory-sky')), findsOneWidget);
+      final fan = find.byType(DeckPortrait);
+      final start = find.byKey(const ValueKey('begin-reading'));
+      expect(
+        tester.getRect(fan).left,
+        greaterThan(tester.getRect(start).right),
+      );
+      tester.view.physicalSize = const Size(390, 820);
+      await tester.pumpAndSettle();
+      expect(
+        tester.getRect(fan).bottom,
+        lessThanOrEqualTo(tester.getRect(start).top),
+      );
+    },
+  );
+
   testWidgets('a reader can draw, reveal and interpret a single card', (
     tester,
   ) async {

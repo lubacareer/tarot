@@ -10,6 +10,8 @@ Arcana Observatory is a free, offline tarot reader for Android and Windows x64. 
 
 Read a single card, follow a Past–Present–Future spread, or lay out the ten-card Celtic Cross. Reversals are optional. Enlarge a card to examine its symbols, or use the deck library to study the illustrations and meanings between readings.
 
+Use the globe menu to choose **English**, **עברית**, or **Русский**. It updates the current reading, including the card names, interpretations and spread prompts. Hebrew uses a right-to-left layout. On first launch the app follows a supported device language and otherwise opens in English. It remembers your choice on this device.
+
 ![The Arcana Observatory reading table on Windows](docs/reading-table.webp)
 
 ## Run an app
@@ -28,6 +30,8 @@ flutter pub get --enforce-lockfile
 dart format --output=none --set-exit-if-changed lib test integration_test
 flutter analyze
 flutter test
+python -m pip install Pillow==12.3.0
+python -m unittest discover -s tools
 flutter devices
 ```
 
@@ -35,6 +39,6 @@ Run the end-to-end suite with `flutter test integration_test -d windows` or use 
 
 ## Art and licensing
 
-Each deck's `faces.zip` contains 78 individually named WebPs. Open it with any ZIP utility to inspect the paintings. The neighboring `catalog.json` maps the filenames to card identities, lessons, and credits.
+Each deck's `faces.zip` contains 78 individually named WebPs. Open it with any ZIP utility to inspect the paintings. The neighboring `catalog.json` maps the filenames to card identities, English lessons, and credits. The `he.json` and `ru.json` files contain Hebrew and Russian text keyed by those same card IDs.
 
 The code uses the MIT license. Original Celestial Arcana images, card backs and lessons use Creative Commons Attribution 4.0. The historical deck catalogs include provenance for each individual scan. Font notices ship with the app. [Code license](LICENSE) · [Artwork and font credits](ARTWORK-LICENSE.md)

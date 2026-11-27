@@ -10,6 +10,10 @@ dependencies:
   archive: ^4.7.1
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: ^0.20.3
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
   integration_test:
@@ -19,19 +23,17 @@ dev_dependencies:
   flutter_lints: ^6.0.0
 
 flutter:
+  generate: true
   uses-material-design: true
   assets:
     - assets/decks/waite_smith/
     - assets/decks/marseille/
     - assets/decks/celestial/
-    - assets/fonts/cormorantgaramond-OFL.txt
-    - assets/fonts/dmsans-OFL.txt
+    - assets/visuals/observatory.webp
+    - assets/fonts/rubik-OFL.txt
     - LICENSE
     - ARTWORK-LICENSE.md
   fonts:
-    - family: Cormorant Garamond
+    - family: Rubik
       fonts:
-        - asset: assets/fonts/CormorantGaramond.ttf
-    - family: DM Sans
-      fonts:
-        - asset: assets/fonts/DMSans.ttf
+        - asset: assets/fonts/Rubik.ttf
