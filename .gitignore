@@ -1,4 +1,10 @@
 # Miscellaneous
+.env
+.env.*
+.dev.vars
+.dev.vars.*
+.wrangler/
+node_modules/
 *.class
 *.log
 *.pyc
