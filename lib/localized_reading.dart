@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart' show SynchronousFuture;
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 
@@ -60,17 +61,21 @@ class _DeckWords {
 
 /// A locale changes the text shown for a reading, independently of its shuffled cards.
 class ReadingText {
-  ReadingText._(this._decks);
+  ReadingText._(this.locale, this._decks);
+  final Locale locale;
   final Map<String, _DeckWords> _decks;
   final _localizedDecks = Expando<TarotDeck>();
-  static const delegate = _ReadingDelegate();
+  LocalizationsDelegate<ReadingText> get delegate => _ReadingDelegate(this);
+
+  static Future<ReadingText> load(Locale locale) =>
+      _load(DeckCatalog.ids, locale, rootBundle);
 
   static Future<ReadingText> _load(
     Iterable<String> ids,
     Locale locale,
     AssetBundle assets,
   ) async {
-    if (locale.languageCode == 'en') return ReadingText._({});
+    if (locale.languageCode == 'en') return ReadingText._(locale, {});
     final entries = await Future.wait(
       ids.map(
         (id) async => MapEntry(
@@ -79,7 +84,7 @@ class ReadingText {
         ),
       ),
     );
-    return ReadingText._(Map.fromEntries(entries));
+    return ReadingText._(locale, Map.fromEntries(entries));
   }
 
   TarotCard _card(TarotDeck deck, TarotCard card) {
@@ -115,15 +120,14 @@ class ReadingText {
 }
 
 class _ReadingDelegate extends LocalizationsDelegate<ReadingText> {
-  const _ReadingDelegate();
+  const _ReadingDelegate(this.words);
+  final ReadingText words;
   @override
-  bool isSupported(Locale locale) =>
-      const {'en', 'he', 'ru'}.contains(locale.languageCode);
+  bool isSupported(Locale locale) => locale == words.locale;
   @override
-  Future<ReadingText> load(Locale locale) =>
-      ReadingText._load(DeckCatalog.ids, locale, rootBundle);
+  Future<ReadingText> load(Locale locale) => SynchronousFuture(words);
   @override
-  bool shouldReload(_ReadingDelegate old) => false;
+  bool shouldReload(_ReadingDelegate old) => words != old.words;
 }
 
 Future<List<TarotDeck>> localizeDecks(

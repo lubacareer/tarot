@@ -23,40 +23,74 @@ class ObservatoryApp extends StatefulWidget {
   State<ObservatoryApp> createState() => _ObservatoryAppState();
 }
 
-class _ObservatoryAppState extends State<ObservatoryApp> {
-  late final LanguageController _language;
+class _ObservatoryAppState extends State<ObservatoryApp>
+    with WidgetsBindingObserver {
+  late final _language = LanguageController(widget.preferences);
+  late final _restored = _language.restore();
+  final _catalogs = <Locale, Future<ReadingText>>{};
 
   @override
   void initState() {
     super.initState();
-    _language = LanguageController(widget.preferences)..restore();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeLocales(List<Locale>? locales) {
+    if (_language.explicitLocale == null) setState(() {});
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     _language.dispose();
     super.dispose();
   }
 
   @override
-  Widget build(BuildContext context) => LanguageScope(
+  Widget build(BuildContext context) => FutureBuilder<void>(
+    future: _restored,
+    builder: (_, snapshot) {
+      if (snapshot.connectionState != ConnectionState.done) {
+        return const ColoredBox(color: paper);
+      }
+      return _app();
+    },
+  );
+
+  Widget _app() => LanguageScope(
     controller: _language,
     child: ListenableBuilder(
       listenable: _language,
-      builder: (context, child) => MaterialApp(
-        onGenerateTitle: (context) => context.tr('Arcana Observatory'),
-        debugShowCheckedModeBanner: false,
-        theme: observatoryTheme(),
-        localizationsDelegates: const [
-          ReadingText.delegate,
-          ...AppLocalizations.localizationsDelegates,
-        ],
-        supportedLocales: AppLocalizations.supportedLocales,
-        locale: _language.explicitLocale,
-        localeListResolutionCallback: (locales, _) =>
-            resolveDeviceLanguage(locales ?? const []),
-        home: child,
-      ),
+      builder: (context, child) {
+        final locale =
+            _language.explicitLocale ??
+            resolveDeviceLanguage(
+              WidgetsBinding.instance.platformDispatcher.locales,
+            );
+        // FutureBuilder retains the displayed catalog while loading the next,
+        // and only publishes a completion for the current language request.
+        return FutureBuilder<ReadingText>(
+          future: _catalogs.putIfAbsent(locale, () => ReadingText.load(locale)),
+          builder: (_, snapshot) {
+            final words = snapshot.data;
+            if (snapshot.hasError) return ErrorWidget(snapshot.error!);
+            if (words == null) return const ColoredBox(color: paper);
+            return MaterialApp(
+              onGenerateTitle: (context) => context.tr('Arcana Observatory'),
+              debugShowCheckedModeBanner: false,
+              theme: observatoryTheme(),
+              localizationsDelegates: [
+                words.delegate,
+                ...AppLocalizations.localizationsDelegates,
+              ],
+              supportedLocales: AppLocalizations.supportedLocales,
+              locale: words.locale,
+              home: child,
+            );
+          },
+        );
+      },
       child: Observatory(loadDecks: widget.loadDecks),
     ),
   );
