@@ -73,7 +73,7 @@ void main() {
       await tester.pumpAndSettle();
       final session = ReadingSession.start(deck, SpreadType.one)..pick(0);
       await tester.pumpWidget(
-        host(ReadingTable(session: session, onNew: () {})),
+        host(ReadingTable(session: session, onNew: () {}, onComplete: () {})),
       );
       await tester.pumpAndSettle();
       expect(find.text(label), findsNothing);

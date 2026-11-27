@@ -41,6 +41,31 @@ Future<void> _tap(WidgetTester tester, Finder finder) async {
 Finder _key(String id) => find.byKey(ValueKey(id));
 
 void main() {
+  testWidgets(
+    'Android Back exits immediately after the final card is revealed',
+    (tester) async {
+      await _open(tester);
+      var systemPops = 0;
+      final messenger = tester.binding.defaultBinaryMessenger;
+      messenger.setMockMethodCallHandler(SystemChannels.platform, (call) async {
+        if (call.method == 'SystemNavigator.pop') systemPops++;
+        return null;
+      });
+      addTearDown(
+        () => messenger.setMockMethodCallHandler(SystemChannels.platform, null),
+      );
+      await _tap(tester, _key('begin-reading'));
+      await _tap(tester, _key('fan-card-0'));
+      await _tap(tester, _key('reveal-card'));
+      expect(find.text('Reading complete'), findsOneWidget);
+      await tester.binding.handlePopRoute();
+      await tester.pumpAndSettle();
+      expect(systemPops, 1);
+      expect(find.text('Leave this reading?'), findsNothing);
+    },
+    variant: TargetPlatformVariant.only(TargetPlatform.android),
+  );
+
   testWidgets('Android Back returns to the reading and confirms a live exit', (
     tester,
   ) async {

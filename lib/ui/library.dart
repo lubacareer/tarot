@@ -72,6 +72,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
           .max(1, (constraints.maxWidth / 250).floor())
           .clamp(1, 3);
       final end = math.min(first + pageSize, deck.cards.length);
+      final previous = math.max(0, first - pageSize);
       return Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -129,7 +130,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
                     tooltip: 'Previous page',
                     onPressed: first == 0
                         ? null
-                        : () => setState(() => first -= pageSize),
+                        : () => setState(() => first = previous),
                     icon: const Icon(Icons.chevron_left),
                   ),
                   Flexible(
@@ -143,7 +144,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
                     tooltip: 'Next page',
                     onPressed: end >= deck.cards.length
                         ? null
-                        : () => setState(() => first += pageSize),
+                        : () => setState(() => first = end),
                     icon: const Icon(Icons.chevron_right),
                   ),
                 ],

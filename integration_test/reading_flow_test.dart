@@ -23,12 +23,35 @@ void main() {
     for (var index = 0; index < 10; index++) {
       await tapControl('fan-card-0');
       await tapControl('reveal-card');
-      expect(find.byIcon(Icons.broken_image_outlined), findsNothing);
+      final stage = find.byKey(const ValueKey('revealed-stage-card'));
+      expect(stage, findsOneWidget);
+      final failedArt = find.descendant(
+        of: stage,
+        matching: find.byIcon(Icons.broken_image_outlined),
+      );
+      final decodedArt = find.descendant(
+        of: stage,
+        matching: find.byWidgetPredicate(
+          (widget) => widget is RawImage && widget.image != null,
+        ),
+      );
+      final deadline = tester.binding.clock.fromNowBy(
+        const Duration(seconds: 10),
+      );
+      while (decodedArt.evaluate().isEmpty &&
+          failedArt.evaluate().isEmpty &&
+          tester.binding.clock.now().isBefore(deadline)) {
+        await tester.pump(const Duration(milliseconds: 100));
+      }
       expect(
-        tester
-            .widgetList<RawImage>(find.byType(RawImage))
-            .any((image) => image.image != null),
-        isTrue,
+        failedArt,
+        findsNothing,
+        reason: 'Broken artwork at position ${index + 1}',
+      );
+      expect(
+        decodedArt,
+        findsOneWidget,
+        reason: 'Artwork did not decode at position ${index + 1}',
       );
       if (index < 9) await tapControl('next-position');
     }

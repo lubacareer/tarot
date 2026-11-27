@@ -6,9 +6,15 @@ import '../reading.dart';
 import 'style.dart';
 
 class ReadingTable extends StatefulWidget {
-  const ReadingTable({super.key, required this.session, required this.onNew});
+  const ReadingTable({
+    super.key,
+    required this.session,
+    required this.onNew,
+    required this.onComplete,
+  });
   final ReadingSession session;
   final VoidCallback onNew;
+  final VoidCallback onComplete;
   @override
   State<ReadingTable> createState() => _ReadingTableState();
 }
@@ -46,6 +52,8 @@ class _ReadingTableState extends State<ReadingTable> {
   @override
   Widget build(BuildContext context) {
     final draws = session.draws;
+    final nextOffset = offset + 5;
+    final previousOffset = math.max(0, offset - 5);
     final unseen = draws.isNotEmpty && !draws.last.isRevealed;
     final index = inspected ?? (draws.length - 1);
     final DrawnCard? viewing = index >= 0 && !next ? draws[index] : null;
@@ -96,12 +104,12 @@ class _ReadingTableState extends State<ReadingTable> {
                 disabledColor: Colors.white24,
                 onPressed: offset == 0
                     ? null
-                    : () => setState(() => offset = math.max(0, offset - 5)),
+                    : () => setState(() => offset = previousOffset),
                 icon: const Icon(Icons.chevron_left),
               ),
               Flexible(
                 child: Text(
-                  '${offset + 1}–${math.min(offset + 5, session.remainingCount)} of ${session.remainingCount}',
+                  '${offset + 1}–${math.min(nextOffset, session.remainingCount)} of ${session.remainingCount}',
                   textAlign: TextAlign.center,
                   style: const TextStyle(color: ivory),
                 ),
@@ -110,9 +118,9 @@ class _ReadingTableState extends State<ReadingTable> {
                 tooltip: 'Next cards',
                 color: brass,
                 disabledColor: Colors.white24,
-                onPressed: offset + 5 >= session.remainingCount
+                onPressed: nextOffset >= session.remainingCount
                     ? null
-                    : () => setState(() => offset += 5),
+                    : () => setState(() => offset = nextOffset),
                 icon: const Icon(Icons.chevron_right),
               ),
             ],
@@ -132,7 +140,11 @@ class _ReadingTableState extends State<ReadingTable> {
             child: SizedBox(
               height: narrow ? 184 : 219,
               child: viewing.isRevealed
-                  ? CardArt(viewing.card, reversed: viewing.isReversed)
+                  ? CardArt(
+                      viewing.card,
+                      key: const ValueKey('revealed-stage-card'),
+                      reversed: viewing.isReversed,
+                    )
                   : const CardBack(),
             ),
           ),
@@ -144,7 +156,10 @@ class _ReadingTableState extends State<ReadingTable> {
                 backgroundColor: brass,
                 foregroundColor: night,
               ),
-              onPressed: () => setState(() => session.reveal(index)),
+              onPressed: () {
+                setState(() => session.reveal(index));
+                if (session.complete) widget.onComplete();
+              },
               icon: const Icon(Icons.flip, size: 18),
               label: const Text('Reveal card'),
             )

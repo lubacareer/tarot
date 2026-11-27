@@ -177,6 +177,8 @@ class _ObservatoryState extends State<Observatory> {
                             key: ObjectKey(session),
                             session: session!,
                             onNew: _setup,
+                            // Rebuild PopScope so Android Back can exit a completed reading.
+                            onComplete: () => setState(() {}),
                           ),
                         ),
                       if (page == _Page.table && session == null)
