@@ -12,7 +12,7 @@ Read a single card, follow a Past–Present–Future spread, or lay out the ten-
 
 Use the globe menu to choose **English**, **עברית**, or **Русский**. It updates the current reading, including the card names, interpretations and spread prompts. Hebrew uses a right-to-left layout. On first launch the app follows a supported device language and otherwise opens in English. It remembers your choice on this device.
 
-![The Arcana Observatory reading table on Windows](docs/reading-table.webp)
+![The Hebrew reading table on Windows, with the Celestial Arcana deck selected and the language menu open](docs/reading-table.webp)
 
 ## Run an app
 
