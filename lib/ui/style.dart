@@ -207,7 +207,11 @@ class CardArt extends StatelessWidget {
     label: card.title,
     child: ExcludeSemantics(
       child: AspectRatio(
-        aspectRatio: .585,
+        // The original paintings are all 640 × 960. Keep the full composition
+        // inside their frames, including in the large preview fan.
+        aspectRatio: card.imageAsset.startsWith('assets/decks/celestial/')
+            ? 2 / 3
+            : .585,
         child: DecoratedBox(
           decoration: BoxDecoration(
             color: const Color(0xff13121a),
