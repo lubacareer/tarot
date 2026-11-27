@@ -1,0 +1,36 @@
+name: arcana_observatory
+description: "Learn tarot with three illustrated decks and guided offline readings."
+publish_to: 'none'
+version: 0.1.0+1
+
+environment:
+  sdk: ^3.13.2
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  integration_test:
+    sdk: flutter
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - assets/decks/waite_smith/
+    - assets/decks/marseille/
+    - assets/decks/celestial/
+    - assets/fonts/cormorantgaramond-OFL.txt
+    - assets/fonts/dmsans-OFL.txt
+    - LICENSE
+    - ARTWORK-LICENSE.md
+  fonts:
+    - family: Cormorant Garamond
+      fonts:
+        - asset: assets/fonts/CormorantGaramond.ttf
+    - family: DM Sans
+      fonts:
+        - asset: assets/fonts/DMSans.ttf
