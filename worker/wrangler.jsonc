@@ -1,0 +1,14 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "arcana-observatory-readings",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-25",
+  "workers_dev": true,
+  "observability": { "enabled": false },
+  "durable_objects": {
+    "bindings": [{ "name": "READINGS", "class_name": "ReadingService" }]
+  },
+  "migrations": [
+    { "tag": "v1", "new_sqlite_classes": ["ReadingService"] }
+  ]
+}
