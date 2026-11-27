@@ -66,6 +66,26 @@ void main() {
     expect(tester.takeException(), isNull);
   });
 
+  testWidgets('the gallery pager fits a compact phone with large text', (
+    tester,
+  ) async {
+    tester.view.devicePixelRatio = 1;
+    tester.view.physicalSize = const Size(320, 640);
+    tester.platformDispatcher.textScaleFactorTestValue = 2.0;
+    addTearDown(tester.view.reset);
+    addTearDown(tester.platformDispatcher.clearTextScaleFactorTestValue);
+    await tester.pumpWidget(const ObservatoryApp(loadDecks: _loadDecks));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('nav-library')));
+    await tester.pumpAndSettle();
+    final forward = find.byTooltip('Next page');
+    await tester.ensureVisible(forward);
+    await tester.tap(forward);
+    await tester.pumpAndSettle();
+    expect(find.text('13–24 of 78'), findsOneWidget);
+    expect(tester.takeException(), isNull);
+  });
+
   testWidgets(
     'a reading retains its place when consulting the guide and rotating',
     (tester) async {

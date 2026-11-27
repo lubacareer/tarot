@@ -190,6 +190,8 @@ class _ReadingTableState extends State<ReadingTable> {
         const Divider(height: 1),
         const SizedBox(height: 16),
         if (viewing != null && viewing.isRevealed) ...[
+          if (session.deck.familyLesson(viewing.card) case final family?)
+            _Lesson(family.$1, family.$2),
           _Lesson('Look at the image', viewing.card.symbolism),
           _Lesson(
             'Card meaning',

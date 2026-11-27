@@ -39,6 +39,7 @@ class _DeckLibraryState extends State<DeckLibrary> {
               Center(child: SizedBox(height: 210, child: CardArt(card))),
               const SizedBox(height: 15),
               for (final (title, text) in [
+                ?deck.familyLesson(card),
                 ('Symbolism', card.symbolism),
                 ('Upright', card.meaning),
                 ('Reversed', card.reversed),
@@ -131,9 +132,12 @@ class _DeckLibraryState extends State<DeckLibrary> {
                         : () => setState(() => first -= pageSize),
                     icon: const Icon(Icons.chevron_left),
                   ),
-                  Text(
-                    '${first + 1}–$end of ${deck.cards.length}',
-                    style: const TextStyle(color: muted),
+                  Flexible(
+                    child: Text(
+                      '${first + 1}–$end of ${deck.cards.length}',
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(color: muted),
+                    ),
                   ),
                   IconButton(
                     tooltip: 'Next page',

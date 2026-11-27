@@ -38,6 +38,43 @@ class TarotDeck {
   final String source;
   final String rights;
   final List<TarotCard> cards;
+
+  (String, String)? familyLesson(TarotCard card) {
+    if (DeckCatalog._majorIds.contains(card.id)) {
+      return (
+        'Major Arcana · ${card.number ?? 'Unnumbered'}',
+        'Read this image as a turning point and ask what larger change its central figure or event might represent.',
+      );
+    }
+    final parts = card.id.split('_');
+    if (parts.length != 2) return null;
+    final marseille = id == 'marseille';
+    final family = switch (parts.first) {
+      'cups' => (
+        'Cups',
+        'A cup holds, offers or spills its contents, giving you a way to explore how feelings pass between people.',
+      ),
+      'swords' => (
+        'Swords',
+        'Read the blade as a tool of judgment and ask what needs to be separated, questioned or decided.',
+      ),
+      'wands' => (
+        marseille ? 'Batons' : 'Wands',
+        'A staff can support a traveler or direct a movement, so look for where effort is being put to work.',
+      ),
+      'pentacles' => (
+        marseille ? 'Coins' : 'Pentacles',
+        'Read the disc as a resource and ask who holds, shares or cultivates something of practical value.',
+      ),
+      _ => null,
+    };
+    if (family == null) return null;
+    final (suit, lesson) = family;
+    final rank = parts.last;
+    final rankLabel =
+        card.number ?? '${rank[0].toUpperCase()}${rank.substring(1)} (court)';
+    return ('Minor Arcana · $suit · $rankLabel', lesson);
+  }
 }
 
 /// Each tradition supplies its own labels, art and guidance for the same tarot identities.

@@ -10,6 +10,8 @@ Arcana Observatory is a free, offline tarot reader for Android and Windows x64. 
 
 Read a single card, follow a Past–Present–Future spread, or lay out the ten-card Celtic Cross. Reversals are optional. Enlarge a card to examine its symbols, or use the deck library to study the illustrations and meanings between readings.
 
+![The Arcana Observatory reading table on Windows](docs/reading-table.webp)
+
 ## Run an app
 
 - **Windows 10/11 x64.** Extract the entire portable ZIP, then open `arcana_observatory.exe` in that folder.
@@ -32,5 +34,7 @@ flutter devices
 Run the end-to-end suite with `flutter test integration_test -d windows` or use the Android device ID reported by `flutter devices`. Build an APK with `flutter build apk --release`. On Windows, run `flutter build windows --release` followed by `.\tool\package_windows.ps1`. The APK is under `build/app/outputs/flutter-apk/` and the portable ZIP is under `build/`.
 
 ## Art and licensing
+
+Each deck's `faces.zip` contains 78 individually named WebPs. Open it with any ZIP utility to inspect the paintings. The neighboring `catalog.json` maps the filenames to card identities, lessons, and credits.
 
 The code uses the MIT license. Original Celestial Arcana images, card backs and lessons use Creative Commons Attribution 4.0. The historical deck catalogs include provenance for each individual scan. Font notices ship with the app. [Code license](LICENSE) · [Artwork and font credits](ARTWORK-LICENSE.md)
