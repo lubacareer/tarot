@@ -288,3 +288,34 @@ test('cleanup wakes for the first cached reading to expire even when a month cou
   await service.alarm();
   assert.equal(alarm, expiry);
 });
+
+test('accepted submissions bring an existing cleanup alarm forward, without postponing an earlier wakeup', async () => {
+  const database = storage();
+  let alarm = Date.now() + 86_400_000;
+  database.getAlarm = async () => alarm;
+  database.setAlarm = async value => { alarm = value; };
+  const service = new ReadingService({storage: database}, {});
+  service.gate.run = async () => ({status: 202, body: {status: 'pending'}});
+  const submit = () => service.fetch(new Request('https://internal/', {
+    method: 'POST', body: JSON.stringify({prepared: reading(1), source: 'reader', token: crypto.randomUUID()}),
+  }));
+  await submit();
+  assert.ok(alarm <= Date.now() + 30_000);
+  const earlier = alarm = Date.now() + 1000;
+  await submit();
+  assert.equal(alarm, earlier);
+});
+
+test('the alarm keeps pending generations active, then returns to normal cleanup', async () => {
+  const database = storage();
+  let alarm;
+  database.setAlarm = async value => { alarm = value; };
+  const service = new ReadingService({storage: database}, {});
+  const expires = Date.now() + 210_000;
+  database.sql.exec('INSERT INTO reading VALUES (?, NULL, ?)', 'pending', expires);
+  await service.alarm();
+  assert.ok(alarm <= Date.now() + 30_000);
+  database.sql.exec('UPDATE reading SET result = ? WHERE fingerprint = ?', JSON.stringify(words), 'pending');
+  await service.alarm();
+  assert.equal(alarm, expires);
+});
