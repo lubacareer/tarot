@@ -126,3 +126,25 @@ test('provider failures, unfinished generations and missing sections never becom
   ]) await assert.rejects(generateInterpretation(reading('en','three',3), 'secret', makeResponse), error =>
     !error.message.includes('secret') && !error.message.includes('Reader input'));
 });
+
+test('the 180-second deadline covers both connection and reading the response body', async t => {
+  const controller = new AbortController();
+  const deadline = t.mock.method(AbortSignal, 'timeout', () => controller.signal);
+  const request = reading('en', 'one', 1);
+  const duringBodyRead = async () => ({
+    ok: true,
+    json: async () => {
+      controller.abort(new DOMException('Timed out', 'TimeoutError'));
+      throw new DOMException('Body read aborted', 'AbortError');
+    },
+  });
+  await assert.rejects(generateInterpretation(request, 'test', duringBodyRead), {name: 'TimeoutError'});
+  assert.deepEqual(deadline.mock.calls[0].arguments, [180_000]);
+});
+
+test('provider HTTP request and gateway timeouts produce the timeout outcome', async () => {
+  for (const status of [408, 504]) {
+    const upstream = async () => new Response(null, {status});
+    await assert.rejects(generateInterpretation(reading('en', 'one', 1), 'test', upstream), {name: 'TimeoutError'});
+  }
+});

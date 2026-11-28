@@ -1,3 +1,5 @@
+import { PROVIDER_TIMEOUT_MS } from './timing.js';
+
 const endpoint = 'https://generativelanguage.googleapis.com/v1beta/interactions';
 const voices = {
   en: 'Use everyday English. Speak directly to the reader.',
@@ -69,24 +71,27 @@ export async function generateInterpretation(reading, apiKey, fetchFn = fetch) {
       schema: { type: 'object', properties, required: Object.keys(properties), additionalProperties: false },
     },
   };
-  const response = await fetchFn(endpoint, {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Api-Revision': '2026-05-20',
-      'x-goog-api-key': apiKey,
-    },
-    body: JSON.stringify(body),
-    signal: AbortSignal.timeout(100_000),
-  });
-  if (!response.ok) throw new Error('Gemini request failed (HTTP ' + response.status + ')');
+  const signal = AbortSignal.timeout(PROVIDER_TIMEOUT_MS);
   try {
+    const response = await fetchFn(endpoint, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Api-Revision': '2026-05-20',
+        'x-goog-api-key': apiKey,
+      },
+      body: JSON.stringify(body),
+      signal,
+    });
+    if (response.status === 408 || response.status === 504) throw new DOMException('Gemini timed out', 'TimeoutError');
+    if (!response.ok) throw new Error('Gemini request failed');
     const result = JSON.parse(outputText(await response.json()));
     return {
       card: section(result.card, 3200),
       synthesis: synthesize ? section(result.synthesis, 8000) : null,
     };
-  } catch {
+  } catch (error) {
+    if (signal.aborted || error?.name === 'TimeoutError') throw new DOMException('Gemini timed out', 'TimeoutError');
     // Provider diagnostics and malformed JSON can quote a private question.
     throw new Error('Gemini returned an incomplete or invalid reading');
   }
