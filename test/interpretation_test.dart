@@ -135,36 +135,76 @@ void main() {
           {'id': id, 'reversed': false},
       ],
     );
+    late HttpServer server;
+    late InterpretationClient client;
+    setUp(() async {
+      server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      client = InterpretationClient(baseUrl: 'http://127.0.0.1:${server.port}');
+    });
+    Future<void> expectError(String code) => expectLater(
+      client.interpret(request),
+      throwsA(
+        isA<InterpretationException>().having((e) => e.code, 'code', code),
+      ),
+    );
 
     for (final (status, body, code) in [
       (400, '{"error":"invalid_request"}', 'invalid_request'),
+      (400, '{"error":"quota"}', 'unavailable'),
       (413, '{"error":"invalid_request"}', 'invalid_request'),
       (429, '{"error":"quota"}', 'quota'),
       (429, '{"error":"rate_limit"}', 'rate_limit'),
+      (429, '{"error":"unknown"}', 'unavailable'),
       (503, '{"error":"invalid_request"}', 'unavailable'),
       (503, 'temporarily offline', 'unavailable'),
       (200, '{"card":"Star","synthesis":null}', 'unavailable'),
+      (200, '{"synthesis":"Complete"}', 'unavailable'),
     ]) {
       test('$status $body maps to $code', () async {
-        final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
-        addTearDown(() => server.close(force: true));
         server.listen((incoming) async {
           await incoming.drain<void>();
           incoming.response.statusCode = status;
           incoming.response.write(body);
           await incoming.response.close();
         });
-        final client = InterpretationClient(
-          baseUrl: 'http://127.0.0.1:${server.port}',
-        );
-        await expectLater(
-          client.interpret(request),
-          throwsA(
-            isA<InterpretationException>().having((e) => e.code, 'code', code),
-          ),
-        );
+        await expectError(code);
       });
     }
+
+    test(
+      'a 303 redirect is rejected without contacting its destination',
+      () async {
+        final paths = <String>[];
+        server.listen((incoming) async {
+          paths.add(incoming.uri.path);
+          await incoming.drain<void>();
+          if (incoming.uri.path == '/v1/interpret') {
+            incoming.response.statusCode = HttpStatus.seeOther;
+            incoming.response.headers.set(
+              HttpHeaders.locationHeader,
+              '/redirected',
+            );
+          } else {
+            incoming.response.write('{"card":"Star","synthesis":"Complete"}');
+          }
+          await incoming.response.close();
+        });
+        await expectError('unavailable');
+        expect(paths, ['/v1/interpret']);
+      },
+    );
+
+    test('a valid JSON response of 65,537 bytes is rejected', () async {
+      server.listen((incoming) async {
+        await incoming.drain<void>();
+        incoming.response.write(
+          '{"card":"Star","synthesis":"Complete"}'.padRight(65537),
+        );
+        await incoming.response.close();
+      });
+      await expectError('unavailable');
+    });
   });
 
   test(
