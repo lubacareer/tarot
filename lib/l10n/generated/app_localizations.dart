@@ -100,6 +100,36 @@ abstract class AppLocalizations {
     Locale('ru'),
   ];
 
+  /// No description provided for @reconnectingReading.
+  ///
+  /// In en, this message translates to:
+  /// **'Reconnecting to your reading…'**
+  String get reconnectingReading;
+
+  /// No description provided for @checkSavedReading.
+  ///
+  /// In en, this message translates to:
+  /// **'The reading service could not be reached. Check for your saved reading when you’re connected.'**
+  String get checkSavedReading;
+
+  /// No description provided for @checkAgain.
+  ///
+  /// In en, this message translates to:
+  /// **'Check again'**
+  String get checkAgain;
+
+  /// No description provided for @expiredReading.
+  ///
+  /// In en, this message translates to:
+  /// **'The saved interpretation is no longer available. You can still explore the card meanings below.'**
+  String get expiredReading;
+
+  /// No description provided for @readingTimeout.
+  ///
+  /// In en, this message translates to:
+  /// **'Gemini ran out of time on this interpretation. You can try again.'**
+  String get readingTimeout;
+
   /// No description provided for @geminiReading.
   ///
   /// In en, this message translates to:

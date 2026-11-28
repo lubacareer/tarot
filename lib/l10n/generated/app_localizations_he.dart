@@ -10,6 +10,24 @@ class AppLocalizationsHe extends AppLocalizations {
   AppLocalizationsHe([String locale = 'he']) : super(locale);
 
   @override
+  String get reconnectingReading => 'החיבור לקריאה מתחדש…';
+
+  @override
+  String get checkSavedReading =>
+      'אין חיבור לשירות הקריאה. כשהחיבור יחזור, אפשר לבדוק אם הפרשנות נשמרה.';
+
+  @override
+  String get checkAgain => 'בדיקה חוזרת';
+
+  @override
+  String get expiredReading =>
+      'הפרשנות השמורה כבר אינה זמינה. עדיין אפשר לעיין במשמעויות הקלפים.';
+
+  @override
+  String get readingTimeout =>
+      'תם הזמן שהוקצב ל־Gemini להשלמת הפרשנות. אפשר לנסות שוב.';
+
+  @override
   String get geminiReading => 'קריאה עם Gemini 4 Carbon';
 
   @override

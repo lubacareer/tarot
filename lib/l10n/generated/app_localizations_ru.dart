@@ -10,6 +10,24 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get reconnectingReading => 'Восстанавливаем связь с вашим раскладом…';
+
+  @override
+  String get checkSavedReading =>
+      'Не удалось связаться с сервисом. Когда связь восстановится, проверьте, сохранилось ли толкование.';
+
+  @override
+  String get checkAgain => 'Проверить снова';
+
+  @override
+  String get expiredReading =>
+      'Сохранённое толкование больше недоступно. Вы по-прежнему можете изучить значения карт.';
+
+  @override
+  String get readingTimeout =>
+      'Gemini не удалось завершить толкование вовремя. Можно попробовать ещё раз.';
+
+  @override
   String get geminiReading => 'Расклад с Gemini 4 Carbon';
 
   @override

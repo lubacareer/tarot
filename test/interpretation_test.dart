@@ -123,6 +123,58 @@ void main() {
     },
   );
 
+  test(
+    'opted-in POST and bodyless GET use the same capability token',
+    () async {
+      final server = await HttpServer.bind(InternetAddress.loopbackIPv4, 0);
+      addTearDown(() => server.close(force: true));
+      final request = InterpretationRequest(
+        sessionId: 's',
+        language: 'en',
+        deckId: 'celestial',
+        spreadId: 'one',
+        question: 'private',
+        cards: [
+          {'id': 'star', 'reversed': false},
+        ],
+      );
+      final posted = Completer<void>();
+      server.listen((incoming) async {
+        expect(incoming.headers.value('X-Reading-Token'), request.token);
+        if (incoming.method == 'POST') {
+          expect(incoming.uri.path, '/v1/interpret');
+          expect(
+            jsonDecode(await utf8.decoder.bind(incoming).join()),
+            request.toJson(),
+          );
+          incoming.response.statusCode = 202;
+          incoming.response.write('{"status":"pending"}');
+          posted.complete();
+        } else {
+          expect(incoming.method, 'GET');
+          expect(incoming.uri.toString(), '/v1/interpret/status');
+          expect(await utf8.decoder.bind(incoming).join(), isEmpty);
+          incoming.response.write('{"card":"Recovered","synthesis":null}');
+        }
+        await incoming.response.close();
+      });
+      final client = InterpretationClient(
+        baseUrl: 'http://127.0.0.1:${server.port}',
+      );
+      expect(await client.interpret(request), isNull);
+      await posted.future;
+      expect(
+        request.token,
+        matches(
+          RegExp(
+            r'^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$',
+          ),
+        ),
+      );
+      expect((await client.status(request))?.card, 'Recovered');
+    },
+  );
+
   group('HTTP error handling', () {
     final request = InterpretationRequest(
       sessionId: 'a',
@@ -151,15 +203,17 @@ void main() {
 
     for (final (status, body, code) in [
       (400, '{"error":"invalid_request"}', 'invalid_request'),
-      (400, '{"error":"quota"}', 'unavailable'),
+      (400, '{"error":"quota"}', 'disconnected'),
+      (409, '{"error":"invalid_request"}', 'invalid_request'),
       (413, '{"error":"invalid_request"}', 'invalid_request'),
+      (415, '{"error":"invalid_request"}', 'invalid_request'),
       (429, '{"error":"quota"}', 'quota'),
       (429, '{"error":"rate_limit"}', 'rate_limit'),
-      (429, '{"error":"unknown"}', 'unavailable'),
-      (503, '{"error":"invalid_request"}', 'unavailable'),
-      (503, 'temporarily offline', 'unavailable'),
-      (200, '{"card":"Star","synthesis":null}', 'unavailable'),
-      (200, '{"synthesis":"Complete"}', 'unavailable'),
+      (429, '{"error":"unknown"}', 'disconnected'),
+      (503, '{"error":"invalid_request"}', 'disconnected'),
+      (503, 'temporarily offline', 'disconnected'),
+      (200, '{"card":"Star","synthesis":null}', 'disconnected'),
+      (200, '{"synthesis":"Complete"}', 'disconnected'),
     ]) {
       test('$status $body maps to $code', () async {
         server.listen((incoming) async {
@@ -170,6 +224,26 @@ void main() {
         });
         await expectError(code);
       });
+    }
+
+    for (final (status, code) in [(503, 'unavailable'), (504, 'timeout')]) {
+      for (final confirmed in [false, true]) {
+        test(
+          '$status permits a new attempt only when marked terminal ($confirmed)',
+          () async {
+            server.listen((incoming) async {
+              await incoming.drain<void>();
+              incoming.response.statusCode = status;
+              if (confirmed) {
+                incoming.response.headers.set('X-Reading-State', 'terminal');
+              }
+              incoming.response.write(jsonEncode({'error': code}));
+              await incoming.response.close();
+            });
+            await expectError(confirmed ? code : 'disconnected');
+          },
+        );
+      }
     }
 
     test(
@@ -190,7 +264,7 @@ void main() {
           }
           await incoming.response.close();
         });
-        await expectError('unavailable');
+        await expectError('disconnected');
         expect(paths, ['/v1/interpret']);
       },
     );
@@ -203,7 +277,7 @@ void main() {
         );
         await incoming.response.close();
       });
-      await expectError('unavailable');
+      await expectError('disconnected');
     });
   });
 
@@ -239,7 +313,7 @@ void main() {
         jsonEncode({'card': 'Карта', 'synthesis': 'Весь расклад'}),
       );
       await received.response.close();
-      final value = await pending;
+      final value = (await pending)!;
       expect(value.card, 'Карта');
       expect(value.synthesis, 'Весь расклад');
     },

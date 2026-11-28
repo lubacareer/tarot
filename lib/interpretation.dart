@@ -1,172 +1,78 @@
 import 'dart:async';
-import 'dart:convert';
-import 'dart:io';
-import 'dart:math';
-import 'dart:typed_data' show BytesBuilder;
 
 import 'package:flutter/foundation.dart';
 
 import 'reading.dart';
+import 'src/interpretation_client.dart';
+export 'src/interpretation_client.dart' hide newReadingId;
 
-class Interpretation {
-  const Interpretation({required this.card, this.synthesis});
-  final String card;
-  final String? synthesis;
-}
+class _Attempt {
+  _Attempt(this.request, this.deadline);
+  final InterpretationRequest request;
+  final DateTime deadline;
+  Interpretation? result;
+  String? error;
+  Timer? timer;
+  bool posted = false, accepted = false, disconnected = false, busy = false;
+  int generation = 0, delaySeconds = 2;
 
-class InterpretationRequest {
-  const InterpretationRequest({
-    required this.sessionId,
-    required this.language,
-    required this.deckId,
-    required this.spreadId,
-    required this.question,
-    required this.cards,
-  });
-  final String sessionId, language, deckId, spreadId, question;
-  final List<Map<String, Object>> cards;
-
-  Map<String, Object> toJson() => {
-    'sessionId': sessionId,
-    'language': language,
-    'deckId': deckId,
-    'spreadId': spreadId,
-    'question': question,
-    'cards': cards,
-  };
-}
-
-class InterpretationException implements Exception {
-  const InterpretationException(this.code);
-  final String code;
-}
-
-/// The apps know the public service origin. Only the Worker talks to Google.
-class InterpretationClient {
-  const InterpretationClient({
-    this.baseUrl = const String.fromEnvironment(
-      'ARCANA_SERVICE_URL',
-      defaultValue:
-          'https://arcana-observatory-readings.lubacareer.workers.dev',
-    ),
-  });
-  final String baseUrl;
-
-  Future<Interpretation> interpret(InterpretationRequest request) async {
-    final origin = Uri.tryParse(baseUrl);
-    if (origin == null ||
-        !origin.hasAuthority ||
-        origin.userInfo.isNotEmpty ||
-        (origin.scheme != 'https' &&
-            !(origin.scheme == 'http' &&
-                ['127.0.0.1', 'localhost', '::1'].contains(origin.host)))) {
-      throw const InterpretationException('unavailable');
-    }
-    final http = HttpClient()..connectionTimeout = const Duration(seconds: 12);
-    try {
-      return await _post(
-        http,
-        origin.resolve('/v1/interpret'),
-        request,
-      ).timeout(const Duration(seconds: 105));
-    } on InterpretationException {
-      rethrow;
-    } on Exception {
-      throw const InterpretationException('unavailable');
-    } finally {
-      http.close(force: true);
-    }
-  }
-
-  Future<Interpretation> _post(
-    HttpClient client,
-    Uri uri,
-    InterpretationRequest reading,
-  ) async {
-    final req = await client.postUrl(uri);
-    req.followRedirects = false;
-    req.headers.contentType = ContentType.json;
-    req.write(jsonEncode(reading.toJson()));
-    final response = await req.close();
-    final bytes = BytesBuilder(copy: false);
-    await for (final part in response) {
-      if (bytes.length + part.length > 65536) {
-        throw const InterpretationException('unavailable');
-      }
-      bytes.add(part);
-    }
-    final data = jsonDecode(utf8.decode(bytes.takeBytes()));
-    if (response.statusCode != HttpStatus.ok) {
-      final error = data is Map ? data['error'] : null;
-      if (error == 'invalid_request' &&
-          (response.statusCode == HttpStatus.badRequest ||
-              response.statusCode == HttpStatus.requestEntityTooLarge)) {
-        throw const InterpretationException('invalid_request');
-      }
-      if (response.statusCode == HttpStatus.tooManyRequests &&
-          (error == 'quota' || error == 'rate_limit')) {
-        throw InterpretationException(error as String);
-      }
-      throw const InterpretationException('unavailable');
-    }
-    if (data is! Map ||
-        data['card'] is! String ||
-        (data['card'] as String).trim().isEmpty) {
-      throw const InterpretationException('unavailable');
-    }
-    final total = SpreadType.values.byName(reading.spreadId).positions.length;
-    final needsSynthesis = total > 1 && reading.cards.length == total;
-    final synthesis = data['synthesis'];
-    if (needsSynthesis
-        ? synthesis is! String || synthesis.trim().isEmpty
-        : synthesis != null) {
-      throw const InterpretationException('unavailable');
-    }
-    return Interpretation(
-      card: (data['card'] as String).trim(),
-      synthesis: (synthesis as String?)?.trim(),
-    );
+  void pause() {
+    timer?.cancel();
+    generation++;
+    busy = false;
+    request.cancelTransport();
   }
 }
 
-/// A reading owns its requests. Navigation and rebuilds can ask for the same
-/// card freely; late replies update only their original reading and language.
+/// A reading owns one attempt per reveal and language. Backgrounding cancels
+/// local requests and timers; the Worker's job can finish independently.
 class ReadingInterpretations extends ChangeNotifier {
   ReadingInterpretations({
     required this.session,
     required this.client,
     String question = '',
     this.online = true,
+    this.now = DateTime.now,
   }) : question = question.trim();
   final ReadingSession session;
   final InterpretationClient client;
   final String question;
   final bool online;
-  final String _id = _sessionId();
-  final _results = <(int, String), Interpretation>{};
-  final _errors = <(int, String), String>{};
-  final _pending = <(int, String)>{};
-  bool _disposed = false;
+  final DateTime Function() now;
+  final String _id = newReadingId();
+  final _attempts = <(int, String), _Attempt>{};
+  bool _disposed = false, _foreground = true;
 
   Interpretation? result(int index, String language) =>
-      _results[(index, language)];
-  String? error(int index, String language) => _errors[(index, language)];
-  bool loading(int index, String language) =>
-      _pending.contains((index, language));
+      _attempts[(index, language)]?.result;
+  String? error(int index, String language) =>
+      _attempts[(index, language)]?.error;
+  bool reconnecting(int index, String language) =>
+      _attempts[(index, language)]?.disconnected == true;
+  bool loading(int index, String language) {
+    final attempt = _attempts[(index, language)];
+    return attempt != null && attempt.result == null && attempt.error == null;
+  }
 
   void load(int index, String language, {bool retry = false}) {
     final key = (index, language);
+    final previous = _attempts[key];
     if (_disposed ||
         !online ||
         index < 0 ||
         index >= session.draws.length ||
-        !session.draws[index].isRevealed ||
-        _results.containsKey(key) ||
-        (_errors.containsKey(key) && !retry) ||
-        !_pending.add(key)) {
+        !session.draws[index].isRevealed) {
       return;
     }
-    _errors.remove(key);
+    if (previous != null) {
+      if (!retry ||
+          previous.error == null ||
+          previous.error == 'check_again' ||
+          previous.error == 'expired') {
+        return;
+      }
+      previous.pause();
+    }
     final request = InterpretationRequest(
       sessionId: _id,
       language: language,
@@ -178,38 +84,103 @@ class ReadingInterpretations extends ChangeNotifier {
           {'id': draw.card.id, 'reversed': draw.isReversed},
       ],
     );
+    final attempt = _Attempt(request, now().add(const Duration(minutes: 4)));
+    _attempts[key] = attempt;
     notifyListeners();
-    unawaited(_fetch(key, request));
+    if (_foreground) unawaited(_fetch(attempt, submit: true));
   }
 
-  Future<void> _fetch((int, String) key, InterpretationRequest request) async {
+  /// Outside the automatic reconnection window, check only the existing job.
+  void checkAgain(int index, String language) {
+    final attempt = _attempts[(index, language)];
+    if (_disposed || !_foreground || attempt?.error != 'check_again') return;
+    attempt!.error = null;
+    notifyListeners();
+    unawaited(_fetch(attempt, submit: false));
+  }
+
+  void setForeground(bool foreground) {
+    if (_disposed || _foreground == foreground) return;
+    _foreground = foreground;
+    for (final attempt in _attempts.values) {
+      if (attempt.result != null || attempt.error != null) continue;
+      if (foreground) {
+        unawaited(_fetch(attempt, submit: !attempt.posted));
+      } else {
+        attempt.pause();
+      }
+    }
+  }
+
+  Future<void> _fetch(_Attempt attempt, {required bool submit}) async {
+    if (_disposed || !_foreground || attempt.busy) return;
+    final generation = attempt.generation;
+    attempt.busy = true;
+    if (submit) attempt.posted = true;
+    bool resubmit = false;
     try {
-      final value = await client.interpret(request);
-      if (!_disposed) _results[key] = value;
-    } catch (error) {
-      if (!_disposed) {
-        _errors[key] = error is InterpretationException
-            ? error.code
-            : 'unavailable';
+      final reply = await (submit
+          ? client.interpret(attempt.request)
+          : client.status(attempt.request));
+      if (generation != attempt.generation) return;
+      attempt.accepted = true;
+      attempt.disconnected = false;
+      attempt.result = reply;
+    } on Exception catch (error) {
+      if (generation != attempt.generation) return;
+      final code = error is InterpretationException
+          ? error.code
+          : 'disconnected';
+      switch (code) {
+        case 'disconnected':
+          attempt.disconnected = true;
+        case 'not_found':
+          // A dropped POST may never have arrived. Re-submit only after a
+          // confirmed miss, with identical input and the same idempotency key.
+          resubmit = !attempt.accepted && now().isBefore(attempt.deadline);
+          if (!resubmit) attempt.error = 'expired';
+        default:
+          attempt.error = code;
       }
     } finally {
-      _pending.remove(key);
-      if (!_disposed) notifyListeners();
+      if (generation == attempt.generation) {
+        attempt.busy = false;
+      }
+    }
+    if (_disposed || generation != attempt.generation) return;
+    if (resubmit) {
+      unawaited(_fetch(attempt, submit: true));
+    } else if (attempt.result == null && attempt.error == null) {
+      _schedule(attempt);
+    }
+    notifyListeners();
+  }
+
+  void _schedule(_Attempt attempt) {
+    final remaining = attempt.deadline.difference(now());
+    final interval = Duration(seconds: attempt.delaySeconds);
+    attempt.delaySeconds = (attempt.delaySeconds * 2).clamp(2, 8);
+    if (remaining <= Duration.zero) {
+      attempt.error = 'check_again';
+    } else if (remaining <= interval) {
+      attempt.timer = Timer(remaining, () {
+        attempt.error = 'check_again';
+        notifyListeners();
+      });
+    } else {
+      attempt.timer = Timer(
+        interval,
+        () => unawaited(_fetch(attempt, submit: false)),
+      );
     }
   }
 
   @override
   void dispose() {
     _disposed = true;
+    for (final attempt in _attempts.values) {
+      attempt.pause();
+    }
     super.dispose();
-  }
-
-  static String _sessionId() {
-    final random = Random.secure();
-    final bytes = List.generate(16, (_) => random.nextInt(256));
-    bytes[6] = (bytes[6] & 0x0f) | 0x40;
-    bytes[8] = (bytes[8] & 0x3f) | 0x80;
-    final hex = bytes.map((b) => b.toRadixString(16).padLeft(2, '0')).join();
-    return '${hex.substring(0, 8)}-${hex.substring(8, 12)}-${hex.substring(12, 16)}-${hex.substring(16, 20)}-${hex.substring(20)}';
   }
 }

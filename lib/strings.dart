@@ -9,6 +9,14 @@ extension ObservatoryStrings on BuildContext {
     final copy =
         AppLocalizations.of(this) ?? lookupAppLocalizations(const Locale('en'));
     return switch (english) {
+      'Reconnecting to your reading…' => copy.reconnectingReading,
+      'The reading service could not be reached. Check for your saved reading when you’re connected.' =>
+        copy.checkSavedReading,
+      'Check again' => copy.checkAgain,
+      'The saved interpretation is no longer available. You can still explore the card meanings below.' =>
+        copy.expiredReading,
+      'Gemini ran out of time on this interpretation. You can try again.' =>
+        copy.readingTimeout,
       'Read with Gemini 4 Carbon' => copy.geminiReading,
       'Your optional question and revealed cards are sent to Google Gemini.' =>
         copy.geminiDisclosure,

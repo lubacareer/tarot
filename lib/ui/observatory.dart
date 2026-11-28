@@ -24,7 +24,7 @@ class Observatory extends StatefulWidget {
   State<Observatory> createState() => _ObservatoryState();
 }
 
-class _ObservatoryState extends State<Observatory> {
+class _ObservatoryState extends State<Observatory> with WidgetsBindingObserver {
   late Future<List<TarotDeck>> catalog = widget.loadDecks();
   _Page page = _Page.table;
   TarotDeck? chosen;
@@ -37,7 +37,19 @@ class _ObservatoryState extends State<Observatory> {
   final scroll = ScrollController();
 
   @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    interpretations?.setForeground(state == AppLifecycleState.resumed);
+  }
+
+  @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     scroll.dispose();
     question.dispose();
     interpretations?.dispose();
@@ -113,6 +125,10 @@ class _ObservatoryState extends State<Observatory> {
         client: widget.interpretationClient,
         online: online,
         question: question.text.trim(),
+      );
+      final lifecycle = WidgetsBinding.instance.lifecycleState;
+      interpretations!.setForeground(
+        lifecycle == null || lifecycle == AppLifecycleState.resumed,
       );
     });
     _toTop();

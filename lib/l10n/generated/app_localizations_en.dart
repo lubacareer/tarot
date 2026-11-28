@@ -10,6 +10,24 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get reconnectingReading => 'Reconnecting to your reading…';
+
+  @override
+  String get checkSavedReading =>
+      'The reading service could not be reached. Check for your saved reading when you’re connected.';
+
+  @override
+  String get checkAgain => 'Check again';
+
+  @override
+  String get expiredReading =>
+      'The saved interpretation is no longer available. You can still explore the card meanings below.';
+
+  @override
+  String get readingTimeout =>
+      'Gemini ran out of time on this interpretation. You can try again.';
+
+  @override
   String get geminiReading => 'Read with Gemini 4 Carbon';
 
   @override

@@ -10,7 +10,15 @@ import '../support/fixture_interpretations.dart';
 
 class _RecordingClient extends FixtureInterpretationClient {
   final calls = <InterpretationRequest>[];
+  final checks = <InterpretationRequest>[];
   final pending = <Completer<Interpretation>>[];
+  final checked = Completer<Interpretation>();
+  @override
+  Future<Interpretation> status(InterpretationRequest request) {
+    checks.add(request);
+    return checked.future;
+  }
+
   @override
   Future<Interpretation> interpret(InterpretationRequest request) {
     calls.add(request);
@@ -38,6 +46,35 @@ Future<void> _tap(WidgetTester tester, Finder finder) async {
 Finder _key(String name) => find.byKey(ValueKey(name));
 
 void main() {
+  testWidgets(
+    'a paused reading resumes the same job and keeps the card on screen',
+    (tester) async {
+      final client = _RecordingClient();
+      await _open(tester, client);
+      await _tap(tester, _key('begin-reading'));
+      await _tap(tester, _key('fan-card-0'));
+      await _tap(tester, _key('reveal-card'));
+      client.pending.single.completeError(
+        const InterpretationException('disconnected'),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Reconnecting to your reading…'), findsOneWidget);
+      expect(find.text('Try again'), findsNothing);
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.paused);
+      await tester.pump(const Duration(seconds: 10));
+      expect(client.checks, isEmpty);
+      tester.binding.handleAppLifecycleStateChanged(AppLifecycleState.resumed);
+      expect(client.checks.single.token, client.calls.single.token);
+      client.checked.complete(
+        const Interpretation(card: 'The original reading'),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('The original reading'), findsOneWidget);
+      expect(_key('revealed-stage-card'), findsOneWidget);
+      expect(client.calls, hasLength(1));
+    },
+  );
+
   testWidgets(
     'only reveals send the question and whole-spread synthesis stays visible',
     (tester) async {

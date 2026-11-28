@@ -504,13 +504,24 @@ class _InterpretationSection extends StatelessWidget {
               else if (error != null) ...[
                 Text(
                   context.tr(switch (error) {
+                    'check_again' => 'The reading service could not be reached. Check for your saved reading when you’re connected.',
+                    'expired' => 'The saved interpretation is no longer available. You can still explore the card meanings below.',
+                    'timeout' => 'Gemini ran out of time on this interpretation. You can try again.',
                     'quota' => 'The monthly Gemini reading limit has been reached. The deck’s meanings are still available.',
                     'rate_limit' =>
                       'Gemini is receiving many requests. Try again shortly.',
                     _ => 'Gemini could not finish this interpretation. The deck’s meanings are still available.',
                   }),
                 ),
-                if (error != 'quota' && error != 'invalid_request')
+                if (error == 'check_again')
+                  TextButton.icon(
+                    onPressed: () => readings.checkAgain(index, language),
+                    icon: const Icon(Icons.sync, size: 17),
+                    label: Text(context.tr('Check again')),
+                  )
+                else if (error != 'quota' &&
+                    error != 'invalid_request' &&
+                    error != 'expired')
                   TextButton.icon(
                     onPressed: () =>
                         readings.load(index, language, retry: true),
@@ -522,7 +533,9 @@ class _InterpretationSection extends StatelessWidget {
                   liveRegion: true,
                   child: Text(
                     context.tr(
-                      wholeReading && !singleCard
+                      readings.reconnecting(index, language)
+                          ? 'Reconnecting to your reading…'
+                          : wholeReading && !singleCard
                           ? 'Gemini is connecting the cards…'
                           : 'Gemini is interpreting this card…',
                     ),

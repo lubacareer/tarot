@@ -1,5 +1,10 @@
 {
   "@@locale": "en",
+  "reconnectingReading": "Reconnecting to your reading…",
+  "checkSavedReading": "The reading service could not be reached. Check for your saved reading when you’re connected.",
+  "checkAgain": "Check again",
+  "expiredReading": "The saved interpretation is no longer available. You can still explore the card meanings below.",
+  "readingTimeout": "Gemini ran out of time on this interpretation. You can try again.",
   "geminiReading": "Read with Gemini 4 Carbon",
   "geminiDisclosure": "Your optional question and revealed cards are sent to Google Gemini.",
   "offlineReading": "Offline reading uses the meanings stored on this device.",

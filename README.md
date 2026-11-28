@@ -16,7 +16,9 @@ Use the globe menu to choose **English**, **עברית**, or **Русский**.
 
 Choose an online reading and optionally enter a question before drawing. Each reveal sends your question, language, deck, spread and revealed cards to the shared service. The service asks Gemini about the specific illustration, its position and orientation. You can keep drawing while it answers. The final card of a three-card spread or Celtic Cross also opens a whole-spread interpretation. A one-card reading has one integrated interpretation.
 
-The service owner pays for up to 500 Gemini calls per UTC calendar month across all readers. A request in a new language counts toward that limit. The app remembers completed answers for the active reading. If the service is busy or unavailable, you can still read the bundled lessons. Choose offline mode to keep the reading on your device.
+If your phone loses its connection or you switch apps, return to the open reading to pick up the answer. After four minutes the app offers **Check again** to look up the same request. Checking an accepted request uses no additional Gemini calls. The bundled lessons are available while you wait.
+
+The service owner pays for up to 500 Gemini calls per UTC calendar month across all readers. A request in a new language counts toward that limit. The app remembers completed answers for the active reading. Choose offline mode to keep the reading on your device.
 
 ![The Hebrew reading table on Windows, with the Celestial Arcana deck selected and the language menu open](docs/reading-table.webp)
 
@@ -45,7 +47,7 @@ Run the end-to-end suite with `flutter test integration_test -d windows` or use 
 
 ### Run your own interpretation service
 
-The Cloudflare Worker uses one SQLite-backed Durable Object to enforce the monthly allowance, limit bursts and deduplicate retries. It derives card meanings and positions from the bundled catalogs. Google receives the question and card context with interaction storage disabled. The Worker caches successful responses for up to 24 hours and omits questions and interpretations from application logs.
+The Cloudflare Worker uses one SQLite-backed Durable Object to enforce the monthly allowance, limit bursts and deduplicate retries. It derives card meanings and positions from the bundled catalogs. Google receives the question and card context with interaction storage disabled. Each accepted request gives Gemini up to three minutes to answer. The app can retrieve the outcome with its private reading token for 24 hours. Application logs omit questions and interpretations.
 
 For local development, put `GEMINI_API_KEY` in an ignored `.env` file at the project root. Use Node.js 22.13 or newer. From the `worker` directory, run:
 
