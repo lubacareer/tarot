@@ -1,0 +1,20 @@
+version: 2.1
+
+jobs:
+  verify-decks:
+    docker:
+      - image: cimg/python:3.13.17
+    resource_class: small
+    steps:
+      - checkout
+      - run:
+          name: Install Pillow
+          command: python -m pip install Pillow==12.3.0
+      - run:
+          name: Verify decks and tooling
+          command: python -m unittest discover -s tools -v
+
+workflows:
+  verify:
+    jobs:
+      - verify-decks
