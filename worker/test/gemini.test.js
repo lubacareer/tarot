@@ -89,6 +89,8 @@ test('a questionless reading opens with the strongest insight or central tension
   const prompt = await capturePrompt(reading('he', 'one', 1, ''), { card: 'נושא הקריאה.' });
   assert.match(prompt, /first sentence/i);
   assert.match(prompt, /strongest (?:insight|pattern)|central (?:tension|theme|pattern)|main tension/i);
+  // A Hebrew reading addresses one person throughout, including suggested actions.
+  assert.match(prompt, /יחיד/);
 });
 
 for (const [spreadId, count] of [['three', 2], ['celticCross', 9]]) {
