@@ -313,9 +313,14 @@ test('the alarm keeps pending generations active, then returns to normal cleanup
   const service = new ReadingService({storage: database}, {});
   const expires = Date.now() + 210_000;
   database.sql.exec('INSERT INTO reading VALUES (?, NULL, ?)', 'pending', expires);
+  database.sql.exec('INSERT INTO reading VALUES (?, NULL, ?)', 'second', expires + 1000);
   await service.alarm();
   assert.ok(alarm <= Date.now() + 30_000);
   database.sql.exec('UPDATE reading SET result = ? WHERE fingerprint = ?', JSON.stringify(words), 'pending');
+  await service.alarm();
+  assert.ok(alarm <= Date.now() + 30_000);
+  // An orphan expires normally. The heartbeat never submits it to Gemini.
+  database.sql.exec('UPDATE reading SET expires = ? WHERE fingerprint = ?', Date.now() - 1, 'second');
   await service.alarm();
   assert.equal(alarm, expires);
 });

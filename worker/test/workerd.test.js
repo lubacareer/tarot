@@ -116,3 +116,33 @@ async function waitForResult(status) {
   }
   assert.fail('The local provider completed but the job stayed pending');
 }
+
+test('a generation survives over 105 seconds with no client requests', {timeout: 150_000}, async t => {
+  // workerd can evict a quiet object even though a provider promise is
+  // outstanding. A fake clock or frequent status checks would hide this.
+  const providerReturned = Promise.withResolvers();
+  let calls = 0;
+  const service = await localWorker(t, async request => {
+    await request.arrayBuffer();
+    calls++;
+    await new Promise(resolve => setTimeout(resolve, 110_000));
+    providerReturned.resolve();
+    return Response.json({status: 'completed', steps: [
+      {type: 'model_output', content: [{type: 'text', text: '{"card":"Original result"}'}]},
+    ]});
+  });
+  const url = 'https://tarot.example/v1/interpret';
+  const headers = {'X-Reading-Token': crypto.randomUUID()};
+  const accepted = await service.dispatchFetch(url, {
+    method: 'POST', headers: {...headers, 'content-type': 'application/json'},
+    body: JSON.stringify({sessionId: crypto.randomUUID(), language: 'en', deckId: 'celestial',
+      spreadId: 'one', cards: [{id: 'fool', reversed: false}]}),
+  });
+  assert.equal(accepted.status, 202);
+  await accepted.arrayBuffer();
+  await providerReturned.promise;
+  const result = await waitForResult(() => service.dispatchFetch(url + '/status', {headers}));
+  assert.equal(result.status, 200);
+  assert.deepEqual(await result.json(), {card: 'Original result', synthesis: null});
+  assert.equal(calls, 1);
+});
