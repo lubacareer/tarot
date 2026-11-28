@@ -10,6 +10,62 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get reconnectingReading => 'Reconnecting to your reading…';
+
+  @override
+  String get checkSavedReading =>
+      'The reading service could not be reached. Check for your saved reading when you’re connected.';
+
+  @override
+  String get checkAgain => 'Check again';
+
+  @override
+  String get expiredReading =>
+      'The saved interpretation is no longer available. You can still explore the card meanings below.';
+
+  @override
+  String get readingTimeout =>
+      'Gemini ran out of time on this interpretation. You can try again.';
+
+  @override
+  String get geminiReading => 'Read with Gemini 4 Carbon';
+
+  @override
+  String get geminiDisclosure =>
+      'Your optional question and revealed cards are sent to Google Gemini.';
+
+  @override
+  String get offlineReading =>
+      'Offline reading uses the meanings stored on this device.';
+
+  @override
+  String get readingQuestion => 'Your question (optional)';
+
+  @override
+  String get interpretationHeading => 'Gemini’s interpretation';
+
+  @override
+  String get synthesisHeading => 'Your reading';
+
+  @override
+  String get quotaMessage =>
+      'The monthly Gemini reading limit has been reached. The deck’s meanings are still available.';
+
+  @override
+  String get rateLimitMessage =>
+      'Gemini is receiving many requests. Try again shortly.';
+
+  @override
+  String get interpretationError =>
+      'Gemini could not finish this interpretation. The deck’s meanings are still available.';
+
+  @override
+  String get synthesisLoading => 'Gemini is connecting the cards…';
+
+  @override
+  String get interpretationLoading => 'Gemini is interpreting this card…';
+
+  @override
   String get navTable => 'Table';
 
   @override

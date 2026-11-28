@@ -10,6 +10,62 @@ class AppLocalizationsRu extends AppLocalizations {
   AppLocalizationsRu([String locale = 'ru']) : super(locale);
 
   @override
+  String get reconnectingReading => 'Восстанавливаем связь с вашим раскладом…';
+
+  @override
+  String get checkSavedReading =>
+      'Не удалось связаться с сервисом. Когда связь восстановится, проверьте, сохранилось ли толкование.';
+
+  @override
+  String get checkAgain => 'Проверить снова';
+
+  @override
+  String get expiredReading =>
+      'Сохранённое толкование больше недоступно. Вы по-прежнему можете изучить значения карт.';
+
+  @override
+  String get readingTimeout =>
+      'Gemini не удалось завершить толкование вовремя. Можно попробовать ещё раз.';
+
+  @override
+  String get geminiReading => 'Расклад с Gemini 4 Carbon';
+
+  @override
+  String get geminiDisclosure =>
+      'Ваш вопрос, если вы его укажете, и открытые карты отправляются в Google Gemini.';
+
+  @override
+  String get offlineReading =>
+      'В автономном режиме используются толкования, сохранённые на устройстве.';
+
+  @override
+  String get readingQuestion => 'Ваш вопрос (необязательно)';
+
+  @override
+  String get interpretationHeading => 'Толкование Gemini';
+
+  @override
+  String get synthesisHeading => 'Ваш расклад';
+
+  @override
+  String get quotaMessage =>
+      'Месячный лимит обращений к Gemini исчерпан. Толкования из колоды по-прежнему доступны.';
+
+  @override
+  String get rateLimitMessage =>
+      'Сейчас поступает много запросов. Попробуйте ещё раз чуть позже.';
+
+  @override
+  String get interpretationError =>
+      'Gemini не удалось завершить толкование. Значения карт из колоды по-прежнему доступны.';
+
+  @override
+  String get synthesisLoading => 'Gemini ищет связи между картами…';
+
+  @override
+  String get interpretationLoading => 'Gemini толкует эту карту…';
+
+  @override
   String get navTable => 'Стол';
 
   @override

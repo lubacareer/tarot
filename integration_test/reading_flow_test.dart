@@ -8,6 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
 
+import '../test/support/fixture_interpretations.dart';
+
 class _TestPreferences implements LanguagePreferences {
   String language = 'en';
   @override
@@ -35,7 +37,9 @@ void main() {
   IntegrationTestWidgetsFlutterBinding.ensureInitialized();
 
   testWidgets('complete a Celtic Cross from bundled art', (tester) async {
-    app.main();
+    runApp(
+      const app.ObservatoryApp(interpretationClient: fixtureInterpretations),
+    );
     await tester.pumpAndSettle();
     Future<void> tapControl(String key) => _tapControl(tester, key);
 
@@ -85,12 +89,19 @@ void main() {
       find.text(tester.element(table).tr('Reading complete')),
       findsOneWidget,
     );
+    final language = Localizations.localeOf(tester.element(table)).languageCode;
+    expect(find.text('Spread insight $language 10'), findsOneWidget);
     expect(tester.takeException(), isNull);
   });
   testWidgets(
     'changing language and viewport preserves the revealed card and position',
     (tester) async {
-      runApp(app.ObservatoryApp(preferences: _TestPreferences()));
+      runApp(
+        app.ObservatoryApp(
+          preferences: _TestPreferences(),
+          interpretationClient: fixtureInterpretations,
+        ),
+      );
       await tester.pumpAndSettle();
       await _tapControl(tester, 'spread-three');
       await _tapControl(tester, 'begin-reading');
@@ -124,6 +135,7 @@ void main() {
         expect(translated.imageAsset, original.imageAsset);
         expect(translated.meaning, isNot(original.meaning));
         expect(find.text(translated.meaning), findsOneWidget);
+        expect(find.text('Card insight $language 1'), findsOneWidget);
         expect(tester.widget<ReadingTable>(table).session, same(session));
         expect(session.draws.single.position, session.spread.positions.first);
       }

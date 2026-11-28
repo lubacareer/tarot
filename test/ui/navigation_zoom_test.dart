@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_test/flutter_test.dart';
 
+import '../support/fixture_interpretations.dart';
+
 Future<List<TarotDeck>> _fixture() async => [
   TarotDeck(
     id: 'test',
@@ -28,7 +30,12 @@ Future<void> _open(WidgetTester tester) async {
   tester.view.devicePixelRatio = 1;
   tester.view.physicalSize = const Size(1080, 600);
   addTearDown(tester.view.reset);
-  await tester.pumpWidget(const ObservatoryApp(loadDecks: _fixture));
+  await tester.pumpWidget(
+    const ObservatoryApp(
+      interpretationClient: fixtureInterpretations,
+      loadDecks: _fixture,
+    ),
+  );
   await tester.pumpAndSettle();
 }
 
